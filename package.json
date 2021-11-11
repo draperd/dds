@@ -1,0 +1,42 @@
+{
+  "name": "dds",
+  "version": "1.0.0",
+  "description": "A Design System by Dave",
+  "source": "src/index.ts",
+  "main": "dist/index.js",
+  "module": "dist/module.js",
+  "types": "dist/types.d.ts",
+  "scripts": {
+    "watch": "parcel watch",
+    "build": "parcel build",
+    "test": "jest",
+    "prepare": "husky install"
+  },
+  "author": "Dave Draper",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.16.0",
+    "@babel/plugin-transform-runtime": "^7.16.0",
+    "@babel/preset-env": "^7.16.0",
+    "@babel/preset-react": "^7.16.0",
+    "@babel/preset-typescript": "^7.16.0",
+    "@parcel/packager-ts": "^2.0.1",
+    "@parcel/transformer-react-refresh-wrap": "^2.0.1",
+    "@parcel/transformer-typescript-types": "^2.0.1",
+    "@testing-library/react": "^12.1.2",
+    "@types/jest": "^27.0.2",
+    "@types/react": "^17.0.34",
+    "babel-jest": "^27.3.1",
+    "husky": "^7.0.4",
+    "jest": "^27.3.1",
+    "parcel": "^2.0.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "ts-node": "^10.4.0",
+    "typescript": "^4.4.4"
+  },
+  "peerDependencies": {
+    "react": "^17.0.2"
+  },
+  "dependencies": {}
+}
