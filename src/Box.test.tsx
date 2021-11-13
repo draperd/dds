@@ -1,16 +1,21 @@
 import React from "react";
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import Box from "./Box";
 
 describe("Box Component", function () {
-  it("should have hello world message", function () {
-    // let { getByText } = render(<Box></Box>);
-    // expect(getByText("Hello world React!")).toMatchInlineSnapshot(`
-    //   <div></div>
-    // `);
+  const buttonOneId = "button-1";
+  it("should render a div with the supplied test id", function () {
+    render(<Box testId={buttonOneId} />);
+    screen.getByTestId(buttonOneId);
+  });
 
-    render(<Box />);
-    // const linkElement = screen.getByRole("link", { name: /getting started/i });
-    // expect(linkElement).toBeInTheDocument();
+  it("should render its children", function () {
+    const testText = "Hello world";
+    render(
+      <Box>
+        <span>{testText}</span>
+      </Box>
+    );
+    screen.getByText(testText);
   });
 });
