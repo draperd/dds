@@ -1,16 +1,14 @@
 import React from 'react';
 
-import { Card } from './Card';
-import { Inline } from './Inline';
+import { Card } from '../recipes/Card';
+import { Inline } from '../primitives/Inline';
 import './page.css';
-
 interface PageProps {
   
 }
 
 const description: string =
   "An astronomical event that occurs during the last stages of a massive star's life.";
-
 
 export const Page = ({  }: PageProps) => (
   <Inline>

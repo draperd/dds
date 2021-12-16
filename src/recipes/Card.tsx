@@ -1,11 +1,11 @@
 import React from "react";
 
-import { Box } from "./Box";
+import { Box } from "../primitives/Box";
 import { Button } from "./Button";
-import { Inline } from "./Inline";
+import { Inline } from "../primitives/Inline";
 import { Pill } from './Pill';
-import { Stack } from './Stack';
-import { Text } from "./Text";
+import { Stack } from '../primitives/Stack';
+import { Text } from "../primitives/Text";
 import "./card.css";
 
 interface CardProps {
