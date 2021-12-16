@@ -1,5 +1,6 @@
 import React from "react";
 
+import { Pressable } from "../behaviors/Pressable";
 import { Box } from "../primitives/Box";
 import { Button } from "./Button";
 import { Inline } from "../primitives/Inline";
@@ -16,7 +17,8 @@ interface CardProps {
 }
 
 export const Card = ({ type, title, description, tags}: CardProps) => (
-  <Stack className="card">
+  <Pressable>
+<Stack className="card">
     <Box spacingStyle="INSET">
       <Stack>
         <Text content={type}></Text>
@@ -29,4 +31,6 @@ export const Card = ({ type, title, description, tags}: CardProps) => (
       </Stack>
     </Box>
   </Stack>
+  </Pressable>
+  
 );

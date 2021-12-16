@@ -1,0 +1,4 @@
+.pressable:hover > * {
+   background-color: orange;
+   cursor: pointer;
+}
