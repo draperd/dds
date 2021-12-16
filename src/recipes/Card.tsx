@@ -16,9 +16,13 @@ interface CardProps {
   tags?: string[],
 }
 
+const onPress = () => {
+  alert("Clicked on card!")
+}
+
 export const Card = ({ type, title, description, tags = []}: CardProps) => (
   <Stack className="card">  
-    <Pressable>
+    <Pressable onPress={onPress}>
       <Box spacingStyle="INSET">
         <Stack>
           <Text content={type}></Text>

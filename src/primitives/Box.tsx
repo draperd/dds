@@ -1,4 +1,4 @@
-import React, { MouseEventHandler} from 'react';
+import React from 'react';
 import { SpacingSize, SpacingStyle } from '../foundations/Spacing';
 import './box.css';
 
@@ -49,8 +49,20 @@ export const getSpacingClassNames = ({className, spacingStyle, spacingSize}: Get
   return `${cssPrefix}defaults ${cssPrefix}${spacingStyle.toLowerCase()}-${spacingSize.toLowerCase()} ${className}`
 }
 
-export const handleClick: MouseEventHandler<HTMLElement> = () => alert('Clicked!');
+export type OnClickHandlerArgs = {
+  evt: React.MouseEvent<HTMLElement>, 
+  onPress: PressHandler | undefined
+}
 
+// export const handleClick: MouseEventHandler<HTMLElement> = () => alert('Clicked!');
+
+export const handleClick = ({evt, onPress}: OnClickHandlerArgs) => {
+    evt.stopPropagation();
+    evt.preventDefault();
+    if (onPress) {
+      onPress();
+    }
+  }
 
 export type KeyPressHandlerArgs = {
   evt: React.KeyboardEvent<HTMLElement>, 
@@ -96,7 +108,7 @@ export const AbstractBox = ({
         <div className={spacingClassNames}
              role="button" 
              tabIndex={0} 
-             onClick={evt => onPress && onPress()} 
+             onClick={evt => handleClick({evt, onPress})} 
              onKeyPress={evt => handleKeyPress({evt, onPress})}>
           {children}
         </div>
