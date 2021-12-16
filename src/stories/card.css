@@ -4,4 +4,6 @@
   display: flex;
   /* width: var(--spacing-xxlarge); */
   width: 300px;
+
+  background-color: #eee;;
 }

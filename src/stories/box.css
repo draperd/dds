@@ -1,7 +1,7 @@
 @import url(./spacing.css);
 
 .box-defaults {
-  border: 1px solid black;
+  /* border: 1px solid black; */
   box-sizing: border-box;
   display: flex;
   align-items: flex-start;
@@ -23,14 +23,18 @@
 }
 
 .box-inline-medium {
-  display: flex;
   flex-direction: row;
   gap: var(--spacing-medium);
+}
+
+.box-inline-small {
+  flex-direction: row;
+  gap: var(--spacing-small);
 }
 
 .box-squished-inset-medium {
   padding-left: var(--spacing-medium);
   padding-right: var(--spacing-medium);
-  padding-top: var(--spacing-small);
-  padding-bottom: var(--spacing-small);
+  padding-top: calc(var(--spacing-medium) / 2);
+  padding-bottom: calc(var(--spacing-medium) / 2);
 }
