@@ -13,24 +13,24 @@ interface CardProps {
   type: string,
   title: string,
   description: string,
-  tags: string[],
+  tags?: string[],
 }
 
-export const Card = ({ type, title, description, tags}: CardProps) => (
-  <Pressable>
-<Stack className="card">
-    <Box spacingStyle="INSET">
-      <Stack>
-        <Text content={type}></Text>
-        <Text typographyStyle="HEADING" content={title}></Text>
-        <Text content={description}></Text>
-        <Inline spacingSize="SMALL">
-          {tags.map(tag => (<Pill content={tag}></Pill>))}
-        </Inline>
-        <Button label="View"></Button>
-      </Stack>
-    </Box>
+export const Card = ({ type, title, description, tags = []}: CardProps) => (
+  <Stack className="card">  
+    <Pressable>
+      <Box spacingStyle="INSET">
+        <Stack>
+          <Text content={type}></Text>
+          <Text typographyStyle="HEADING" content={title}></Text>
+          <Text content={description}></Text>
+          <Inline spacingSize="SMALL">
+            {tags.map(tag => (<Pill content={tag}></Pill>))}
+          </Inline>
+          <Button label="View"></Button>
+        </Stack>
+      </Box>
+    </Pressable>
   </Stack>
-  </Pressable>
   
 );

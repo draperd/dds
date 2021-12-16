@@ -1,7 +1,6 @@
 @import url(../foundations/spacing.css);
 
 .box-defaults {
-  /* border: 1px solid black; */
   box-sizing: border-box;
   display: flex;
   align-items: flex-start;

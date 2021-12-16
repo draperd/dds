@@ -1,27 +1,22 @@
-import React, { KeyboardEvent } from "react";
+import React from "react";
+import { AbstractBox, PublicBoxProps, PressableBoxProps } from "../primitives/Box";
 
 import "./pressable.css";
 
-interface PressableProps {
-  onClick?: Function,
-  children: React.ReactNode
-}
-
-const handleClick = () => alert('Clicked!');
-
-// Not sure about this function, but it's demo worthy enough
-const handleKeyPress = (evt: KeyboardEvent) => {
-    if (evt.code === 'Enter') {
-        alert('Key Press!');
-        evt.stopPropagation();
-    }
-}
+export type PressableProps = PublicBoxProps & PressableBoxProps;
 
 // Something that is pressable, must also be focusable - which is why tabIndex is set to 0
 // Unfortunately the focus outline is on the DOM element rendered by pressable and not the child
-
-export const Pressable = ({children}: PressableProps) => (
-  <div role="button" tabIndex={0} className="pressable" onClick={handleClick} onKeyPress={handleKeyPress}>
+export const Pressable = ({children,
+                           onPress, 
+                           className = '', 
+                           spacingSize = 'MEDIUM',
+                           spacingStyle = 'INSET'}: PressableProps) => (
+  <AbstractBox boxType="PRESSABLE"
+               className={`pressable ${className}`}
+               onPress={onPress}
+               spacingSize={spacingSize}
+               spacingStyle={spacingStyle}>
     {children}
-  </div>
+  </AbstractBox>
 )
