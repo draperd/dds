@@ -1,5 +1,5 @@
 import React from 'react';
-import { TypographyStyle } from './Typography';
+import { TypographyStyle } from '../foundations/Typography';
 import './text.css';
 
 interface TextProps {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { SpacingSize, SpacingStyle } from './Spacing';
+import { SpacingSize, SpacingStyle } from '../foundations/Spacing';
 import './box.css';
 
 interface BoxProps {

@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Box } from "./Box";
-import { SpacingSize } from "./Spacing";
+import { SpacingSize } from "../foundations/Spacing";
 import "./inline.css";
 
 interface InlineProps {

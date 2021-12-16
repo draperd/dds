@@ -1,4 +1,4 @@
-@import url(./spacing.css);
+@import url(../foundations/spacing.css);
 
 .box-defaults {
   /* border: 1px solid black; */

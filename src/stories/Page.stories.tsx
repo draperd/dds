@@ -17,7 +17,3 @@ Card.args = {
   ...CardStories.LoggedIn.args,
 };
 
-// export const LoggedOut = Template.bind({});
-// LoggedOut.args = {
-//   ...CardStories.LoggedOut.args,
-// };

@@ -1,3 +1,3 @@
-import Box from "./Box";
+import { Page } from "./stories/Page";
 
-export { Box };
+export { Page };

@@ -1,7 +1,7 @@
 import React from "react";
 
-import { Box } from "./Box";
-import { Text } from "./Text";
+import { Box } from "../primitives/Box";
+import { Text } from "../primitives/Text";
 import "./pill.css";
 
 interface PillProps {
