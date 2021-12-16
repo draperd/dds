@@ -1,0 +1,4 @@
+.text {
+  display: flex;
+  border: 1px dotted black;
+}

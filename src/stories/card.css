@@ -1,0 +1,7 @@
+@import url(./spacing.css);
+
+.card {
+  display: flex;
+  /* width: var(--spacing-xxlarge); */
+  width: 300px;
+}
