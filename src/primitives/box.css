@@ -15,19 +15,25 @@
   padding: var(--spacing-small);
 }
 
-.box-stack-medium {
-  display: flex;
+.box-stack {
+  width: 100%;
   flex-direction: column;
+}
+
+.box-stack-medium {
   gap: var(--spacing-medium);
 }
 
-.box-inline-medium {
+.box-inline {
   flex-direction: row;
+  width: 100%;
+}
+
+.box-inline-medium {
   gap: var(--spacing-medium);
 }
 
 .box-inline-small {
-  flex-direction: row;
   gap: var(--spacing-small);
 }
 

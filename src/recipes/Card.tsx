@@ -29,7 +29,7 @@ export const Card = ({ type, title, description, tags = []}: CardProps) => (
           <Text typographyStyle="HEADING" content={title}></Text>
           <Text content={description}></Text>
           <Inline spacingSize="SMALL">
-            {tags.map(tag => (<Pill content={tag}></Pill>))}
+            {tags.map(tag => (<Pill key={tag} content={tag}></Pill>))}
           </Inline>
           <Button label="View"></Button>
         </Stack>

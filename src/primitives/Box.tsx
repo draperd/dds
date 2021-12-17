@@ -46,15 +46,13 @@ type GetSpacingClassNamesArgs = {
 
 // This is a bit of a short cut and we'd want unit tests for this!
 export const getSpacingClassNames = ({className, spacingStyle, spacingSize}: GetSpacingClassNamesArgs) => {
-  return `${cssPrefix}defaults ${cssPrefix}${spacingStyle.toLowerCase()}-${spacingSize.toLowerCase()} ${className}`
+  return `${cssPrefix}defaults ${cssPrefix}${spacingStyle.toLowerCase()} ${cssPrefix}${spacingStyle.toLowerCase()}-${spacingSize.toLowerCase()} ${className}`
 }
 
 export type OnClickHandlerArgs = {
   evt: React.MouseEvent<HTMLElement>, 
   onPress: PressHandler | undefined
 }
-
-// export const handleClick: MouseEventHandler<HTMLElement> = () => alert('Clicked!');
 
 export const handleClick = ({evt, onPress}: OnClickHandlerArgs) => {
     evt.stopPropagation();
