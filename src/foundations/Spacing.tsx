@@ -1,2 +1,2 @@
-export type SpacingStyle = 'INSET' | 'STACK' | 'INLINE' | 'SQUISHED-INSET';
+export type SpacingStyle = 'INSET' | 'STACK' | 'INLINE' | 'SQUISHED-INSET' | 'SPREAD';
 export type SpacingSize = 'SMALL' | 'MEDIUM';
