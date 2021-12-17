@@ -22,7 +22,7 @@ const onPress = () => {
 
 export const Card = ({ type, title, description, tags = []}: CardProps) => (
   <Stack className="card">  
-    <Pressable onPress={onPress}>
+    <Pressable onPress={onPress} spacingStyle="FLUSH">
       <Box spacingStyle="INSET">
         <Stack>
           <Text content={type}></Text>

@@ -15,26 +15,29 @@ const description: string =
   "An astronomical event that occurs during the last stages of a massive star's life.";
 
 export const Page = ({  }: PageProps) => (
-  <Stack>
-    <Inline>
-        <Card type="VIDEO" 
-          title="Supernova" 
-          description={description}
-          tags={["Galaxies", "Milky Way", "Speed of Light"]}></Card>
-        <Card type="AUDIO" 
-          title="Supernova" 
-          description={description}
-          tags={["Galaxies", "Milky Way"]}></Card>
-    </Inline>
-    <Dialog></Dialog>
-    <Spread>
-      <Inline alignment='LEFT'>
-        <Text content='LEFT'></Text>
-      </Inline>
-      <Inline alignment='RIGHT'>
-        <Text content='RIGHT'></Text>
-      </Inline>
-    </Spread>
-  </Stack>
+  <section>
+    <Stack>
+        <Inline>
+            <Card type="VIDEO" 
+              title="Supernova" 
+              description={description}
+              tags={["Galaxies", "Milky Way", "Speed of Light", "Mars", "Venus"]}></Card>
+            <Card type="AUDIO" 
+              title="Supernova" 
+              description={description}
+              tags={["Galaxies", "Milky Way"]}></Card>
+        </Inline>
+        <Dialog heading="Header" content="Lorem ipsum..."></Dialog>
+        <Spread>
+          <Inline alignment='LEFT'>
+            <Text content='LEFT'></Text>
+          </Inline>
+          <Inline alignment='RIGHT'>
+            <Text content='RIGHT'></Text>
+          </Inline>
+        </Spread>
+      </Stack>
+  </section>
+ 
   
 );
