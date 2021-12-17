@@ -2,8 +2,6 @@
 
 .card {
   display: flex;
-  /* width: var(--spacing-xxlarge); */
-  width: 300px;
-
+  width: calc(var(--spacing-xxlarge) * 2);
   background-color: #eee;;
 }

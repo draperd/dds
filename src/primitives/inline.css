@@ -1,0 +1,7 @@
+.inline-left {
+    justify-content: flex-start;
+}
+
+.inline-right {
+    justify-content: flex-end;
+}

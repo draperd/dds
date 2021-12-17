@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Box } from "../primitives/Box";
+import { Pressable } from "../behaviors/Pressable";
 import { Text } from "../primitives/Text";
 import "./button.css";
 
@@ -9,7 +9,7 @@ interface ButtonProps {
 }
 
 export const Button = ({label}: ButtonProps) => (
-  <Box spacingStyle="SQUISHED-INSET" spacingSize="MEDIUM" className="button">
+  <Pressable spacingStyle="SQUISHED-INSET" spacingSize="MEDIUM" className="button">
     <Text content={label}></Text>
-  </Box>
+  </Pressable>
 )
