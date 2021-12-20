@@ -6,25 +6,14 @@ interface GridProps {
 //   children?: React.ReactNode
 }
 
-
-
-
-
-//   return (
-//     <div >
-//       {matches && (<h1>Big Screen</h1>)}
-//       {!matches && (<h3>Small Screen</h3>)}
-//     </div>
-//   );
-
-
 // Let's assume we're going to plan for the following media types (these are just randomly picked, no research or science on these)
 // - mobile
 // - tablet
 // - small browser
 // - larger browser 
 
-// Grabbed some screen sizes from https://www.hobo-web.co.uk/best-screen-size/
+// There are more realistic screen sizes on https://www.hobo-web.co.uk/best-screen-size/
+// The following sizes have just been used so that I can see columns changing in my browser
 const MOBILE_WIDTH = 500;
 const TABLET_WIDTH = 800;
 const SMALL_DESKTOP_WIDTH = 1000;
@@ -41,12 +30,14 @@ export type Media = 'UNSUPPORTED' | 'MOBILE' | 'TABLET' | 'SMALL_DESKTOP' | 'LAR
 
 export type GetMedia = {(): Media}
 
-
+// Currently this grid simply changes the number of columns that are used based on a media query
+// The thinking for this is that we want to be able to change the positioning of child elements based on
+// the "breakpoints" of the changing grid
 export const Grid = ({ }: GridProps) => {
 
-
+    // This feels potentially expensive being here :/
+    // Maybe I should be setting up the matchMedia query just once outside the function and then calling it
     const getMedia: GetMedia = () => {
-
         if (window.matchMedia(LARGE_DESKTOP_MEDIA_QUERY).matches) {
             return 'LARGE_DESKTOP';
         }
@@ -68,17 +59,18 @@ export const Grid = ({ }: GridProps) => {
     )
 
     useEffect(() => {
+        // If this is running on every render then it suggests that we're just repeatedly creating listeners, which would be bad :/ 
+        // Need to check and then fix this if that's the case...
         window.matchMedia(MOBILE_MEDIA_QUERY).addEventListener('change', () => setMatches(getMedia()));
         window.matchMedia(TABLET_MEDIA_QUERY).addEventListener('change', e => setMatches(getMedia()));
         window.matchMedia(SMALL_DESKTOP_MEDIA_QUERY).addEventListener('change', e => setMatches(getMedia()));
         window.matchMedia(LARGE_DESKTOP_MEDIA_QUERY).addEventListener('change', e => setMatches(getMedia()));
-    }, []);
+    }, []); // <- I think that this empty array solves the efficiency problem by only running on mount and unmount, but I need to check
 
 
     const getClassName = (matches: Media) => {
         return `grid ${matches.toLowerCase()}`;
     }
-
 
     return (
         <div className={getClassName(matches)}>
