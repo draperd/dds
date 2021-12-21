@@ -10,7 +10,8 @@
 .grid > div {
     
     /* background: green; */
-    border: 1px solid black;
+    border: 1px dashed black;
+    padding: var(--spacing-medium);
 }
 
 .mobile {

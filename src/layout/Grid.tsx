@@ -28,32 +28,8 @@ export type Media = 'UNSUPPORTED' | 'MOBILE' | 'TABLET' | 'SMALL_DESKTOP' | 'LAR
 export type GetMedia = {(): Media}
 
 
-// One option might be to have separate components for each device type. I'm not sure this saves anything though :/ 
-// interface MobileGridProps {
-//     children?: React.ReactNode
-// }
-
-// interface TabletGridProps {
-//     children?: React.ReactNode
-// }
-
-// interface DesktopGridProps {
-//     children?: React.ReactNode
-// }
-
-// export const MobileGrid = ({ children }: MobileGridProps) => {
-//     return <div className="grid mobile">{children}</div>
-// }
-
-// export const TabletGrid = ({ children }: TabletGridProps) => {
-//     return <div className="grid tablet">{children}</div>
-// }
-
-// export const DesktopGrid = ({ children }: DesktopGridProps) => {
-//     return <div className="grid small_desktop">{children}</div>
-// }
-
-
+// There might be some elaborate ways to calculate row spans, but it's probably realistic to expect
+// developers to be able to work out the layout they want for themselves.
 interface GridItemProps {
     columnSpan?: number,
     rowSpan?: number,
@@ -69,14 +45,15 @@ interface GridProps {
     //   children?: React.ReactNode
     childrenForMobileDisplay?: React.ReactNode,
     childrenForTabletDisplay?: React.ReactNode,
-    childrenForDesktopDisplay?: React.ReactNode,   
+    childrenForSmallDesktopDisplay?: React.ReactNode,
+    childrenForLargeDesktopDisplay?: React.ReactNode,   
 }
 
 
 // Currently this grid simply changes the number of columns that are used based on a media query
 // The thinking for this is that we want to be able to change the positioning of child elements based on
 // the "breakpoints" of the changing grid
-export const Grid = ({ childrenForMobileDisplay, childrenForTabletDisplay, childrenForDesktopDisplay }: GridProps) => {
+export const Grid = ({ childrenForMobileDisplay, childrenForTabletDisplay, childrenForSmallDesktopDisplay, childrenForLargeDesktopDisplay }: GridProps) => {
 
     // This feels potentially expensive being here :/
     // Maybe I should be setting up the matchMedia query just once outside the function and then calling it
@@ -126,35 +103,16 @@ export const Grid = ({ childrenForMobileDisplay, childrenForTabletDisplay, child
     
     switch (media) {
         case 'MOBILE': {
-            return <div className="grid mobile">{childrenForMobileDisplay}</div>
+            return <div className={getClassName(media)}>{childrenForMobileDisplay}</div>
         }
         case 'TABLET': {
-            return <div className="grid tablet">{childrenForTabletDisplay}</div>
+            return <div className={getClassName(media)}>{childrenForTabletDisplay}</div>
+        }
+        case 'SMALL_DESKTOP': {
+            return <div className={getClassName(media)}>{childrenForSmallDesktopDisplay}</div>
         }
         default: {
-            return <div className="grid small_desktop">{childrenForDesktopDisplay}</div>
+            return <div className={getClassName(media)}>{childrenForLargeDesktopDisplay}</div>
         }
     }
-
-    // Examples for playing with layout - this doesn't allow different components to be specified for different devices/resolutions
-    return (
-        <div className={getClassName(media)}>
-            <div style={{gridColumnStart: "span 4", gridRow: 'span 3', height: '400px'}}>1</div>
-            <div>2</div>
-            <div>3</div>
-            <div>4</div>
-            <div>5</div>
-            <div>6</div>
-            <div>7</div>
-            <div>8</div>
-            <div>9</div>
-            <div>10</div>
-            <div>11</div>
-            <div>12</div>
-            <div>13</div>
-            <div>14</div>
-            <div>15</div>
-            <div>16</div>
-        </div>
-    )
 };
