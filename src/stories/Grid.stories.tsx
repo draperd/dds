@@ -10,9 +10,24 @@ export default {
 
 const Template: ComponentStory<typeof Grid> = (args) => <Grid {...args} />;
 
+
 export const Basic = Template.bind({});
 Basic.args = {
-//   // More on composing args: https://storybook.js.org/docs/react/writing-stories/args#args-composition
-//   ...CardStories.LoggedIn.args,
+  childrenForMobileDisplay: ( <>
+                                <div>Heading</div>
+                                <div>Main</div>
+                              </>),
+  childrenForTabletDisplay: (<>
+                                <div>Heading</div>
+                                <div>Sidebar</div>
+                                <div>Main</div>
+                            </>),
+  childrenForDesktopDisplay: (<>
+                                <div>Heading</div>
+                                <div>Sidebar</div>
+                                <div>Main</div>
+                                <div>Metadata</div>
+                                <div>Comments</div>
+                              </>)
 };
 
