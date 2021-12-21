@@ -1,0 +1,28 @@
+@import url(../foundations/spacing.css);
+
+.grid {
+    display: grid;
+    column-gap: var(--spacing-medium);
+    row-gap: var(--spacing-medium);
+}
+
+.griditem {
+    border: 1px dashed black;
+    padding: var(--spacing-medium);
+}
+
+.mobile {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.tablet {
+    grid-template-columns: repeat(8, 1fr);
+}
+
+.small_desktop {
+    grid-template-columns: repeat(12, 1fr);
+}
+
+.large_desktop {
+    grid-template-columns: repeat(16, 1fr);
+}
