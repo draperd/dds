@@ -1,7 +1,7 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import { Grid } from '../layout/Grid';
+import { Grid, GridItem } from '../layout/Grid';
 
 export default {
   title: 'Example/Grid',
@@ -14,20 +14,22 @@ const Template: ComponentStory<typeof Grid> = (args) => <Grid {...args} />;
 export const Basic = Template.bind({});
 Basic.args = {
   childrenForMobileDisplay: ( <>
-                                <div>Heading</div>
-                                <div>Main</div>
+                                <GridItem columnSpan={4}><div>Heading with menu</div></GridItem>
+                                <GridItem columnSpan={4}><div>Main</div></GridItem>
                               </>),
   childrenForTabletDisplay: (<>
-                                <div>Heading</div>
-                                <div>Sidebar</div>
-                                <div>Main</div>
+                                <GridItem columnSpan={8}><div>Heading</div></GridItem>
+                                <GridItem columnSpan={2} rowSpan={3}><div>Sidebar</div></GridItem>
+                                <GridItem columnSpan={6}><div>Main</div></GridItem>
+                                <GridItem columnSpan={6}><div>Metadata</div></GridItem>
+                                <GridItem columnSpan={6}><div>Comments</div></GridItem>
                             </>),
   childrenForDesktopDisplay: (<>
-                                <div>Heading</div>
-                                <div>Sidebar</div>
-                                <div>Main</div>
-                                <div>Metadata</div>
-                                <div>Comments</div>
+                                <GridItem columnSpan={12}><div>Heading</div></GridItem>
+                                <GridItem columnSpan={2} rowSpan={2}><div>Sidebar</div></GridItem>
+                                <GridItem columnSpan={5}><div>Main</div></GridItem>
+                                <GridItem columnSpan={5} rowSpan={2}><div>Metadata</div></GridItem>
+                                <GridItem columnSpan={5}><div>Comments</div></GridItem>
                               </>)
 };
 

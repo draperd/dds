@@ -54,6 +54,17 @@ export type GetMedia = {(): Media}
 // }
 
 
+interface GridItemProps {
+    columnSpan?: number,
+    rowSpan?: number,
+    children?: React.ReactNode,
+}
+
+export const GridItem = ({ columnSpan = 1, rowSpan = 1, children}: GridItemProps) => (
+    <div style={{gridColumnStart: `span ${columnSpan}`, gridRowStart: `span ${rowSpan}`}}>{children}</div>
+)
+
+
 interface GridProps {
     //   children?: React.ReactNode
     childrenForMobileDisplay?: React.ReactNode,
