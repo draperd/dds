@@ -37,7 +37,9 @@ interface GridItemProps {
 }
 
 export const GridItem = ({ columnSpan = 1, rowSpan = 1, children}: GridItemProps) => (
-    <div style={{gridColumnStart: `span ${columnSpan}`, gridRowStart: `span ${rowSpan}`}}>{children}</div>
+    <div className="griditem" style={{gridColumnStart: `span ${columnSpan}`, gridRowStart: `span ${rowSpan}`}}>
+      {children}
+    </div>
 )
 
 
@@ -49,6 +51,10 @@ interface GridProps {
     childrenForLargeDesktopDisplay?: React.ReactNode,   
 }
 
+const matchMobile = window.matchMedia(MOBILE_MEDIA_QUERY);
+const matchTablet = window.matchMedia(TABLET_MEDIA_QUERY);
+const matchSmallDesktop = window.matchMedia(SMALL_DESKTOP_MEDIA_QUERY);
+const matchLargeDesktop = window.matchMedia(LARGE_DESKTOP_MEDIA_QUERY);
 
 // Currently this grid simply changes the number of columns that are used based on a media query
 // The thinking for this is that we want to be able to change the positioning of child elements based on
@@ -58,16 +64,16 @@ export const Grid = ({ childrenForMobileDisplay, childrenForTabletDisplay, child
     // This feels potentially expensive being here :/
     // Maybe I should be setting up the matchMedia query just once outside the function and then calling it
     const getMedia: GetMedia = () => {
-        if (window.matchMedia(LARGE_DESKTOP_MEDIA_QUERY).matches) {
+        if (matchLargeDesktop.matches) {
             return 'LARGE_DESKTOP';
         }
-        if (window.matchMedia(SMALL_DESKTOP_MEDIA_QUERY).matches) {
+        if (matchSmallDesktop.matches) {
             return 'SMALL_DESKTOP';
         }
-        if (window.matchMedia(TABLET_MEDIA_QUERY).matches) {
+        if (matchTablet.matches) {
             return 'TABLET';
         }
-        if (window.matchMedia(MOBILE_MEDIA_QUERY).matches) {
+        if (matchMobile.matches) {
             return 'MOBILE';
         }
         return 'UNSUPPORTED';
@@ -81,25 +87,16 @@ export const Grid = ({ childrenForMobileDisplay, childrenForTabletDisplay, child
     useEffect(() => {
         // If this is running on every render then it suggests that we're just repeatedly creating listeners, which would be bad :/ 
         // Need to check and then fix this if that's the case...
-        window.matchMedia(MOBILE_MEDIA_QUERY).addEventListener('change', () => setMedia(getMedia()));
-        window.matchMedia(TABLET_MEDIA_QUERY).addEventListener('change', e => setMedia(getMedia()));
-        window.matchMedia(SMALL_DESKTOP_MEDIA_QUERY).addEventListener('change', e => setMedia(getMedia()));
-        window.matchMedia(LARGE_DESKTOP_MEDIA_QUERY).addEventListener('change', e => setMedia(getMedia()));
+        matchMobile.addEventListener('change', () => setMedia(getMedia()));
+        matchTablet.addEventListener('change', () => setMedia(getMedia()));
+        matchSmallDesktop.addEventListener('change', () => setMedia(getMedia()));
+        matchLargeDesktop.addEventListener('change', () => setMedia(getMedia()));
     }, []); // <- I think that this empty array solves the efficiency problem by only running on mount and unmount, but I need to check
 
 
     const getClassName = (media: Media) => {
         return `grid ${media.toLowerCase()}`;
     }
-
-    // How are we expecting this to be used?
-    // Children will want to grab a number of columns or a starting position?
-    
-    // Maybe products could design optimistically for a desktop and then the grid can accommodate smaller sizes?
-    // We would want to define the element that can stretch indefinitely?
-
-    // Do we want to set min/max columns?
-    // How will elements span rows?
     
     switch (media) {
         case 'MOBILE': {

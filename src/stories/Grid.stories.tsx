@@ -14,7 +14,7 @@ const Template: ComponentStory<typeof Grid> = (args) => <Grid {...args} />;
 export const Basic = Template.bind({});
 Basic.args = {
   childrenForMobileDisplay: ( <>
-                                <GridItem columnSpan={4}><div>Heading with menu</div></GridItem>
+                                <GridItem columnSpan={4}><div>Heading (w/ hamburger menu)</div></GridItem>
                                 <GridItem columnSpan={4}><div>Main</div></GridItem>
                                 <GridItem columnSpan={4}><div>Metadata</div></GridItem>
                                 <GridItem columnSpan={4}><div>Comments</div></GridItem>

@@ -2,14 +2,11 @@
 
 .grid {
     display: grid;
-    /* grid-template-columns: 1fr 1fr; */
     column-gap: var(--spacing-medium);
     row-gap: var(--spacing-medium);
 }
 
-.grid > div {
-    
-    /* background: green; */
+.griditem {
     border: 1px dashed black;
     padding: var(--spacing-medium);
 }
