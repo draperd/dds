@@ -4,11 +4,7 @@
     display: grid;
     column-gap: var(--spacing-medium);
     row-gap: var(--spacing-medium);
-}
-
-.griditem {
-    border: 1px dashed black;
-    padding: var(--spacing-medium);
+    grid-template-rows: repeat(3, 1fr);
 }
 
 .mobile {
