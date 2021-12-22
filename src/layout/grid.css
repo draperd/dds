@@ -1,24 +1,24 @@
 @import url(../foundations/spacing.css);
 
 .grid {
-    display: grid;
-    column-gap: var(--spacing-medium);
-    row-gap: var(--spacing-medium);
-    grid-template-rows: repeat(3, 1fr);
+  display: grid;
+  column-gap: var(--spacing-medium);
+  row-gap: var(--spacing-medium);
+  grid-template-rows: repeat(3, minmax(min-content, max-content));
 }
 
 .mobile {
-    grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, 1fr);
 }
 
 .tablet {
-    grid-template-columns: repeat(8, 1fr);
+  grid-template-columns: repeat(8, 1fr);
 }
 
 .small_desktop {
-    grid-template-columns: repeat(12, 1fr);
+  grid-template-columns: repeat(12, 1fr);
 }
 
 .large_desktop {
-    grid-template-columns: repeat(16, 1fr);
+  grid-template-columns: repeat(16, 1fr);
 }
