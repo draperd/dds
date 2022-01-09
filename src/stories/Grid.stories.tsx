@@ -4,7 +4,6 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { Grid } from '../layout/Grid';
 import { GridItem } from '../layout/GridItem';
 import { SubGrid } from '../layout/SubGrid';
-// import { Card } from '../recipes/Card';
 
 export default {
   title: 'Example/Grid',
@@ -12,18 +11,6 @@ export default {
 } as ComponentMeta<typeof Grid>;
 
 const Template: ComponentStory<typeof Grid> = (args) => <Grid {...args} />;
-
-// const description: string =
-//   "An astronomical event that occurs during the last stages of a massive star's life.";
-
-//   <Card type="VIDEO" 
-//                                               title="Supernova" 
-//                                               description={description}
-//                                               tags={["Galaxies", "Milky Way", "Speed of Light", "Mars", "Venus"]} />
-//                                         <Card type="VIDEO" 
-//                                               title="Supernova" 
-//                                               description={description}
-//                                               tags={["Galaxies", "Milky Way", "Speed of Light", "Mars", "Venus"]} />
 
 // Just wanted to render something on the page to fill the grid
 const Shape = ({ }) => (
