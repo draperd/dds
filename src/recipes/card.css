@@ -2,6 +2,11 @@
 
 .card {
   display: flex;
-  width: calc(var(--spacing-xxlarge) * 2);
+
+  /* This line was commented out to allow the card to be used in a Grid, 
+     it's replaced with width 100% and hiding the overflow so that it doesn't blow out the grid */
+  /* width: calc(var(--spacing-xxlarge) * 2); */
+  width: 100%; 
+  overflow: hidden;
   background-color: #eee;;
 }

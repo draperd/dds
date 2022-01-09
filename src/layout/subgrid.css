@@ -1,0 +1,7 @@
+@import url(../foundations/spacing.css);
+
+.subgrid {
+    display: grid;
+    column-gap: var(--spacing-medium);
+    row-gap: var(--spacing-medium);
+}
