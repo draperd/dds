@@ -1,12 +1,8 @@
 import React from 'react';
 
-import { Card } from '../recipes/Card';
-import { Dialog } from "../recipes/Dialog";
-import { Inline } from '../primitives/Inline';
-import { Stack } from '../primitives/Stack';
-import { Text } from '../primitives/Text';
-import { Spread } from '../primitives/Spread';
-import './page.css';
+import { Grid } from '../layout/Grid';
+import { GridItem } from '../layout/GridItem';
+import { Card } from '../recipes/Card';import './page.css';
 interface PageProps {
   
 }
@@ -14,29 +10,28 @@ interface PageProps {
 const description: string =
   "An astronomical event that occurs during the last stages of a massive star's life.";
 
+const createDemoCards = ({numOfCards, colspan}: {numOfCards: number, colspan: number}) => {
+  const cards = [];
+  
+    for(let i=0; i<numOfCards; i++) {
+      cards.push(<GridItem columnSpan={colspan}>
+      <Card type="VIDEO" 
+        title="Supernova" 
+        description={description}
+        tags={["Galaxies", "Milky Way", "Speed of Light", "Mars", "Venus"]}/>
+      </GridItem>)
+    }
+    return <>{cards}</>;
+}
+
+const cards = createDemoCards({ numOfCards: 6, colspan: 4});
+
 export const Page = ({  }: PageProps) => (
   <section>
-    <Stack>
-        <Inline>
-            <Card type="VIDEO" 
-              title="Supernova" 
-              description={description}
-              tags={["Galaxies", "Milky Way", "Speed of Light", "Mars", "Venus"]}></Card>
-            <Card type="AUDIO" 
-              title="Supernova" 
-              description={description}
-              tags={["Galaxies", "Milky Way"]}></Card>
-        </Inline>
-        <Dialog heading="Header" content="Lorem ipsum..."></Dialog>
-        <Spread>
-          <Inline alignment='LEFT'>
-            <Text content='LEFT'></Text>
-          </Inline>
-          <Inline alignment='RIGHT'>
-            <Text content='RIGHT'></Text>
-          </Inline>
-        </Spread>
-      </Stack>
+    <Grid childrenForMobileDisplay={cards} 
+          childrenForTabletDisplay={cards} 
+          childrenForSmallDesktopDisplay={cards}
+          childrenForLargeDesktopDisplay={cards} />
   </section>
  
   
