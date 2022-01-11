@@ -14,7 +14,7 @@
 /* PLEASE NOTE:
    Only the spacing styles and sizes required for the storybook demo have been displayed, a full
    implementation would require many more definitions.
- */ 
+ */
 
 .box-inset-medium {
   padding: var(--spacing-medium);

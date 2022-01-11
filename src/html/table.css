@@ -1,0 +1,20 @@
+table.html-table {
+  display: table;
+}
+
+tr.html-table {
+  display: table-row;
+}
+
+td.html-table,
+th.html-table {
+  display: table-cell;
+}
+
+thead.html-table {
+  display: table-header-group;
+}
+
+tbody.html-table {
+  display: table-row-group;
+}

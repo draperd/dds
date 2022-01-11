@@ -1,7 +1,7 @@
 @import url(../foundations/spacing.css);
 
 .dialog {
-    width: calc(var(--spacing-xxlarge) * 4);
-    border: 1px solid #aaa;
-    border-radius: var(--spacing-small);
+  width: calc(var(--spacing-xxlarge) * 4);
+  border: 1px solid #aaa;
+  border-radius: var(--spacing-small);
 }

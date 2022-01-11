@@ -1,8 +1,8 @@
 @import url(../foundations/spacing.css);
 
 .button {
-    background-color: #ccc;
-    border-color: #bbb;
-    border-radius: var(--spacing-small);
-    /* color: #000; */
+  background-color: #ccc;
+  border-color: #bbb;
+  border-radius: var(--spacing-small);
+  /* color: #000; */
 }
