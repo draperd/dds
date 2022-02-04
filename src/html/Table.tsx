@@ -69,7 +69,7 @@ export const TableRow = ({
 );
 
 export const TableHeadCell = ({
-  spacingStyle = "FLUSH",
+  spacingStyle = "INSET",
   spacingSize = "MEDIUM",
   className = "",
   children,
@@ -85,7 +85,7 @@ export const TableHeadCell = ({
 );
 
 export const TableDataCell = ({
-  spacingStyle = "FLUSH",
+  spacingStyle = "SQUISHED-INSET",
   spacingSize = "MEDIUM",
   className = "",
   children,

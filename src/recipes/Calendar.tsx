@@ -216,12 +216,15 @@ export const Calendar = ({ date }: CalendarProps) => {
     <Week key={`week_${index}`} days={week} />
   ));
 
+  const month = date.toLocaleString("default", { month: "long" });
+  const year = date.getFullYear();
+
   return (
     <Stack>
       <Inline>
         <Button label="<<"></Button>
         <Button label="<"></Button>
-        <Text content="February 2022"></Text>
+        <Text content={`${month} ${year}`} typographyStyle="HEADING"></Text>
         <Button label=">"></Button>
         <Button label=">>"></Button>
       </Inline>
