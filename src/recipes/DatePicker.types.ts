@@ -77,9 +77,9 @@ export type State = {
   isValid: boolean,
   proposedDate: Date,
   selectedDate?: Date,
-  dayInputFieldValue: number | "",
-  monthInputFieldValue: number | "",
-  yearInputFieldValue: number | "",
+  dayInputFieldValue: number, // | "",
+  monthInputFieldValue: number, // | "",
+  yearInputFieldValue: number, // | "",
   warning?: string,
   onChange?: OnChange
 };

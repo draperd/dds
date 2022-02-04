@@ -9,12 +9,40 @@ interface InputProps {
   name: string;
   className?: string;
   type?: InputType;
+  onChange?: ChangeHandler;
+  value?: number | string;
 }
+
+export type ChangeHandler = (value: any) => void;
+
+export type HandleChangeArgs = {
+  evt: React.ChangeEvent<HTMLInputElement>;
+  onChange: ChangeHandler | undefined;
+};
+
+export const handleChange = ({ evt, onChange }: HandleChangeArgs) => {
+  if (onChange) {
+    console.log("New value is", evt.target.value);
+    onChange(evt.target.value);
+  }
+};
+
 export const Input = ({
   className = "",
   type = "TEXT",
   id,
   name,
+  onChange,
+  value,
 }: InputProps) => {
-  return <input id={id} name={name} type={type} className={className}></input>;
+  return (
+    <input
+      id={id}
+      name={name}
+      type={type}
+      className={className}
+      onChange={(evt) => handleChange({ evt, onChange })}
+      value={value}
+    ></input>
+  );
 };

@@ -15,6 +15,9 @@ import {
   createHidePickerAction,
   createSelectDateAction,
   createShowPickerAction,
+  createOnDayChangedAction,
+  createOnMonthChangedAction,
+  createOnYearChangedAction,
 } from "./DatePickerActions";
 import { reducer } from "./DatePickerReducer";
 import {
@@ -56,9 +59,27 @@ export const DatePickerEditDisplay = ({
   <Box>
     <Stack className="datepicker-popup">
       <Spread>
-        <NumberSpinner id="DAY" label="Day"></NumberSpinner>
-        <NumberSpinner id="MONTH" label="Month"></NumberSpinner>
-        <NumberSpinner id="YEAR" label="Year"></NumberSpinner>
+        <NumberSpinner
+          id="DAY"
+          label="Day"
+          value={state.dayInputFieldValue}
+          onChange={(value) => {
+            console.log("New day is", value);
+            dispatch(createOnDayChangedAction({ value }));
+          }}
+        ></NumberSpinner>
+        <NumberSpinner
+          id="MONTH"
+          label="Month"
+          value={state.monthInputFieldValue}
+          onChange={(value) => dispatch(createOnMonthChangedAction({ value }))}
+        ></NumberSpinner>
+        <NumberSpinner
+          id="YEAR"
+          label="Year"
+          value={state.yearInputFieldValue}
+          onChange={(value) => dispatch(createOnYearChangedAction({ value }))}
+        ></NumberSpinner>
         <Button
           label="Save"
           onPress={() =>
@@ -87,7 +108,9 @@ interface DatePickerReadDisplayProps {
   triggerProps: TriggerProps;
 }
 
-export default function ReadDisplay(props: DatePickerReadDisplayProps) {
+export default function DatePickerReadDisplay(
+  props: DatePickerReadDisplayProps
+) {
   const {
     dispatch,
     id,
@@ -159,8 +182,8 @@ export const DatePicker = (props: DatePickerProps) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const context = createContext({ state, dispatch });
 
-  // // This is an attempt to track changing in prop value, to update the selected date...
-  // // However, this updates on each render and we need to be able to process more than once
+  // This is an attempt to track changing in prop value, to update the selected date...
+  // However, this updates on each render and we need to be able to process more than once
   // const ref = useRef();
   // useEffect(() => {
   //   const previousProps = ref.current;
@@ -201,6 +224,7 @@ export const DatePicker = (props: DatePickerProps) => {
     day: "numeric",
   };
 
+  // console.log("New state", state);
   return (
     <DatePickerContext.Provider value={context}>
       <Popup
@@ -219,7 +243,7 @@ export const DatePicker = (props: DatePickerProps) => {
           ></DatePickerEditDisplay>
         )}
         trigger={(triggerProps) => (
-          <ReadDisplay
+          <DatePickerReadDisplay
             id={id}
             label={label}
             dispatch={dispatch}
@@ -227,7 +251,7 @@ export const DatePicker = (props: DatePickerProps) => {
             locale={locale}
             formatDateOptions={ariaDateOptions}
             triggerProps={triggerProps}
-          ></ReadDisplay>
+          ></DatePickerReadDisplay>
         )}
       />
     </DatePickerContext.Provider>
