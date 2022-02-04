@@ -46,5 +46,7 @@
   "peerDependencies": {
     "react": "^17.0.2"
   },
-  "dependencies": {}
+  "dependencies": {
+    "@atlaskit/popup": "^1.3.2"
+  }
 }

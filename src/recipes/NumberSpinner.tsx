@@ -10,7 +10,7 @@ interface NumberSpinnerProps {
 }
 
 export const NumberSpinner = ({ id, label }: NumberSpinnerProps) => (
-  <Stack>
+  <Stack spacingSize="SMALL">
     <Label htmlFor={id} content={label}></Label>
     <Input type="NUMBER" id={id} name={id}></Input>
   </Stack>

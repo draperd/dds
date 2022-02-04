@@ -1,4 +1,5 @@
 .spread {
   justify-content: space-between;
   width: 100%;
+  align-items: flex-end; /* Added this to get items of different heights to be vertically aligned, might not work in all cases though */
 }

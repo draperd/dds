@@ -14,5 +14,5 @@ const Template: ComponentStory<typeof DatePicker> = (args) => (
 
 export const Simple = Template.bind({});
 Simple.args = {
-  user: {},
+  date: new Date(),
 };

@@ -20,6 +20,10 @@ const onPress = () => {
   alert("Clicked on card!");
 };
 
+const onButtonPress = () => {
+  alert("Clicked on button!");
+};
+
 export const Card = ({ type, title, description, tags = [] }: CardProps) => (
   <Stack className="card">
     <Pressable onPress={onPress} spacingStyle="FLUSH">
@@ -33,7 +37,7 @@ export const Card = ({ type, title, description, tags = [] }: CardProps) => (
               <Pill key={tag} content={tag}></Pill>
             ))}
           </Inline>
-          <Button label="View"></Button>
+          <Button label="View" onPress={onButtonPress}></Button>
         </Stack>
       </Box>
     </Pressable>
