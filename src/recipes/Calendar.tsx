@@ -32,6 +32,10 @@ import { Button } from "./Button";
 import { Stack } from "../primitives/Stack";
 import { Inline } from "../primitives/Inline";
 import { Text } from "../primitives/Text";
+import {
+  createOnMonthChangedAction,
+  createOnYearChangedAction,
+} from "./DatePickerActions";
 
 export const oneDayInMilliseconds = 60 * 60 * 24 * 1000;
 
@@ -206,7 +210,7 @@ export const Week = ({ days }: WeekProps) => {
   );
 };
 
-export const Calendar = ({ date }: CalendarProps) => {
+export const Calendar = ({ date, dispatch }: CalendarProps) => {
   const today = new Date();
   const weeksInMonth = getMonthData({
     date,
@@ -219,14 +223,40 @@ export const Calendar = ({ date }: CalendarProps) => {
   const month = date.toLocaleString("default", { month: "long" });
   const year = date.getFullYear();
 
+  // NOTE: Months are zero-indexed, but the month field is not hence adding 2 and not substracting anything!
+  const nextMonth = date.getMonth() + 2;
+  const previousMonth = date.getMonth();
+  const nextYear = date.getFullYear() + 1;
+  const previousYear = date.getFullYear() - 1;
+
   return (
     <Stack>
       <Inline>
-        <Button label="<<"></Button>
-        <Button label="<"></Button>
+        <Button
+          label="<<"
+          onPress={() =>
+            dispatch(createOnYearChangedAction({ value: previousYear }))
+          }
+        ></Button>
+        <Button
+          label="<"
+          onPress={() =>
+            dispatch(createOnMonthChangedAction({ value: previousMonth }))
+          }
+        ></Button>
         <Text content={`${month} ${year}`} typographyStyle="HEADING"></Text>
-        <Button label=">"></Button>
-        <Button label=">>"></Button>
+        <Button
+          label=">"
+          onPress={() =>
+            dispatch(createOnMonthChangedAction({ value: nextMonth }))
+          }
+        ></Button>
+        <Button
+          label=">>"
+          onPress={() =>
+            dispatch(createOnYearChangedAction({ value: nextYear }))
+          }
+        ></Button>
       </Inline>
       <Table>
         <TableHead>

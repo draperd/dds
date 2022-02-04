@@ -1,3 +1,5 @@
+import { DispatchAction } from "./DatePicker.types";
+
 export type DayOfWeek = 1 | 2 | 3 | 4 | 5 | 6 | 7;
 
 export type DayData = {
@@ -71,6 +73,7 @@ export type CreateDayData = (args: {
 
 export interface CalendarProps {
   date: Date;
+  dispatch: DispatchAction;
 }
 
 export interface DayProps {

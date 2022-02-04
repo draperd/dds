@@ -91,7 +91,7 @@ export const DatePickerEditDisplay = ({
           onPress={() => dispatch(createHidePickerAction())}
         ></Button>
       </Spread>
-      <Calendar date={new Date()} />
+      <Calendar date={state.proposedDate} dispatch={dispatch} />
     </Stack>
   </Box>
 );
@@ -124,16 +124,6 @@ export default function DatePickerReadDisplay(
   const displayValue = state.selectedDate
     ? state.selectedDate.toDateString()
     : "";
-
-  // const ariaDate = state.selectedDate
-  //   ? state.selectedDate.toLocaleDateString(locale, formatDateOptions)
-  //   : "";
-
-  // const ariaLabel =
-  //   label + (ariaDate === "" ? " with no date" : ` with date ${ariaDate}`);
-
-  // const editButtonLabel = `Edit date of ${label}`;
-  // const clearButtonLabel = `Clear date for ${label}`;
 
   return (
     <div id={id} className="display" {...triggerProps}>
@@ -182,38 +172,7 @@ export const DatePicker = (props: DatePickerProps) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const context = createContext({ state, dispatch });
 
-  // This is an attempt to track changing in prop value, to update the selected date...
-  // However, this updates on each render and we need to be able to process more than once
-  // const ref = useRef();
-  // useEffect(() => {
-  //   const previousProps = ref.current;
-  //   if (previousProps) {
-  //     if (previousProps.value !== value) {
-  //       if (value) {
-  //         dispatch(createSelectDateAction({ date: value }));
-  //       } else {
-  //         dispatch(createClearDateAction());
-  //       }
-  //     }
-
-  //     const {
-  //       earliestAllowedDate: previousEarliestAllowedDate,
-  //       latestAllowedDate: previousLatestAllowedDate,
-  //     } = previousProps;
-  //     if (
-  //       previousEarliestAllowedDate !== earliestAllowedDate ||
-  //       previousLatestAllowedDate !== latestAllowedDate
-  //     ) {
-  //       dispatch(
-  //         createSetConstraintsAction({
-  //           earliestAllowedDate,
-  //           latestAllowedDate,
-  //         })
-  //       );
-  //     }
-  //   }
-  //   ref.current = props;
-  // });
+  // UseRef stuff was here (see previous implementation)
 
   /* The following section is very much a work in progress experimenting with good messages for accessibility, this
      needs to be refactored into more suitable functions for clarity / code cleanliness */
