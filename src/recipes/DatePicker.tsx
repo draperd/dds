@@ -61,10 +61,7 @@ export const DatePickerEditDisplay = ({
           id="DAY"
           label="Day"
           value={state.dayInputFieldValue}
-          onChange={(value) => {
-            console.log("New day is", value);
-            dispatch(createOnDayChangedAction({ value }));
-          }}
+          onChange={(value) => dispatch(createOnDayChangedAction({ value }))}
         ></NumberSpinner>
         <NumberSpinner
           id="MONTH"
@@ -173,7 +170,6 @@ export const DatePicker = (props: DatePickerProps) => {
     day: "numeric",
   };
 
-  // console.log("New state", state);
   return (
     <DatePickerContext.Provider value={context}>
       <Popup

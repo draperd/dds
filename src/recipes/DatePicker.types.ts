@@ -142,13 +142,13 @@ export type ClearDateAction = {
 export type CreateShowPickerAction = () => ShowPickerAction;
 export type CreateHidePickerAction = () => HidePickerAction;
 export type CreateOnDayChangedAction = (args: {
-  value: number
+  value: string
 }) => OnDayChangedAction;
 export type CreateOnMonthChangedAction = (args: {
-  value: number
+  value: string
 }) => OnMonthChangedAction;
 export type CreateOnYearChangedAction = (args: {
-  value: number
+  value: string
 }) => OnYearChangedAction;
 export type CreateSelectDateAction = (args: { date: Date }) => SelectDateAction;
 export type CreateClearDateAction = () => ClearDateAction;

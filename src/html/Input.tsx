@@ -13,7 +13,7 @@ interface InputProps {
   value?: number | string;
 }
 
-export type ChangeHandler = (value: any) => void;
+export type ChangeHandler = (value: string) => void;
 
 export type HandleChangeArgs = {
   evt: React.ChangeEvent<HTMLInputElement>;
@@ -22,7 +22,6 @@ export type HandleChangeArgs = {
 
 export const handleChange = ({ evt, onChange }: HandleChangeArgs) => {
   if (onChange) {
-    console.log("New value is", evt.target.value);
     onChange(evt.target.value);
   }
 };

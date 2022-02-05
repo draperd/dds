@@ -36,7 +36,7 @@ import {
     return {
       type: ON_DAY_CHANGED_ACTION,
       payload: {
-        value
+        value: parseInt(value)
       }
     };
   };
@@ -47,7 +47,7 @@ import {
     return {
       type: ON_MONTH_CHANGED_ACTION,
       payload: {
-        value
+        value: parseInt(value)
       }
     };
   };
@@ -58,7 +58,7 @@ import {
     return {
       type: ON_YEAR_CHANGED_ACTION,
       payload: {
-        value
+        value: parseInt(value)
       }
     };
   };

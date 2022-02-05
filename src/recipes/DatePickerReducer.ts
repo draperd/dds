@@ -78,14 +78,14 @@ const reduceDatePartChanged: ReduceDatePartChanged = ({
   // TODO: Ideally need to do a better job handling strange characters:
   //       - ignore zeros
   //       - could we always have 2 character day and month? (with leading zeroes)
-//   if (value === "") {
-//     return {
-//       ...state,
-//       isValid: false,
-//       warning: "You need to provide a full date",
-//       [inputFieldStateValue]: value
-//     };
-//   }
+  if (isNaN(value)) {
+    return {
+      ...state,
+      isValid: false,
+      warning: "You need to provide a full date",
+      [inputFieldStateValue]: value
+    };
+  }
 
   const updatedProposedDate = getNewProposedDate({ proposedDate, value });
 

@@ -17,11 +17,11 @@ interface CardProps {
 }
 
 const onPress = () => {
-  alert("Clicked on card!");
+  console.log("Clicked on card!");
 };
 
 const onButtonPress = () => {
-  alert("Clicked on button!");
+  console.log("Clicked on button!");
 };
 
 export const Card = ({ type, title, description, tags = [] }: CardProps) => (

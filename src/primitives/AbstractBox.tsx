@@ -85,7 +85,6 @@ export type KeyPressHandlerArgs = {
 // Not sure about this function, but it's demo worthy enough
 export const handleKeyPress = ({ evt, onPress }: KeyPressHandlerArgs) => {
   if (evt.code === "Enter") {
-    alert("Key Press!");
     evt.stopPropagation();
     if (onPress) {
       onPress();
