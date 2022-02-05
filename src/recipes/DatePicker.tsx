@@ -86,7 +86,11 @@ export const DatePickerEditDisplay = ({
           onPress={() => dispatch(createHidePickerAction())}
         ></Button>
       </Spread>
-      <Calendar date={state.proposedDate} dispatch={dispatch} />
+      <Calendar
+        date={state.proposedDate}
+        dispatch={dispatch}
+        onDayPressed={({ date }) => dispatch(createSelectDateAction({ date }))}
+      />
     </Stack>
   </Box>
 );

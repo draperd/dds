@@ -73,13 +73,18 @@ export type CreateDayData = (args: {
 
 export interface CalendarProps {
   date: Date;
+  onDayPressed: OnDayPressed;
   dispatch: DispatchAction;
 }
 
+export type OnDayPressed = (args: { date: Date}) => void;
+
 export interface DayProps {
   day: DayData;
+  onDayPressed: OnDayPressed;
 }
 
 export type WeekProps = {
   days: WeekData;
+  onDayPressed: OnDayPressed;
 };

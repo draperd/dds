@@ -19,6 +19,7 @@ export const Pressable = ({
   className = "",
   spacingSize = "MEDIUM",
   spacingStyle = "INSET",
+  spacingAlignment = "LEFT",
 }: PressableProps) => (
   <AbstractBox
     boxType="PRESSABLE"
@@ -26,6 +27,7 @@ export const Pressable = ({
     onPress={onPress}
     spacingSize={spacingSize}
     spacingStyle={spacingStyle}
+    spacingAlignment={spacingAlignment}
   >
     {children}
   </AbstractBox>

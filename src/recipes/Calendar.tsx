@@ -32,6 +32,7 @@ import { Button } from "./Button";
 import { Inline } from "../primitives/Inline";
 import { Stack } from "../primitives/Stack";
 import { Text } from "../primitives/Text";
+import { Pressable } from "../behaviors/Pressable";
 import {
   createOnMonthChangedAction,
   createOnYearChangedAction,
@@ -187,37 +188,43 @@ export const getMonthData: GetMonthData = ({
   return weeksInMonth;
 };
 
-export const Day = ({ day }: DayProps) => {
-  const { dayOfMonth } = day;
+export const Day = ({ day, onDayPressed }: DayProps) => {
+  const { dayOfMonth, date } = day;
   return (
     <TableDataCell>
-      <Text content={dayOfMonth.toString()}></Text>
+      <Pressable
+        onPress={() => onDayPressed({ date })}
+        spacingStyle="FLUSH"
+        spacingAlignment="CENTER"
+      >
+        <Text content={dayOfMonth.toString()}></Text>
+      </Pressable>
     </TableDataCell>
   );
 };
 
-export const Week = ({ days }: WeekProps) => {
+export const Week = ({ days, onDayPressed }: WeekProps) => {
   return (
     <TableRow>
-      <Day day={days[0]} />
-      <Day day={days[1]} />
-      <Day day={days[2]} />
-      <Day day={days[3]} />
-      <Day day={days[4]} />
-      <Day day={days[5]} />
-      <Day day={days[6]} />
+      <Day day={days[0]} onDayPressed={onDayPressed} />
+      <Day day={days[1]} onDayPressed={onDayPressed} />
+      <Day day={days[2]} onDayPressed={onDayPressed} />
+      <Day day={days[3]} onDayPressed={onDayPressed} />
+      <Day day={days[4]} onDayPressed={onDayPressed} />
+      <Day day={days[5]} onDayPressed={onDayPressed} />
+      <Day day={days[6]} onDayPressed={onDayPressed} />
     </TableRow>
   );
 };
 
-export const Calendar = ({ date, dispatch }: CalendarProps) => {
+export const Calendar = ({ date, dispatch, onDayPressed }: CalendarProps) => {
   const today = new Date();
   const weeksInMonth = getMonthData({
     date,
     today,
   });
   const weeks = weeksInMonth.map((week, index) => (
-    <Week key={`week_${index}`} days={week} />
+    <Week key={`week_${index}`} days={week} onDayPressed={onDayPressed} />
   ));
 
   const month = date.toLocaleString("default", { month: "long" });
@@ -235,26 +242,32 @@ export const Calendar = ({ date, dispatch }: CalendarProps) => {
         <Button
           label="<<"
           onPress={() =>
-            dispatch(createOnYearChangedAction({ value: previousYear }))
+            dispatch(
+              createOnYearChangedAction({ value: previousYear.toString() })
+            )
           }
         ></Button>
         <Button
           label="<"
           onPress={() =>
-            dispatch(createOnMonthChangedAction({ value: previousMonth }))
+            dispatch(
+              createOnMonthChangedAction({ value: previousMonth.toString() })
+            )
           }
         ></Button>
         <Text content={`${month} ${year}`} typographyStyle="HEADING"></Text>
         <Button
           label=">"
           onPress={() =>
-            dispatch(createOnMonthChangedAction({ value: nextMonth }))
+            dispatch(
+              createOnMonthChangedAction({ value: nextMonth.toString() })
+            )
           }
         ></Button>
         <Button
           label=">>"
           onPress={() =>
-            dispatch(createOnYearChangedAction({ value: nextYear }))
+            dispatch(createOnYearChangedAction({ value: nextYear.toString() }))
           }
         ></Button>
       </Inline>
