@@ -28,8 +28,6 @@ import {
   State,
 } from "./DatePicker.types";
 
-import "./datepicker.css";
-
 interface DatePickerProps {
   id?: string;
   value?: Date;
@@ -111,15 +109,7 @@ interface DatePickerReadDisplayProps {
 export default function DatePickerReadDisplay(
   props: DatePickerReadDisplayProps
 ) {
-  const {
-    dispatch,
-    id,
-    // label,
-    // locale,
-    // formatDateOptions,
-    state,
-    triggerProps,
-  } = props;
+  const { dispatch, id, state, triggerProps } = props;
 
   const displayValue = state.selectedDate
     ? state.selectedDate.toDateString()

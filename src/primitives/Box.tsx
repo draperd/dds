@@ -9,6 +9,7 @@ export type BoxProps = PublicBoxProps;
 export const Box = ({
   spacingStyle = "INSET",
   spacingSize = "MEDIUM",
+  spacingAlignment = "LEFT",
   className = "",
   children,
 }: BoxProps) => (
@@ -16,6 +17,7 @@ export const Box = ({
     className={className}
     spacingStyle={spacingStyle}
     spacingSize={spacingSize}
+    spacingAlignment={spacingAlignment}
   >
     {children}
   </AbstractBox>

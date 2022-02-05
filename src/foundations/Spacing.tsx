@@ -5,4 +5,7 @@ export type SpacingStyle =
   | "INLINE"
   | "SQUISHED-INSET"
   | "SPREAD";
+
 export type SpacingSize = "SMALL" | "MEDIUM";
+
+export type SpacingAlignment = "LEFT" | "CENTER" | "RIGHT";

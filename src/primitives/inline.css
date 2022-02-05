@@ -1,7 +1,11 @@
-.inline-left {
+@import url(../foundations/spacing.css);
+
+.inline {
   justify-content: flex-start;
+  align-items: baseline;
 }
 
 .inline-right {
   justify-content: flex-end;
+  align-content: baseline;
 }

@@ -1,5 +1,9 @@
 import React from "react";
-import { SpacingSize, SpacingStyle } from "../foundations/Spacing";
+import {
+  SpacingAlignment,
+  SpacingSize,
+  SpacingStyle,
+} from "../foundations/Spacing";
 import "./abstractBox.css";
 
 // This defines the different types that we think a box could be
@@ -34,6 +38,7 @@ export interface PublicBoxProps {
   // We might want to export a component that sets this property
   spacingStyle?: SpacingStyle;
   spacingSize?: SpacingSize;
+  spacingAlignment?: SpacingAlignment;
   children?: React.ReactNode;
   className?: string;
 }
@@ -46,6 +51,7 @@ type GetSpacingClassNamesArgs = {
   className: string;
   spacingStyle: SpacingStyle;
   spacingSize: SpacingSize;
+  spacingAlignment: SpacingAlignment;
 };
 
 // This is a bit of a short cut and we'd want unit tests for this!
@@ -53,8 +59,9 @@ export const getSpacingClassNames = ({
   className,
   spacingStyle,
   spacingSize,
+  spacingAlignment,
 }: GetSpacingClassNamesArgs) => {
-  return `${cssPrefix}defaults ${cssPrefix}${spacingStyle.toLowerCase()} ${cssPrefix}${spacingStyle.toLowerCase()}-${spacingSize.toLowerCase()} ${className}`;
+  return `${cssPrefix}defaults ${cssPrefix}${spacingStyle.toLowerCase()} ${cssPrefix}${spacingStyle.toLowerCase()}-${spacingSize.toLowerCase()} ${cssPrefix}${spacingAlignment.toLowerCase()} ${className}`;
 };
 
 export type OnClickHandlerArgs = {
@@ -94,6 +101,7 @@ export const AbstractBox = ({
   onPress,
   spacingSize = "MEDIUM",
   spacingStyle = "INSET",
+  spacingAlignment = "LEFT",
   style = {},
 }: AbstractBoxProps) => {
   // We need to select the appropriate styling for the spacing type... so we need to evaluate the property
@@ -103,6 +111,7 @@ export const AbstractBox = ({
     className,
     spacingStyle,
     spacingSize,
+    spacingAlignment,
   });
 
   switch (boxType) {

@@ -29,8 +29,8 @@ import {
 } from "./Calendar.types";
 
 import { Button } from "./Button";
-import { Stack } from "../primitives/Stack";
 import { Inline } from "../primitives/Inline";
+import { Stack } from "../primitives/Stack";
 import { Text } from "../primitives/Text";
 import {
   createOnMonthChangedAction,
@@ -230,8 +230,8 @@ export const Calendar = ({ date, dispatch }: CalendarProps) => {
   const previousYear = date.getFullYear() - 1;
 
   return (
-    <Stack>
-      <Inline>
+    <Stack spacingAlignment="CENTER">
+      <Inline spacingAlignment="CENTER">
         <Button
           label="<<"
           onPress={() =>
@@ -258,34 +258,36 @@ export const Calendar = ({ date, dispatch }: CalendarProps) => {
           }
         ></Button>
       </Inline>
-      <Table>
-        <TableHead>
-          <TableRow>
-            <TableHeadCell>
-              <Text content="SUN" />
-            </TableHeadCell>
-            <TableHeadCell>
-              <Text content="MON" />
-            </TableHeadCell>
-            <TableHeadCell>
-              <Text content="TUE" />
-            </TableHeadCell>
-            <TableHeadCell>
-              <Text content="WED" />
-            </TableHeadCell>
-            <TableHeadCell>
-              <Text content="THU" />
-            </TableHeadCell>
-            <TableHeadCell>
-              <Text content="FRI" />
-            </TableHeadCell>
-            <TableHeadCell>
-              <Text content="SAT" />
-            </TableHeadCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>{weeks}</TableBody>
-      </Table>
+      <Inline spacingAlignment="CENTER">
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableHeadCell>
+                <Text content="SUN" />
+              </TableHeadCell>
+              <TableHeadCell>
+                <Text content="MON" />
+              </TableHeadCell>
+              <TableHeadCell>
+                <Text content="TUE" />
+              </TableHeadCell>
+              <TableHeadCell>
+                <Text content="WED" />
+              </TableHeadCell>
+              <TableHeadCell>
+                <Text content="THU" />
+              </TableHeadCell>
+              <TableHeadCell>
+                <Text content="FRI" />
+              </TableHeadCell>
+              <TableHeadCell>
+                <Text content="SAT" />
+              </TableHeadCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>{weeks}</TableBody>
+        </Table>
+      </Inline>
     </Stack>
   );
 };
