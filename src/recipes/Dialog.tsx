@@ -31,7 +31,7 @@ export const DialogHeader = ({ heading }: DialogHeaderProps) => (
 );
 
 export const DialogFooter = ({ children }: DialogFooterProps) => (
-  <Inline alignment="RIGHT">{children}</Inline>
+  <Inline spacingAlignment="RIGHT">{children}</Inline>
 );
 
 export const DialogBody = ({ children }: DialogBodyProps) => (

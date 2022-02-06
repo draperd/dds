@@ -55,7 +55,7 @@ export const DatePickerEditDisplay = ({
   state,
 }: DatePickerEditDisplayProps) => (
   <Box>
-    <Stack className="datepicker-popup">
+    <Stack>
       <Spread>
         <NumberSpinner
           id="DAY"
@@ -117,7 +117,7 @@ export default function DatePickerReadDisplay(
     : "";
 
   return (
-    <div id={id} className="display" {...triggerProps}>
+    <div id={id} {...triggerProps}>
       <Inline>
         <Text content={displayValue}></Text>
         <Button
