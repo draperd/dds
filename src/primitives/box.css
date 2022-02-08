@@ -14,7 +14,7 @@
 /* PLEASE NOTE:
    Only the spacing styles and sizes required for the storybook demo have been displayed, a full
    implementation would require many more definitions.
- */ 
+ */
 
 .box-inset-medium {
   padding: var(--spacing-medium);
@@ -36,6 +36,7 @@
 .box-inline {
   flex-direction: row;
   width: 100%;
+  align-items: baseline;
 }
 
 .box-inline-medium {
@@ -51,4 +52,16 @@
   padding-right: var(--spacing-medium);
   padding-top: calc(var(--spacing-medium) / 2);
   padding-bottom: calc(var(--spacing-medium) / 2);
+}
+
+.box-left {
+  justify-content: flex-start;
+}
+
+.box-center {
+  justify-content: center;
+}
+
+.box-right {
+  justify-content: flex-end;
 }

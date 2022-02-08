@@ -1,0 +1,8 @@
+@import url(../foundations/spacing.css);
+
+/* NOTE: This was copied from text.css - it should probably be abstracted to a new AbstractText component */
+
+.typography-defaults {
+  box-sizing: border-box;
+  font-size: var(--spacing-medium);
+}

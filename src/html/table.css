@@ -1,0 +1,30 @@
+table.html-table {
+  display: table;
+}
+
+tr.html-table {
+  display: table-row;
+}
+
+td.html-table,
+th.html-table {
+  display: table-cell;
+}
+
+th.html-table {
+  text-transform: uppercase;
+  text-align: center;
+  vertical-align: top;
+}
+
+td.html-table {
+  text-align: center;
+}
+
+thead.html-table {
+  display: table-header-group;
+}
+
+tbody.html-table {
+  display: table-row-group;
+}

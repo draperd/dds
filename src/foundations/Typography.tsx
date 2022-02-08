@@ -1,1 +1,1 @@
-export type TypographyStyle = "TEXT" | 'HEADING';
+export type TypographyStyle = "TEXT" | "HEADING";

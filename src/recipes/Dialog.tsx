@@ -13,43 +13,45 @@ interface DialogProps {
 }
 
 interface DialogHeaderProps {
-  heading: string
+  heading: string;
 }
 
 interface DialogFooterProps {
-    children?: ReactNode
+  children?: ReactNode;
 }
 
 interface DialogBodyProps {
-  children?: ReactNode
+  children?: ReactNode;
 }
 
 export const DialogHeader = ({ heading }: DialogHeaderProps) => (
-    <Inline><Text typographyStyle="HEADING" content={heading}></Text></Inline>
-)
+  <Inline>
+    <Text typographyStyle="HEADING" content={heading}></Text>
+  </Inline>
+);
 
 export const DialogFooter = ({ children }: DialogFooterProps) => (
-    <Inline alignment="RIGHT">{children}</Inline>
-)
+  <Inline spacingAlignment="RIGHT">{children}</Inline>
+);
 
 export const DialogBody = ({ children }: DialogBodyProps) => (
   <Box spacingStyle="FLUSH">{children}</Box>
-)
+);
 
-// This would need a number of additional accessibility attributes for this to be a proper dialog: 
+// This would need a number of additional accessibility attributes for this to be a proper dialog:
 // See -> https://www.w3.org/TR/wai-aria-practices-1.1/examples/dialog-modal/dialog.html
 
 export const Dialog = ({ heading, content }: DialogProps) => (
-    <Box className="dialog">
-      <Stack>
-        <DialogHeader heading={heading}></DialogHeader>
-        <DialogBody>
-          <Text content={content}></Text>
-        </DialogBody>
-        <DialogFooter>
-            <Button label="Cancel"></Button>
-            <Button label="Confirm"></Button>
-        </DialogFooter>
-      </Stack>
-    </Box>
+  <Box className="dialog">
+    <Stack>
+      <DialogHeader heading={heading}></DialogHeader>
+      <DialogBody>
+        <Text content={content}></Text>
+      </DialogBody>
+      <DialogFooter>
+        <Button label="Cancel"></Button>
+        <Button label="Confirm"></Button>
+      </DialogFooter>
+    </Stack>
+  </Box>
 );

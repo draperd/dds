@@ -2,7 +2,7 @@
 
 .typography-defaults {
   box-sizing: border-box;
-  display: flex;
+  /* display: flex; */
   /* border: 1px dotted black; */
 }
 
