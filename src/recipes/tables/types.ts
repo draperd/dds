@@ -27,9 +27,30 @@ export type TableHeadCell = {
 
 export type TableHead = TableHeadCell[];
 
-export type TableData = {
-    rows: Object[];
-}
+// export type Table = {
+//     headerConfig: TableHeaderData
+//     tableData: Object[];
+// }
+
+export type TableHeaderCellConfig = {
+    id: string,
+    content: string,
+};
+export type TableHeaderCongfig = TableHeaderCellConfig[];
+
+export type TableRowCellData = string;
+export type TableRowData = TableRowCellData[];
+export type TableData = TableRowData[];
+
+// Create React elements for the table heading
+export type CreateTableHeader = (args: { tableHeaderConfig: TableHeaderCongfig}) => ReactElement[];
+
+
+export type CreateTableRow = (args: { tableRowData: TableRowData, rowNumber: number}) => ReactElement[];
+export type CreateTableRows = (args: { tableData: TableData}) => ReactElement[];
+
+
+
 
 export type RenderHeadCell = (args: { columnNumber: number}) => ReactElement | void; // Allow void to be returned so that data can be used to create some cells
 export type RenderDataCell = (args: { columnNumber: number, key: string | number}) => ReactElement | void;
@@ -54,6 +75,16 @@ export type DynamicTableProps = {
 
     // What about re-ordering?
 }
+
+// An "in memory" table is a table that does not fetch data from a service or server. All the data
+// is loaded into memory when created.
+export type InMemoryTableProps = {
+    tableHeaderConfig: TableHeaderCongfig,
+    tableData: TableData
+}
+
+
+
 
 // Should all tables have state? :/ 
 
