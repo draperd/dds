@@ -6,3 +6,14 @@
   border-radius: var(--spacing-small);
   /* color: #000; */
 }
+
+.button.selected {
+  background-color: #aaa;
+  text-decoration: underline;
+}
+
+.button.disabled {
+  background-color: #eee;
+  cursor: not-allowed;
+  color: #ccc;
+}

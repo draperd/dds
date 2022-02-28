@@ -8,13 +8,22 @@ import "./button.css";
 interface ButtonProps {
   label: string;
   onPress?: PressHandler;
+  disabled?: boolean;
+  selected?: boolean;
 }
 
-export const Button = ({ label, onPress }: ButtonProps) => (
+export const Button = ({
+  label,
+  onPress,
+  disabled = false,
+  selected = false,
+}: ButtonProps) => (
   <Pressable
     spacingStyle="SQUISHED-INSET"
     spacingSize="MEDIUM"
-    className="button"
+    className={`button ${disabled ? "disabled" : ""} ${
+      selected ? "selected" : ""
+    }`}
     onPress={onPress}
   >
     <Text content={label}></Text>

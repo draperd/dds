@@ -86,22 +86,24 @@ export const InMemoryPaginatedTable = (
   });
 
   const [sortState, setSortState] = useState(initialSortState);
+  const [pageNumber, setPageNumber] = useState(1);
+
+  const sortedTableData = sortRows({ sortState, tableData });
+  const tablePage = getPage({
+    tableData: sortedTableData,
+    pageNumber,
+    pageSize,
+  });
 
   const heading = createTableHeader({
     tableHeaderConfig,
     sortState,
     setSortState,
   });
-  const headingKeys = getHeadingKeys({ tableHeaderConfig });
-  const sortedTableData = sortRows({ sortState, tableData });
-  const [pageNumber, setPageNumber] = useState(1);
 
-  const tablePage = getPage({
-    tableData: sortedTableData,
-    pageNumber,
-    pageSize,
-  });
+  const headingKeys = getHeadingKeys({ tableHeaderConfig });
   const body = createTableBody({ tableData: tablePage, headingKeys });
+
   const paginationControls = createPaginationControls({
     tableData,
     pageNumber,

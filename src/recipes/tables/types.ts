@@ -67,12 +67,6 @@ export type CreateTableBody<T> = (args: {
   headingKeys: HeadingKey[];
 }) => ReactElement;
 
-export type CreatePageButtons = (args: {
-  pageSize: number;
-  totalRecords: number;
-  setPageNumber: SetPageNumber;
-}) => ReactElement[];
-
 export type SortDirection = "ASCENDING" | "DESCENDING";
 
 export type GetInitialSortState<T> = (args: {
@@ -146,10 +140,11 @@ export interface InMemoryPaginatedTableProps<T> extends InMemoryTableProps<T> {
   pageSize: number;
 }
 
-// export interface InMemoryPaginatedSortableTableProps<T> extends InMemoryPaginatedTableProps<T> {
-//     sortAttribute: [keyof T],
-//     sortDirection: SortDirection,
-// }
+/* *****************************************************
+ *
+ * PAGINATION
+ *
+ * *****************************************************/
 
 export type GetPage<T> = (args: {
   tableData: T[];
@@ -169,6 +164,13 @@ export type PageUp = (args: {
 }) => void;
 
 export type SetPageNumber = (args: number) => void;
+
+export type CreatePageButtons = (args: {
+  pageNumber: number;
+  pageSize: number;
+  totalRecords: number;
+  setPageNumber: SetPageNumber;
+}) => ReactElement[];
 
 export type CreatePaginationControls<T> = (args: {
   tableData: T[];

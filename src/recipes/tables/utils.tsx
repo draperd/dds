@@ -51,10 +51,13 @@ export const createTableHeaderCell: CreateTableHeaderCell = ({
   setSortState,
 }) => {
   const { label, sortable } = headerConfig;
-  const { sortDirection } = sortState;
+  const { sortDirection, sortAttribute } = sortState;
 
   if (sortable) {
-    const sortButtonLabel = sortDirection === "ASCENDING" ? "A" : "D";
+    const isCurrentSortAttribute = sortAttribute === headingKey;
+
+    const sortButtonLabel =
+      !isCurrentSortAttribute || sortDirection === "ASCENDING" ? "^" : "v";
     const nextSortState = getNextSortState({
       sortState,
       nextSortAttribute: headingKey,
@@ -67,6 +70,7 @@ export const createTableHeaderCell: CreateTableHeaderCell = ({
           <Button
             label={sortButtonLabel}
             onPress={() => setSortState(nextSortState)}
+            selected={isCurrentSortAttribute}
           ></Button>
         </Inline>
       </TableHeadCell>
@@ -202,6 +206,7 @@ export const getPage: GetPage<Object> = ({
  * as allow a new page to be selected.
  */
 export const createPageButtons: CreatePageButtons = ({
+  pageNumber,
   pageSize,
   totalRecords,
   setPageNumber,
@@ -209,14 +214,15 @@ export const createPageButtons: CreatePageButtons = ({
   const pageCount = Math.ceil(totalRecords / pageSize);
   const pageButtons = [];
   for (let i = 0; i < pageCount; i++) {
-    const pageNumber = i + 1;
-    const label = pageNumber.toString();
+    const pageNumberToDisplay = i + 1;
+    const label = pageNumberToDisplay.toString();
     // TODO: This key needs to be changed obviously! :)
     pageButtons.push(
       <Button
         key={label}
         label={label}
-        onPress={() => setPageNumber(pageNumber)}
+        onPress={() => setPageNumber(pageNumberToDisplay)}
+        selected={pageNumberToDisplay === pageNumber}
       ></Button>
     );
   }
@@ -237,15 +243,18 @@ export const createPaginationControls: CreatePaginationControls<Object> = ({
   const totalRecords = tableData.length;
 
   const pageButtons = createPageButtons({
+    pageNumber,
     pageSize,
     totalRecords,
     setPageNumber,
   });
+
   return (
     <Inline>
       <Button
         label="<"
         onPress={() => pageDown({ pageNumber, setPageNumber })}
+        disabled={pageNumber === 1}
       ></Button>
       {pageButtons}
       <Button
@@ -253,6 +262,7 @@ export const createPaginationControls: CreatePaginationControls<Object> = ({
         onPress={() =>
           pageUp({ pageNumber, pageSize, totalRecords, setPageNumber })
         }
+        disabled={pageButtons.length === pageNumber}
       ></Button>
     </Inline>
   );
