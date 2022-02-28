@@ -12,8 +12,9 @@
     5. ?
 
     Other features to consider:
-    1. Stick header?
-    2. ?
+    1. Sticky header?
+    2. Infinite scroll?
+    3. ?
 
     You might want to provide a custom heading cell? Do this as a function?
 
@@ -21,74 +22,88 @@
 
 import { ReactElement } from "react";
 
-export type TableHeadCell = {
-    content: string;
+export interface TypedHeadingAttributes {
+    sortable: boolean,
+    label: string,
+    index: boolean,
 }
 
-export type TableHead = TableHeadCell[];
+export type TableHeaderConfig<T> = {
+    [Property in keyof T]?: TypedHeadingAttributes
+}
 
-// export type Table = {
-//     headerConfig: TableHeaderData
-//     tableData: Object[];
-// }
+
+export interface TypedTable<T>  {
+    heading: TableHeaderConfig<T>, 
+    data: T[]
+}
+
 
 export type TableHeaderCellConfig = {
     id: string,
     content: string,
+    sortable?: boolean,
 };
-export type TableHeaderCongfig = TableHeaderCellConfig[];
 
-export type TableRowCellData = string;
-export type TableRowData = TableRowCellData[];
-export type TableData = TableRowData[];
 
 // Create React elements for the table heading
-export type CreateTableHeader = (args: { tableHeaderConfig: TableHeaderCongfig}) => ReactElement[];
+export type CreateTableHeader<T> = (args: { tableHeaderConfig: TableHeaderConfig<T>}) => ReactElement[];
+
+export type HeadingKey = string;
 
 
-export type CreateTableRow = (args: { tableRowData: TableRowData, rowNumber: number}) => ReactElement[];
-export type CreateTableRows = (args: { tableData: TableData}) => ReactElement[];
+export type CreateTableRow<T> = (args: { tableRowData: T, headingKeys: HeadingKey[], rowNumber: number}) => ReactElement[];
+export type CreateTableRows<T> = (args: { tableData: T[], headingKeys: HeadingKey[]}) => ReactElement[];
 export type CreatePageButtons = (args: { pageSize: number, totalRecords: number, setPageNumber: SetPageNumber}) => ReactElement[];
 
 
 
-export type RenderHeadCell = (args: { columnNumber: number}) => ReactElement | void; // Allow void to be returned so that data can be used to create some cells
-export type RenderDataCell = (args: { columnNumber: number, key: string | number}) => ReactElement | void;
+// export type RenderHeadCell = (args: { columnNumber: number}) => ReactElement | void; // Allow void to be returned so that data can be used to create some cells
+// export type RenderDataCell = (args: { columnNumber: number, key: string | number}) => ReactElement | void;
 
-export type TablePageData = {
-    page: number,
-    data: TableData,
-    pageCount: number,
-    pageSize: number,
-    // What about sort ... column and direction?
-}
+// export type TablePageData = {
+//     page: number,
+//     data: TableData,
+//     pageCount: number,
+//     pageSize: number,
+//     // What about sort ... column and direction?
+// }
 
-export type FetchTablePage = (args: { page: number, pageSize: number }) => TableData;
+// export type FetchTablePage = (args: { page: number, pageSize: number }) => TableData;
 
 
-export type DynamicTableProps = {
-    head?: TableHead; // The data for the heading, probably needs a better name
-    data?: TableData; // the data for the table body
-    renderHeadCell?: RenderHeadCell; // A function for rendering a TH
-    renderDataCell?: RenderDataCell; // A function for rendering a TD
-    fetchPage?: FetchTablePage
+// export type DynamicTableProps = {
+//     head?: TableHead; // The data for the heading, probably needs a better name
+//     data?: TableData; // the data for the table body
+//     renderHeadCell?: RenderHeadCell; // A function for rendering a TH
+//     renderDataCell?: RenderDataCell; // A function for rendering a TD
+//     fetchPage?: FetchTablePage
 
-    // What about re-ordering?
-}
+//     // What about re-ordering?
+// }
 
 // An "in memory" table is a table that does not fetch data from a service or server. All the data
 // is loaded into memory when created.
-export interface InMemoryTableProps {
-    tableHeaderConfig: TableHeaderCongfig,
-    tableData: TableData
+export interface InMemoryTableProps<T> {
+    tableHeaderConfig: TableHeaderConfig<T>,
+    tableData: T[]
 }
 
-export interface InMemoryPaginatedTableProps extends InMemoryTableProps {
+export type InMemoryTableComponent<T> = (args: InMemoryTableProps<T>) => ReactElement;
+
+export interface InMemoryPaginatedTableProps<T> extends InMemoryTableProps<T> {
     pageSize: number,
 }
 
 
-export type GetPage = (args: { tableData: TableData, pageNumber: number, pageSize: number }) => TableData
+export interface InMemoryPaginatedSortableTableProps<T> extends InMemoryPaginatedTableProps<T> {
+    // Is this needed? :/ Is this an attribute of the header?
+}
+
+
+
+
+export type GetPage<T> = (args: { tableData: T[], pageNumber: number, pageSize: number }) => T[]
 
 export type PageDown = (args: { pageNumber: number, setPageNumber: SetPageNumber }) => void;
 export type PageUp = (args: { pageNumber: number, pageSize: number, totalRecords: number, setPageNumber: SetPageNumber }) => void;

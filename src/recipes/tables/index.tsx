@@ -1,9 +1,8 @@
-import React, { useReducer, createContext, useState } from "react";
+import React, { useState } from "react";
 
-import { reducer } from "./reducers";
 import {
-  DynamicTableProps,
-  DynamicTableState,
+  // DynamicTableProps,
+  // DynamicTableState,
   InMemoryTableProps,
   CreateTableHeader,
   CreateTableRow,
@@ -31,40 +30,56 @@ import { Button } from "../Button";
 export const TableContext = React.createContext({});
 
 // Hate the name DynamicTable, but it'll do for now... grrr
-export const DynamicTable = (props: DynamicTableProps) => {
-  const {} = props;
+// export const DynamicTable = (props: DynamicTableProps) => {
+//   const {} = props;
 
-  const initialState: DynamicTableState = {};
-  const [state, dispatch] = useReducer(reducer, initialState);
-  const context = createContext({ state, dispatch });
+//   const initialState: DynamicTableState = {};
+//   const [state, dispatch] = useReducer(reducer, initialState);
+//   const context = createContext({ state, dispatch });
 
-  // Things to consider...
-  // 1. Is data provided?
-  // 2. Are functions provided?
-  // 3. Can both be provided?
+//   // Things to consider...
+//   // 1. Is data provided?
+//   // 2. Are functions provided?
+//   // 3. Can both be provided?
 
-  return <TableContext.Provider value={context}></TableContext.Provider>;
+//   return <TableContext.Provider value={context}></TableContext.Provider>;
+// };
+
+const createTableHeader: CreateTableHeader<Object> = ({
+  tableHeaderConfig,
+}) => {
+  const headerCells = [];
+  for (const [key, value] of Object.entries(tableHeaderConfig)) {
+    headerCells.push(<TableHeadCell key={key}>{value.label}</TableHeadCell>);
+  }
+  return headerCells;
 };
 
-const createTableHeader: CreateTableHeader = ({ tableHeaderConfig }) => {
-  return tableHeaderConfig.map((tableHeader) => {
-    const { id, content } = tableHeader;
-    return <TableHeadCell key={id}>{content}</TableHeadCell>;
-  });
-};
-
-const createTableRow: CreateTableRow = ({ tableRowData, rowNumber }) => {
-  return tableRowData.map((tableCell, cellNumber) => (
-    <TableDataCell key={`${rowNumber}_${cellNumber}`}>
-      {tableCell}
+const createTableRow: CreateTableRow<Object> = ({
+  tableRowData,
+  headingKeys,
+  rowNumber,
+}) => {
+  return headingKeys.map((headingKey, index) => (
+    <TableDataCell key={`${rowNumber}_${index}`}>
+      {tableRowData[headingKey]}
     </TableDataCell>
   ));
+
+  // return tableRowData.map((tableCell, cellNumber) => (
+  //   <TableDataCell key={`${rowNumber}_${cellNumber}`}>
+  //     {tableCell}
+  //   </TableDataCell>
+  // ));
 };
 
-const createTableRows: CreateTableRows = ({ tableData }) => {
+const createTableRows: CreateTableRows<Object> = ({
+  tableData,
+  headingKeys,
+}) => {
   return tableData.map((tableRowData, rowNumber) => (
     <TableRow key={rowNumber}>
-      {createTableRow({ tableRowData, rowNumber })}
+      {createTableRow({ tableRowData, headingKeys, rowNumber })}
     </TableRow>
   ));
 };
@@ -95,10 +110,11 @@ const createPageButtons: CreatePageButtons = ({
 // - NO selection
 // - NO sorting
 // - NO pagination
-export const InMemoryTable = (props: InMemoryTableProps) => {
+export const InMemoryTable = (props: InMemoryTableProps<Object>) => {
   const { tableHeaderConfig, tableData } = props;
   const heading = createTableHeader({ tableHeaderConfig });
-  const rows = createTableRows({ tableData });
+  const headingKeys = Object.keys(tableHeaderConfig);
+  const rows = createTableRows({ tableData, headingKeys });
 
   return (
     <Table>
@@ -111,7 +127,7 @@ export const InMemoryTable = (props: InMemoryTableProps) => {
 };
 
 // TODO: We'd want a test for this obviously :)
-const getPage: GetPage = ({ tableData, pageNumber, pageSize }) => {
+const getPage: GetPage<Object> = ({ tableData, pageNumber, pageSize }) => {
   // Imagine a page size of 3, 9 rows of data and a page number of 2...
   // Page 2 should be rows 3, 4 & 5 (zero-indexed)
   // debugger;
@@ -143,7 +159,9 @@ export const pageUp: PageUp = ({
   setPageNumber(pageNumber + 1);
 };
 
-export const InMemoryPaginatedTable = (props: InMemoryPaginatedTableProps) => {
+export const InMemoryPaginatedTable = (
+  props: InMemoryPaginatedTableProps<Object>
+) => {
   const { tableHeaderConfig, tableData, pageSize } = props;
 
   const [pageNumber, setPageNumber] = useState(1);

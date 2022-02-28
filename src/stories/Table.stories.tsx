@@ -13,16 +13,35 @@ const Template: ComponentStory<typeof InMemoryTable> = (args) => (
   <InMemoryTable {...args} />
 );
 
-const table1: InMemoryTableProps = {
-  tableHeaderConfig: [
-    { id: "1", content: "One" },
-    { id: "2", content: "Two" },
-    { id: "3", content: "Three" },
-  ],
+export type Album = {
+  artist: string;
+  title: string;
+  released: number;
+};
+
+const table1: InMemoryTableProps<Album> = {
+  tableHeaderConfig: {
+    artist: {
+      index: false,
+      label: "Artist",
+      sortable: true,
+    },
+    title: {
+      index: false,
+      label: "Title",
+      sortable: true,
+    },
+    released: {
+      index: false,
+      label: "Year released",
+      sortable: true,
+    },
+  },
+
   tableData: [
-    ["A", "B", "C"],
-    ["D", "E", "F"],
-    ["G", "H", "I"],
+    { artist: "REM", title: "Accelerate", released: 2008 },
+    { artist: "REM", title: "Up", released: 1998 },
+    { artist: "REM", title: "Monster", released: 1994 },
   ],
 };
 
