@@ -54,6 +54,11 @@ export type CreateTableHeaderCell = (args: {
   spacingSize: SpacingSize;
 }) => ReactElement;
 
+export type CreateSimpleTableHeader<T> = (args: {
+  tableHeaderConfig: TableHeaderConfig<T>;
+  spacingSize: SpacingSize;
+}) => ReactElement;
+
 export type CreateTableHeader<T> = (args: {
   tableHeaderConfig: TableHeaderConfig<T>;
   sortState: SortState;
@@ -157,15 +162,27 @@ export type CreatePaginationControls<T> = (args: {
  *
  * *****************************************************/
 
+export interface SimpleTableHeaderCellProps {
+  headingKey: HeadingKey;
+  spacingSize?: SpacingSize;
+  tableHeaderCellConfig: TableHeaderCellConfig;
+}
+
+export interface SortableTableHeaderCellProps
+  extends SimpleTableHeaderCellProps {
+  sortState: SortState;
+  setSortState: SetSortState;
+}
+
 export interface InMemoryTableProps<T> {
   tableHeaderConfig: TableHeaderConfig<T>;
   tableData: T[];
-  sortAttribute: keyof T;
-  sortDirection: SortDirection;
   spacingSize: SpacingSize;
 }
 
 export interface InMemoryPaginatedTableProps<T> extends InMemoryTableProps<T> {
+  sortAttribute: keyof T;
+  sortDirection: SortDirection;
   pageSize: number;
 }
 

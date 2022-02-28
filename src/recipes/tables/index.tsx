@@ -17,6 +17,7 @@ import {
   getPage,
   sortRows,
   createPaginationControls,
+  createSimpleTableHeader,
 } from "./utils";
 
 // TODO Probably want to define a type for table context here
@@ -42,33 +43,16 @@ export const TableContext = React.createContext({});
 // - NO selection
 // - NO pagination
 export const InMemoryTable = (props: InMemoryTableProps<Object>) => {
-  const {
+  const { tableHeaderConfig, tableData, spacingSize } = props;
+
+  const heading = createSimpleTableHeader({
     tableHeaderConfig,
-    tableData,
-    sortAttribute,
-    sortDirection,
-    spacingSize,
-  } = props;
-
-  const initialSortState = getInitialSortState({
-    sortAttribute,
-    sortDirection,
-  });
-
-  const [sortState, setSortState] = useState(initialSortState);
-
-  const heading = createTableHeader({
-    tableHeaderConfig,
-    sortState,
-    setSortState,
     spacingSize,
   });
   const headingKeys = Object.keys(tableHeaderConfig);
-
-  const sortedTableData = sortRows({ sortState, tableData });
   const body = createTableBody({
     tableHeaderConfig,
-    tableData: sortedTableData,
+    tableData: tableData,
     headingKeys,
     spacingSize,
   });

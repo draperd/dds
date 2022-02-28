@@ -2,6 +2,7 @@ import React from "react";
 import {
   CreatePageButtons,
   CreatePaginationControls,
+  CreateSimpleTableHeader,
   CreateTableBody,
   CreateTableHeader,
   CreateTableHeaderCell,
@@ -19,13 +20,13 @@ import {
   TableBody,
   TableDataCell,
   TableHead,
-  TableHeadCell,
   TableRow,
 } from "../../html/Table";
 
 import { Inline } from "../../primitives/Inline";
 import { Text } from "../../primitives/Text";
 import { Button } from "../Button";
+import { SimpleTableHeaderCell, SortableTableHeaderCell } from "./header";
 
 /* *****************************************************
  *
@@ -51,40 +52,44 @@ export const createTableHeaderCell: CreateTableHeaderCell = ({
   setSortState,
   spacingSize,
 }) => {
-  const { label, sortable, spacingAlignment = "LEFT" } = headerConfig;
-  const { sortDirection, sortAttribute } = sortState;
+  const { sortable } = headerConfig;
 
   if (sortable) {
-    const isCurrentSortAttribute = sortAttribute === headingKey;
-
-    const sortButtonLabel =
-      !isCurrentSortAttribute || sortDirection === "ASCENDING" ? "^" : "v";
-    const nextSortState = getNextSortState({
-      sortState,
-      nextSortAttribute: headingKey,
-    });
-
     return (
-      <TableHeadCell
-        key={headingKey}
-        spacingAlignment={spacingAlignment}
+      <SortableTableHeaderCell
+        headingKey={headingKey}
+        tableHeaderCellConfig={headerConfig}
         spacingSize={spacingSize}
-      >
-        <Inline>
-          <Text content={label}></Text>
-          <Button
-            label={sortButtonLabel}
-            onPress={() => setSortState(nextSortState)}
-            selected={isCurrentSortAttribute}
-          ></Button>
-        </Inline>
-      </TableHeadCell>
+        setSortState={setSortState}
+        sortState={sortState}
+      ></SortableTableHeaderCell>
     );
   }
   return (
-    <TableHeadCell>
-      <Text content={label}></Text>
-    </TableHeadCell>
+    <SimpleTableHeaderCell
+      headingKey={headingKey}
+      tableHeaderCellConfig={headerConfig}
+      spacingSize={spacingSize}
+    ></SimpleTableHeaderCell>
+  );
+};
+
+export const createSimpleTableHeader: CreateSimpleTableHeader<Object> = ({
+  tableHeaderConfig,
+}) => {
+  const headerCells = [];
+  for (const [key, value] of Object.entries(tableHeaderConfig)) {
+    headerCells.push(
+      <SimpleTableHeaderCell
+        headingKey={key}
+        tableHeaderCellConfig={value}
+      ></SimpleTableHeaderCell>
+    );
+  }
+  return (
+    <TableHead>
+      <TableRow>{headerCells}</TableRow>
+    </TableHead>
   );
 };
 
