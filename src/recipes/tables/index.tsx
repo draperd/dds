@@ -42,7 +42,13 @@ export const TableContext = React.createContext({});
 // - NO selection
 // - NO pagination
 export const InMemoryTable = (props: InMemoryTableProps<Object>) => {
-  const { tableHeaderConfig, tableData, sortAttribute, sortDirection } = props;
+  const {
+    tableHeaderConfig,
+    tableData,
+    sortAttribute,
+    sortDirection,
+    spacingSize,
+  } = props;
 
   const initialSortState = getInitialSortState({
     sortAttribute,
@@ -55,6 +61,7 @@ export const InMemoryTable = (props: InMemoryTableProps<Object>) => {
     tableHeaderConfig,
     sortState,
     setSortState,
+    spacingSize,
   });
   const headingKeys = Object.keys(tableHeaderConfig);
 
@@ -63,6 +70,7 @@ export const InMemoryTable = (props: InMemoryTableProps<Object>) => {
     tableHeaderConfig,
     tableData: sortedTableData,
     headingKeys,
+    spacingSize,
   });
 
   return (
@@ -82,6 +90,7 @@ export const InMemoryPaginatedTable = (
     pageSize,
     sortAttribute,
     sortDirection,
+    spacingSize,
   } = props;
 
   const initialSortState = getInitialSortState({
@@ -103,6 +112,7 @@ export const InMemoryPaginatedTable = (
     tableHeaderConfig,
     sortState,
     setSortState,
+    spacingSize,
   });
 
   const headingKeys = getHeadingKeys({ tableHeaderConfig });
@@ -110,6 +120,7 @@ export const InMemoryPaginatedTable = (
     tableHeaderConfig,
     tableData: tablePage,
     headingKeys,
+    spacingSize,
   });
 
   const paginationControls = createPaginationControls({

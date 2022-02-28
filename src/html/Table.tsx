@@ -5,7 +5,7 @@ import "./table.css";
 export type TableProps = PublicBoxProps;
 
 export const Table = ({
-  spacingStyle = "FLUSH",
+  spacingStyle = "INSET",
   spacingSize = "MEDIUM",
   className = "",
   children,
@@ -21,7 +21,7 @@ export const Table = ({
 );
 
 export const TableHead = ({
-  spacingStyle = "FLUSH",
+  spacingStyle = "INSET",
   spacingSize = "MEDIUM",
   className = "",
   children,
@@ -37,7 +37,7 @@ export const TableHead = ({
 );
 
 export const TableBody = ({
-  spacingStyle = "FLUSH",
+  spacingStyle = "INSET",
   spacingSize = "MEDIUM",
   className = "",
   children,
@@ -53,7 +53,7 @@ export const TableBody = ({
 );
 
 export const TableRow = ({
-  spacingStyle = "FLUSH",
+  spacingStyle = "INSET",
   spacingSize = "MEDIUM",
   className = "",
   children,
@@ -87,7 +87,7 @@ export const TableHeadCell = ({
 );
 
 export const TableDataCell = ({
-  spacingStyle = "SQUISHED-INSET",
+  spacingStyle = "INSET",
   spacingSize = "MEDIUM",
   spacingAlignment,
   className = "",

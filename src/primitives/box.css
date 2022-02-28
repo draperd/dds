@@ -16,6 +16,10 @@
    implementation would require many more definitions.
  */
 
+.box-inset-large {
+  padding: var(--spacing-large);
+}
+
 .box-inset-medium {
   padding: var(--spacing-medium);
 }
@@ -37,6 +41,10 @@
   flex-direction: row;
   width: 100%;
   align-items: baseline;
+}
+
+.box-inline-large {
+  gap: var(--spacing-large);
 }
 
 .box-inline-medium {

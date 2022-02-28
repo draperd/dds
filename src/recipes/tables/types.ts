@@ -21,7 +21,7 @@
 */
 
 import { ReactElement } from "react";
-import { SpacingAlignment } from "../../foundations/Spacing";
+import { SpacingAlignment, SpacingSize } from "../../foundations/Spacing";
 
 /* *****************************************************
  *
@@ -51,12 +51,14 @@ export type CreateTableHeaderCell = (args: {
   headerConfig: TableHeaderCellConfig;
   sortState: SortState;
   setSortState: SetSortState;
+  spacingSize: SpacingSize;
 }) => ReactElement;
 
 export type CreateTableHeader<T> = (args: {
   tableHeaderConfig: TableHeaderConfig<T>;
   sortState: SortState;
   setSortState: SetSortState;
+  spacingSize: SpacingSize;
 }) => ReactElement;
 
 /* *****************************************************
@@ -70,12 +72,14 @@ export type CreateTableRow<T> = (args: {
   headingKeys: HeadingKey[];
   tableHeaderConfig: TableHeaderConfig<T>;
   rowNumber: number;
+  spacingSize: SpacingSize;
 }) => ReactElement[];
 
 export type CreateTableBody<T> = (args: {
   tableData: T[];
   headingKeys: HeadingKey[];
   tableHeaderConfig: TableHeaderConfig<T>;
+  spacingSize: SpacingSize;
 }) => ReactElement;
 
 /* *****************************************************
@@ -158,6 +162,7 @@ export interface InMemoryTableProps<T> {
   tableData: T[];
   sortAttribute: keyof T;
   sortDirection: SortDirection;
+  spacingSize: SpacingSize;
 }
 
 export interface InMemoryPaginatedTableProps<T> extends InMemoryTableProps<T> {

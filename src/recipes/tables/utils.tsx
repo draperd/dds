@@ -49,6 +49,7 @@ export const createTableHeaderCell: CreateTableHeaderCell = ({
   headerConfig,
   sortState,
   setSortState,
+  spacingSize,
 }) => {
   const { label, sortable, spacingAlignment = "LEFT" } = headerConfig;
   const { sortDirection, sortAttribute } = sortState;
@@ -64,7 +65,11 @@ export const createTableHeaderCell: CreateTableHeaderCell = ({
     });
 
     return (
-      <TableHeadCell key={headingKey} spacingAlignment={spacingAlignment}>
+      <TableHeadCell
+        key={headingKey}
+        spacingAlignment={spacingAlignment}
+        spacingSize={spacingSize}
+      >
         <Inline>
           <Text content={label}></Text>
           <Button
@@ -90,6 +95,7 @@ export const createTableHeader: CreateTableHeader<Object> = ({
   tableHeaderConfig,
   sortState,
   setSortState,
+  spacingSize,
 }) => {
   const headerCells = [];
   for (const [key, value] of Object.entries(tableHeaderConfig)) {
@@ -99,6 +105,7 @@ export const createTableHeader: CreateTableHeader<Object> = ({
         headerConfig: value,
         sortState,
         setSortState,
+        spacingSize,
       })
     );
   }
@@ -123,6 +130,7 @@ export const createTableRow: CreateTableRow<Object> = ({
   tableRowData,
   headingKeys,
   rowNumber,
+  spacingSize,
 }) => {
   return headingKeys.map((headingKey, index) => {
     const tableHeaderCellConfig = tableHeaderConfig[headingKey];
@@ -131,6 +139,7 @@ export const createTableRow: CreateTableRow<Object> = ({
       <TableDataCell
         key={`${rowNumber}_${index}`}
         spacingAlignment={spacingAlignment}
+        spacingSize={spacingSize}
       >
         <Text content={tableRowData[headingKey]}></Text>
       </TableDataCell>
@@ -146,6 +155,7 @@ export const createTableBody: CreateTableBody<Object> = ({
   tableHeaderConfig,
   tableData,
   headingKeys,
+  spacingSize,
 }) => {
   const rows = tableData.map((tableRowData, rowNumber) => (
     <TableRow key={rowNumber}>
@@ -154,6 +164,7 @@ export const createTableBody: CreateTableBody<Object> = ({
         tableRowData,
         headingKeys,
         rowNumber,
+        spacingSize,
       })}
     </TableRow>
   ));
