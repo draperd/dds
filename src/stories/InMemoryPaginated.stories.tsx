@@ -6,7 +6,7 @@ import { InMemoryPaginatedTableProps } from "../recipes/tables/types";
 import { Album } from "./Table.stories";
 
 export default {
-  title: "Example/Tables/InMemoryPaginated",
+  title: "Example/Tables",
   component: InMemoryPaginatedTable,
 } as ComponentMeta<typeof InMemoryPaginatedTable>;
 
@@ -20,16 +20,19 @@ const table1: InMemoryPaginatedTableProps<Album> = {
       index: false,
       label: "Artist",
       sortable: true,
+      spacingAlignment: "LEFT",
     },
     title: {
       index: false,
       label: "Title",
       sortable: true,
+      spacingAlignment: "LEFT",
     },
     released: {
       index: false,
       label: "Year released",
       sortable: true,
+      spacingAlignment: "RIGHT",
     },
   },
   tableData: [
@@ -55,7 +58,7 @@ const table1: InMemoryPaginatedTableProps<Album> = {
   pageSize: 6,
 };
 
-export const InMemory = Template.bind({});
-InMemory.args = {
+export const InMemoryPaginated = Template.bind({});
+InMemoryPaginated.args = {
   ...table1,
 };

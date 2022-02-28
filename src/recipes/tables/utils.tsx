@@ -50,7 +50,7 @@ export const createTableHeaderCell: CreateTableHeaderCell = ({
   sortState,
   setSortState,
 }) => {
-  const { label, sortable } = headerConfig;
+  const { label, sortable, spacingAlignment = "LEFT" } = headerConfig;
   const { sortDirection, sortAttribute } = sortState;
 
   if (sortable) {
@@ -64,7 +64,7 @@ export const createTableHeaderCell: CreateTableHeaderCell = ({
     });
 
     return (
-      <TableHeadCell key={headingKey}>
+      <TableHeadCell key={headingKey} spacingAlignment={spacingAlignment}>
         <Inline>
           <Text content={label}></Text>
           <Button
@@ -119,15 +119,23 @@ export const createTableHeader: CreateTableHeader<Object> = ({
  * Creates the React components representing a single row in the table
  */
 export const createTableRow: CreateTableRow<Object> = ({
+  tableHeaderConfig,
   tableRowData,
   headingKeys,
   rowNumber,
 }) => {
-  return headingKeys.map((headingKey, index) => (
-    <TableDataCell key={`${rowNumber}_${index}`}>
-      {tableRowData[headingKey]}
-    </TableDataCell>
-  ));
+  return headingKeys.map((headingKey, index) => {
+    const tableHeaderCellConfig = tableHeaderConfig[headingKey];
+    const { spacingAlignment } = tableHeaderCellConfig;
+    return (
+      <TableDataCell
+        key={`${rowNumber}_${index}`}
+        spacingAlignment={spacingAlignment}
+      >
+        <Text content={tableRowData[headingKey]}></Text>
+      </TableDataCell>
+    );
+  });
 };
 
 /**
@@ -135,12 +143,18 @@ export const createTableRow: CreateTableRow<Object> = ({
  * body component
  */
 export const createTableBody: CreateTableBody<Object> = ({
+  tableHeaderConfig,
   tableData,
   headingKeys,
 }) => {
   const rows = tableData.map((tableRowData, rowNumber) => (
     <TableRow key={rowNumber}>
-      {createTableRow({ tableRowData, headingKeys, rowNumber })}
+      {createTableRow({
+        tableHeaderConfig,
+        tableRowData,
+        headingKeys,
+        rowNumber,
+      })}
     </TableRow>
   ));
   return <TableBody>{rows}</TableBody>;

@@ -13,12 +13,18 @@ th.html-table {
 
 th.html-table {
   text-transform: uppercase;
-  text-align: center;
+  /* text-align: center; */
   vertical-align: top;
 }
 
-td.html-table {
+td.html-table.box-center {
   text-align: center;
+}
+td.html-table.box-left {
+  text-align: left;
+}
+td.html-table.box-right {
+  text-align: right;
 }
 
 thead.html-table {

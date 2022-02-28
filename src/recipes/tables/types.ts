@@ -21,6 +21,7 @@
 */
 
 import { ReactElement } from "react";
+import { SpacingAlignment } from "../../foundations/Spacing";
 
 /* *****************************************************
  *
@@ -33,17 +34,25 @@ export type HeadingKey = string;
 export type GetHeadingKeys<T> = (args: {
   tableHeaderConfig: TableHeaderConfig<T>;
 }) => HeadingKey[];
+
 export interface TableHeaderCellConfig {
   index: boolean; // Not sure if this is needed
   sortable: boolean;
   label: string;
+  spacingAlignment?: SpacingAlignment;
 }
 
 export type TableHeaderConfig<T> = {
   [Property in keyof T]?: TableHeaderCellConfig;
 };
 
-// Create React elements for the table heading
+export type CreateTableHeaderCell = (args: {
+  headingKey: string;
+  headerConfig: TableHeaderCellConfig;
+  sortState: SortState;
+  setSortState: SetSortState;
+}) => ReactElement;
+
 export type CreateTableHeader<T> = (args: {
   tableHeaderConfig: TableHeaderConfig<T>;
   sortState: SortState;
@@ -52,20 +61,28 @@ export type CreateTableHeader<T> = (args: {
 
 /* *****************************************************
  *
- * TABLE HEADERS
+ * TABLE ROWS
  *
  * *****************************************************/
 
 export type CreateTableRow<T> = (args: {
   tableRowData: T;
   headingKeys: HeadingKey[];
+  tableHeaderConfig: TableHeaderConfig<T>;
   rowNumber: number;
 }) => ReactElement[];
 
 export type CreateTableBody<T> = (args: {
   tableData: T[];
   headingKeys: HeadingKey[];
+  tableHeaderConfig: TableHeaderConfig<T>;
 }) => ReactElement;
+
+/* *****************************************************
+ *
+ * SORTING
+ *
+ * *****************************************************/
 
 export type SortDirection = "ASCENDING" | "DESCENDING";
 
@@ -74,7 +91,6 @@ export type GetInitialSortState<T> = (args: {
   sortDirection: SortDirection;
 }) => SortState;
 
-// Not keen on the name SortState here :/
 export type SortState = {
   sortDirection: SortDirection;
   sortAttribute: string;
@@ -82,7 +98,6 @@ export type SortState = {
 
 export type SetSortState = (sortState: SortState) => void;
 
-// Create a predictable sort process...
 export type GetNextSortState = (args: {
   sortState: SortState;
   nextSortAttribute: string;
@@ -92,53 +107,6 @@ export type SortRows<T> = (args: {
   sortState: SortState;
   tableData: T[];
 }) => T[];
-
-export type CreateTableHeaderCell = (args: {
-  headingKey: string;
-  headerConfig: TableHeaderCellConfig;
-  sortState: SortState;
-  setSortState: SetSortState;
-}) => ReactElement;
-
-// export type RenderHeadCell = (args: { columnNumber: number}) => ReactElement | void; // Allow void to be returned so that data can be used to create some cells
-// export type RenderDataCell = (args: { columnNumber: number, key: string | number}) => ReactElement | void;
-
-// export type TablePageData = {
-//     page: number,
-//     data: TableData,
-//     pageCount: number,
-//     pageSize: number,
-//     // What about sort ... column and direction?
-// }
-
-// export type FetchTablePage = (args: { page: number, pageSize: number }) => TableData;
-
-// export type DynamicTableProps = {
-//     head?: TableHead; // The data for the heading, probably needs a better name
-//     data?: TableData; // the data for the table body
-//     renderHeadCell?: RenderHeadCell; // A function for rendering a TH
-//     renderDataCell?: RenderDataCell; // A function for rendering a TD
-//     fetchPage?: FetchTablePage
-
-//     // What about re-ordering?
-// }
-
-// An "in memory" table is a table that does not fetch data from a service or server. All the data
-// is loaded into memory when created.
-export interface InMemoryTableProps<T> {
-  tableHeaderConfig: TableHeaderConfig<T>;
-  tableData: T[];
-  sortAttribute: keyof T;
-  sortDirection: SortDirection;
-}
-
-export type InMemoryTableComponent<T> = (
-  args: InMemoryTableProps<T>
-) => ReactElement;
-
-export interface InMemoryPaginatedTableProps<T> extends InMemoryTableProps<T> {
-  pageSize: number;
-}
 
 /* *****************************************************
  *
@@ -179,7 +147,28 @@ export type CreatePaginationControls<T> = (args: {
   setPageNumber: SetPageNumber;
 }) => ReactElement;
 
-// Should all tables have state? :/
+/* *****************************************************
+ *
+ * COMPONENTS
+ *
+ * *****************************************************/
+
+export interface InMemoryTableProps<T> {
+  tableHeaderConfig: TableHeaderConfig<T>;
+  tableData: T[];
+  sortAttribute: keyof T;
+  sortDirection: SortDirection;
+}
+
+export interface InMemoryPaginatedTableProps<T> extends InMemoryTableProps<T> {
+  pageSize: number;
+}
+
+/* *****************************************************
+ *
+ * STATE and ACTIONS
+ *
+ * *****************************************************/
 
 export type DynamicTableState = {};
 

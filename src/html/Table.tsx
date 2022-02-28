@@ -71,6 +71,7 @@ export const TableRow = ({
 export const TableHeadCell = ({
   spacingStyle = "INSET",
   spacingSize = "MEDIUM",
+  spacingAlignment,
   className = "",
   children,
 }: TableProps) => (
@@ -79,6 +80,7 @@ export const TableHeadCell = ({
     className={`${className} html-table`}
     spacingStyle={spacingStyle}
     spacingSize={spacingSize}
+    spacingAlignment={spacingAlignment}
   >
     {children}
   </AbstractBox>
@@ -87,6 +89,7 @@ export const TableHeadCell = ({
 export const TableDataCell = ({
   spacingStyle = "SQUISHED-INSET",
   spacingSize = "MEDIUM",
+  spacingAlignment,
   className = "",
   children,
 }: TableProps) => (
@@ -95,6 +98,7 @@ export const TableDataCell = ({
     className={`${className} html-table`}
     spacingStyle={spacingStyle}
     spacingSize={spacingSize}
+    spacingAlignment={spacingAlignment}
   >
     {children}
   </AbstractBox>

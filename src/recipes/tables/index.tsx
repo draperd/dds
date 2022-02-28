@@ -59,7 +59,11 @@ export const InMemoryTable = (props: InMemoryTableProps<Object>) => {
   const headingKeys = Object.keys(tableHeaderConfig);
 
   const sortedTableData = sortRows({ sortState, tableData });
-  const body = createTableBody({ tableData: sortedTableData, headingKeys });
+  const body = createTableBody({
+    tableHeaderConfig,
+    tableData: sortedTableData,
+    headingKeys,
+  });
 
   return (
     <Table>
@@ -102,7 +106,11 @@ export const InMemoryPaginatedTable = (
   });
 
   const headingKeys = getHeadingKeys({ tableHeaderConfig });
-  const body = createTableBody({ tableData: tablePage, headingKeys });
+  const body = createTableBody({
+    tableHeaderConfig,
+    tableData: tablePage,
+    headingKeys,
+  });
 
   const paginationControls = createPaginationControls({
     tableData,
