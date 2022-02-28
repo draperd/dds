@@ -44,10 +44,15 @@ const table1: InMemoryPaginatedTableProps<Album> = {
     { artist: "U2", title: "All that you can't leave behind", released: 2000 },
     { artist: "U2", title: "Actung Baby", released: 1991 },
     { artist: "U2", title: "The Joshua Tree", released: 1987 },
+    { artist: "Radiohead", title: "Amnesiac", released: 2001 },
+    { artist: "Radiohead", title: "OK Computer", released: 1997 },
+    { artist: "Radiohead", title: "The Bends", released: 1995 },
+    { artist: "Radiohead", title: "In Rainbows", released: 2007 },
+    { artist: "Radiohead", title: "Hail to the Thief", released: 2003 },
   ],
   sortAttribute: "title",
   sortDirection: "ASCENDING",
-  pageSize: 4,
+  pageSize: 6,
 };
 
 export const InMemory = Template.bind({});
