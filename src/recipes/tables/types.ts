@@ -22,39 +22,51 @@
 
 import { ReactElement } from "react";
 
-export interface TypedHeadingAttributes {
+export interface TableHeaderCellConfig {
+    index: boolean,      // Not sure if this is needed
     sortable: boolean,
     label: string,
-    index: boolean,
 }
 
 export type TableHeaderConfig<T> = {
-    [Property in keyof T]?: TypedHeadingAttributes
+    [Property in keyof T]?: TableHeaderCellConfig
 }
-
-
-export interface TypedTable<T>  {
-    heading: TableHeaderConfig<T>, 
-    data: T[]
-}
-
-
-export type TableHeaderCellConfig = {
-    id: string,
-    content: string,
-    sortable?: boolean,
-};
 
 
 // Create React elements for the table heading
-export type CreateTableHeader<T> = (args: { tableHeaderConfig: TableHeaderConfig<T>}) => ReactElement[];
+export type CreateTableHeader<T> = (args: { tableHeaderConfig: TableHeaderConfig<T>, sortState: SortState, setSortState: SetSortState}) => ReactElement[];
 
 export type HeadingKey = string;
 
+export type GetHeadingKeys<T> = (args: { tableHeaderConfig: TableHeaderConfig<T> }) => HeadingKey[];
 
 export type CreateTableRow<T> = (args: { tableRowData: T, headingKeys: HeadingKey[], rowNumber: number}) => ReactElement[];
 export type CreateTableRows<T> = (args: { tableData: T[], headingKeys: HeadingKey[]}) => ReactElement[];
 export type CreatePageButtons = (args: { pageSize: number, totalRecords: number, setPageNumber: SetPageNumber}) => ReactElement[];
+
+export type SortDirection = 'ASCENDING' | 'DESCENDING';
+
+export type GetInitialSortState<T> = (args: { sortAttribute: keyof T, sortDirection: SortDirection}) => SortState;
+
+
+
+// Not keen on the name SortState here :/
+export type SortState = {
+    sortDirection: SortDirection,
+    sortAttribute: string,
+}
+
+export type SetSortState = (sortState: SortState) => void;
+
+// Create a predictable sort process...
+export type GetNextSortState = (args: {sortState: SortState, nextSortAttribute: string}) => SortState;
+
+export type SortRows<T> = (args: {sortState: SortState, tableData: T[]}) => T[];
+
+
+
+
+export type CreateTableHeaderCell = (args: { headingKey: string, headerConfig: TableHeaderCellConfig, sortState: SortState, setSortState: SetSortState }) => ReactElement;
 
 
 
@@ -86,7 +98,9 @@ export type CreatePageButtons = (args: { pageSize: number, totalRecords: number,
 // is loaded into memory when created.
 export interface InMemoryTableProps<T> {
     tableHeaderConfig: TableHeaderConfig<T>,
-    tableData: T[]
+    tableData: T[],
+    sortAttribute: keyof T,
+    sortDirection: SortDirection
 }
 
 export type InMemoryTableComponent<T> = (args: InMemoryTableProps<T>) => ReactElement;
@@ -96,9 +110,10 @@ export interface InMemoryPaginatedTableProps<T> extends InMemoryTableProps<T> {
 }
 
 
-export interface InMemoryPaginatedSortableTableProps<T> extends InMemoryPaginatedTableProps<T> {
-    // Is this needed? :/ Is this an attribute of the header?
-}
+// export interface InMemoryPaginatedSortableTableProps<T> extends InMemoryPaginatedTableProps<T> {
+//     sortAttribute: [keyof T],
+//     sortDirection: SortDirection,
+// }
 
 
 

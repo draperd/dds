@@ -45,7 +45,8 @@ const table1: InMemoryPaginatedTableProps<Album> = {
     { artist: "U2", title: "Actung Baby", released: 1991 },
     { artist: "U2", title: "The Joshua Tree", released: 1987 },
   ],
-
+  sortAttribute: "title",
+  sortDirection: "ASCENDING",
   pageSize: 4,
 };
 

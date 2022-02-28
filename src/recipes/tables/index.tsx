@@ -8,10 +8,8 @@ import {
   CreateTableRow,
   CreateTableRows,
   InMemoryPaginatedTableProps,
-  GetPage,
-  PageDown,
-  PageUp,
   CreatePageButtons,
+  CreateTableHeaderCell,
 } from "./types";
 
 import {
@@ -24,7 +22,17 @@ import {
 } from "../../html/Table";
 import { Stack } from "../../primitives/Stack";
 import { Inline } from "../../primitives/Inline";
+import { Text } from "../../primitives/Text";
 import { Button } from "../Button";
+import {
+  getHeadingKeys,
+  getInitialSortState,
+  getNextSortState,
+  getPage,
+  pageDown,
+  pageUp,
+  sortRows,
+} from "./utils";
 
 // TODO Probably want to define a type for table context here
 export const TableContext = React.createContext({});
@@ -45,12 +53,56 @@ export const TableContext = React.createContext({});
 //   return <TableContext.Provider value={context}></TableContext.Provider>;
 // };
 
+const createTableHeaderCell: CreateTableHeaderCell = ({
+  headingKey,
+  headerConfig,
+  sortState,
+  setSortState,
+}) => {
+  const { label, sortable } = headerConfig;
+  const { sortDirection } = sortState;
+
+  if (sortable) {
+    const sortButtonLabel = sortDirection === "ASCENDING" ? "A" : "D";
+    const nextSortState = getNextSortState({
+      sortState,
+      nextSortAttribute: headingKey,
+    });
+
+    return (
+      <TableHeadCell key={headingKey}>
+        <Inline>
+          <Text content={label}></Text>
+          <Button
+            label={sortButtonLabel}
+            onPress={() => setSortState(nextSortState)}
+          ></Button>
+        </Inline>
+      </TableHeadCell>
+    );
+  }
+  return (
+    <TableHeadCell>
+      <Text content={label}></Text>
+    </TableHeadCell>
+  );
+};
+
 const createTableHeader: CreateTableHeader<Object> = ({
   tableHeaderConfig,
+  sortState,
+  setSortState,
 }) => {
   const headerCells = [];
   for (const [key, value] of Object.entries(tableHeaderConfig)) {
-    headerCells.push(<TableHeadCell key={key}>{value.label}</TableHeadCell>);
+    headerCells.push(
+      createTableHeaderCell({
+        headingKey: key,
+        headerConfig: value,
+        sortState,
+        setSortState,
+      })
+    );
   }
   return headerCells;
 };
@@ -65,12 +117,6 @@ const createTableRow: CreateTableRow<Object> = ({
       {tableRowData[headingKey]}
     </TableDataCell>
   ));
-
-  // return tableRowData.map((tableCell, cellNumber) => (
-  //   <TableDataCell key={`${rowNumber}_${cellNumber}`}>
-  //     {tableCell}
-  //   </TableDataCell>
-  // ));
 };
 
 const createTableRows: CreateTableRows<Object> = ({
@@ -108,13 +154,26 @@ const createPageButtons: CreatePageButtons = ({
 
 // This is the simplest example of a table
 // - NO selection
-// - NO sorting
 // - NO pagination
 export const InMemoryTable = (props: InMemoryTableProps<Object>) => {
-  const { tableHeaderConfig, tableData } = props;
-  const heading = createTableHeader({ tableHeaderConfig });
+  const { tableHeaderConfig, tableData, sortAttribute, sortDirection } = props;
+
+  const initialSortState = getInitialSortState({
+    sortAttribute,
+    sortDirection,
+  });
+
+  const [sortState, setSortState] = useState(initialSortState);
+
+  const heading = createTableHeader({
+    tableHeaderConfig,
+    sortState,
+    setSortState,
+  });
   const headingKeys = Object.keys(tableHeaderConfig);
-  const rows = createTableRows({ tableData, headingKeys });
+
+  const sortedTableData = sortRows({ sortState, tableData });
+  const rows = createTableRows({ tableData: sortedTableData, headingKeys });
 
   return (
     <Table>
@@ -126,48 +185,40 @@ export const InMemoryTable = (props: InMemoryTableProps<Object>) => {
   );
 };
 
-// TODO: We'd want a test for this obviously :)
-const getPage: GetPage<Object> = ({ tableData, pageNumber, pageSize }) => {
-  // Imagine a page size of 3, 9 rows of data and a page number of 2...
-  // Page 2 should be rows 3, 4 & 5 (zero-indexed)
-  // debugger;
-  const firstRow = (pageNumber - 1) * pageSize; // (2 - 1) * 3 = 3
-  const lastRow = firstRow + pageSize; // 3 + 3 = 6
-  return tableData.slice(firstRow, lastRow); // Page is 3 -> 6
-};
-
-export const pageDown: PageDown = ({ pageNumber, setPageNumber }) => {
-  // Important to avoid setting a page number below 1 !!!
-  if (pageNumber === 1) {
-    return;
-  }
-  setPageNumber(pageNumber - 1);
-};
-
-export const pageUp: PageUp = ({
-  pageNumber,
-  pageSize,
-  totalRecords,
-  setPageNumber,
-}) => {
-  // Important not to set a page beyond the maxium...
-  const lastRecordOnPage = (pageNumber - 1) * pageSize + pageSize;
-  if (lastRecordOnPage >= totalRecords) {
-    // The last record on the page is the last record in the data, no action
-    return;
-  }
-  setPageNumber(pageNumber + 1);
-};
-
 export const InMemoryPaginatedTable = (
   props: InMemoryPaginatedTableProps<Object>
 ) => {
-  const { tableHeaderConfig, tableData, pageSize } = props;
+  const {
+    tableHeaderConfig,
+    tableData,
+    pageSize,
+    sortAttribute,
+    sortDirection,
+  } = props;
 
+  const initialSortState = getInitialSortState({
+    sortAttribute,
+    sortDirection,
+  });
+
+  const [sortState, setSortState] = useState(initialSortState);
+
+  const heading = createTableHeader({
+    tableHeaderConfig,
+    sortState,
+    setSortState,
+  });
+  const headingKeys = getHeadingKeys({ tableHeaderConfig });
+  const sortedTableData = sortRows({ sortState, tableData });
   const [pageNumber, setPageNumber] = useState(1);
 
   const totalRecords = tableData.length;
-  const rows = getPage({ tableData, pageNumber, pageSize });
+  const tablePage = getPage({
+    tableData: sortedTableData,
+    pageNumber,
+    pageSize,
+  });
+  const rows = createTableRows({ tableData: tablePage, headingKeys });
   const pageButtons = createPageButtons({
     pageSize,
     totalRecords,
@@ -176,10 +227,12 @@ export const InMemoryPaginatedTable = (
 
   return (
     <Stack>
-      <InMemoryTable
-        tableHeaderConfig={tableHeaderConfig}
-        tableData={rows}
-      ></InMemoryTable>
+      <Table>
+        <TableHead>
+          <TableRow>{heading}</TableRow>
+        </TableHead>
+        <TableBody>{rows}</TableBody>
+      </Table>
       <Inline>
         <Button
           label="<"
