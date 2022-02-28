@@ -20,7 +20,7 @@ import { getMonthData } from "../utils";
 export const Day = ({ day, onDayPressed }: DayProps) => {
   const { dayOfMonth, date } = day;
   return (
-    <TableDataCell>
+    <TableDataCell spacingStyle="SQUISHED-INSET">
       <Pressable
         onPress={() => onDayPressed({ date })}
         spacingStyle="FLUSH"
