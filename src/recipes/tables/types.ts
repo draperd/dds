@@ -48,7 +48,7 @@ export type CreateTableHeader = (args: { tableHeaderConfig: TableHeaderCongfig})
 
 export type CreateTableRow = (args: { tableRowData: TableRowData, rowNumber: number}) => ReactElement[];
 export type CreateTableRows = (args: { tableData: TableData}) => ReactElement[];
-
+export type CreatePageButtons = (args: { pageSize: number, totalRecords: number, setPageNumber: SetPageNumber}) => ReactElement[];
 
 
 
@@ -78,12 +78,22 @@ export type DynamicTableProps = {
 
 // An "in memory" table is a table that does not fetch data from a service or server. All the data
 // is loaded into memory when created.
-export type InMemoryTableProps = {
+export interface InMemoryTableProps {
     tableHeaderConfig: TableHeaderCongfig,
     tableData: TableData
 }
 
+export interface InMemoryPaginatedTableProps extends InMemoryTableProps {
+    pageSize: number,
+}
 
+
+export type GetPage = (args: { tableData: TableData, pageNumber: number, pageSize: number }) => TableData
+
+export type PageDown = (args: { pageNumber: number, setPageNumber: SetPageNumber }) => void;
+export type PageUp = (args: { pageNumber: number, pageSize: number, totalRecords: number, setPageNumber: SetPageNumber }) => void;
+
+export type SetPageNumber = (args: number) => void;
 
 
 // Should all tables have state? :/ 

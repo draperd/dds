@@ -5,7 +5,7 @@ import { InMemoryTable } from "../recipes/tables";
 import { InMemoryTableProps } from "../recipes/tables/types";
 
 export default {
-  title: "Example/In Memory Table",
+  title: "Example/Tables",
   component: InMemoryTable,
 } as ComponentMeta<typeof InMemoryTable>;
 
@@ -26,7 +26,7 @@ const table1: InMemoryTableProps = {
   ],
 };
 
-export const Simple = Template.bind({});
-Simple.args = {
+export const InMemory = Template.bind({});
+InMemory.args = {
   ...table1,
 };

@@ -1,4 +1,4 @@
-import React, { useReducer, createContext } from "react";
+import React, { useReducer, createContext, useState } from "react";
 
 import { reducer } from "./reducers";
 import {
@@ -8,6 +8,11 @@ import {
   CreateTableHeader,
   CreateTableRow,
   CreateTableRows,
+  InMemoryPaginatedTableProps,
+  GetPage,
+  PageDown,
+  PageUp,
+  CreatePageButtons,
 } from "./types";
 
 import {
@@ -18,6 +23,9 @@ import {
   TableHeadCell,
   TableRow,
 } from "../../html/Table";
+import { Stack } from "../../primitives/Stack";
+import { Inline } from "../../primitives/Inline";
+import { Button } from "../Button";
 
 // TODO Probably want to define a type for table context here
 export const TableContext = React.createContext({});
@@ -61,6 +69,32 @@ const createTableRows: CreateTableRows = ({ tableData }) => {
   ));
 };
 
+const createPageButtons: CreatePageButtons = ({
+  pageSize,
+  totalRecords,
+  setPageNumber,
+}) => {
+  const pageCount = Math.ceil(totalRecords / pageSize);
+  const pageButtons = [];
+  for (let i = 0; i < pageCount; i++) {
+    const pageNumber = i + 1;
+    const label = pageNumber.toString();
+    // TODO: This key needs to be changed obviously! :)
+    pageButtons.push(
+      <Button
+        key={label}
+        label={label}
+        onPress={() => setPageNumber(pageNumber)}
+      ></Button>
+    );
+  }
+  return pageButtons;
+};
+
+// This is the simplest example of a table
+// - NO selection
+// - NO sorting
+// - NO pagination
 export const InMemoryTable = (props: InMemoryTableProps) => {
   const { tableHeaderConfig, tableData } = props;
   const heading = createTableHeader({ tableHeaderConfig });
@@ -73,5 +107,74 @@ export const InMemoryTable = (props: InMemoryTableProps) => {
       </TableHead>
       <TableBody>{rows}</TableBody>
     </Table>
+  );
+};
+
+// TODO: We'd want a test for this obviously :)
+const getPage: GetPage = ({ tableData, pageNumber, pageSize }) => {
+  // Imagine a page size of 3, 9 rows of data and a page number of 2...
+  // Page 2 should be rows 3, 4 & 5 (zero-indexed)
+  // debugger;
+  const firstRow = (pageNumber - 1) * pageSize; // (2 - 1) * 3 = 3
+  const lastRow = firstRow + pageSize; // 3 + 3 = 6
+  return tableData.slice(firstRow, lastRow); // Page is 3 -> 6
+};
+
+export const pageDown: PageDown = ({ pageNumber, setPageNumber }) => {
+  // Important to avoid setting a page number below 1 !!!
+  if (pageNumber === 1) {
+    return;
+  }
+  setPageNumber(pageNumber - 1);
+};
+
+export const pageUp: PageUp = ({
+  pageNumber,
+  pageSize,
+  totalRecords,
+  setPageNumber,
+}) => {
+  // Important not to set a page beyond the maxium...
+  const lastRecordOnPage = (pageNumber - 1) * pageSize + pageSize;
+  if (lastRecordOnPage >= totalRecords) {
+    // The last record on the page is the last record in the data, no action
+    return;
+  }
+  setPageNumber(pageNumber + 1);
+};
+
+export const InMemoryPaginatedTable = (props: InMemoryPaginatedTableProps) => {
+  const { tableHeaderConfig, tableData, pageSize } = props;
+
+  const [pageNumber, setPageNumber] = useState(1);
+
+  const totalRecords = tableData.length;
+  const rows = getPage({ tableData, pageNumber, pageSize });
+  const pageButtons = createPageButtons({
+    pageSize,
+    totalRecords,
+    setPageNumber,
+  });
+
+  return (
+    <Stack>
+      <InMemoryTable
+        tableHeaderConfig={tableHeaderConfig}
+        tableData={rows}
+      ></InMemoryTable>
+      <Inline>
+        <Button
+          label="<"
+          onPress={() => pageDown({ pageNumber, setPageNumber })}
+        ></Button>
+        {pageButtons}
+        <Button
+          label=">"
+          onPress={() =>
+            pageUp({ pageNumber, pageSize, totalRecords, setPageNumber })
+          }
+        ></Button>
+      </Inline>
+    </Stack>
   );
 };
