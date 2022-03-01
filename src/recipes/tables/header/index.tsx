@@ -13,7 +13,7 @@ import { getNextSortState } from "../utils";
 
 export const SimpleTableHeaderCell = (props: SimpleTableHeaderCellProps) => {
   const { headingKey, spacingSize = "MEDIUM", tableHeaderCellConfig } = props;
-  const { label, spacingAlignment } = tableHeaderCellConfig;
+  const { label, spacingAlignment = "LEFT" } = tableHeaderCellConfig;
   return (
     <TableHeadCell
       key={headingKey}

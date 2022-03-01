@@ -55,7 +55,7 @@ const table1: InMemoryPaginatedTableProps<Album> = {
   ],
   sortAttribute: "title",
   sortDirection: "ASCENDING",
-  pageSize: 6,
+  pageSize: 5,
   spacingSize: "SMALL",
 };
 
