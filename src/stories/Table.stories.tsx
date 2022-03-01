@@ -46,8 +46,6 @@ const table1: InMemoryTableProps<Album> = {
     { artist: "REM", title: "Up", released: 1998 },
     { artist: "REM", title: "Monster", released: 1994 },
   ],
-  sortAttribute: "title",
-  sortDirection: "ASCENDING",
 };
 
 export const InMemory = Template.bind({});

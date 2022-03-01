@@ -177,7 +177,7 @@ export interface SortableTableHeaderCellProps
 export interface InMemoryTableProps<T> {
   tableHeaderConfig: TableHeaderConfig<T>;
   tableData: T[];
-  spacingSize: SpacingSize;
+  spacingSize?: SpacingSize;
 }
 
 export interface InMemoryPaginatedTableProps<T> extends InMemoryTableProps<T> {
