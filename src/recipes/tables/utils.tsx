@@ -268,10 +268,9 @@ export const createPaginationControls: CreatePaginationControls<Object> = ({
   tableData,
   pageNumber,
   pageSize,
+  totalRecords = tableData.length,
   setPageNumber,
 }) => {
-  const totalRecords = tableData.length;
-
   const pageButtons = createPageButtons({
     pageNumber,
     pageSize,

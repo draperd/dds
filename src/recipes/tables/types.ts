@@ -153,6 +153,7 @@ export type CreatePaginationControls<T> = (args: {
   tableData: T[];
   pageNumber: number;
   pageSize: number;
+  totalRecords?: number;
   setPageNumber: SetPageNumber;
 }) => ReactElement;
 
@@ -186,11 +187,24 @@ export interface InMemoryPaginatedTableProps<T> extends InMemoryTableProps<T> {
   pageSize: number;
 }
 
+export interface AsyncPaginatedTableProps<T> {
+  tableHeaderConfig: TableHeaderConfig<T>;
+  spacingSize?: SpacingSize;
+  sortAttribute: keyof T;
+  sortDirection: SortDirection;
+  pageSize: number;
+  dataUrl: string;
+  countAttribute: string;
+  resultsAttribute: string;
+}
+
 /* *****************************************************
  *
  * STATE and ACTIONS
  *
  * *****************************************************/
+
+export type DynamicTableProps = {};
 
 export type DynamicTableState = {};
 
