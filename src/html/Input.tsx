@@ -2,7 +2,7 @@ import React from "react";
 import "./input.css";
 
 // NOTE: Clearly not the full set yet ;)
-type InputType = "TEXT" | "NUMBER";
+type InputType = "TEXT" | "NUMBER" | "CHECKBOX";
 
 interface InputProps {
   id: string;

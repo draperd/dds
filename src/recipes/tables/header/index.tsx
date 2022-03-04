@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  SelectableTableHeaderCellProps,
   SimpleTableHeaderCellProps,
   SortableTableHeaderCellProps,
 } from "../types";
@@ -7,6 +8,7 @@ import {
 import { TableHeadCell } from "../../../html/Table";
 
 import { Inline } from "../../../primitives/Inline";
+import { Input } from "../../../html/Input";
 import { Text } from "../../../primitives/Text";
 import { Button } from "../../Button";
 import { getNextSortState } from "../utils";
@@ -21,6 +23,23 @@ export const SimpleTableHeaderCell = (props: SimpleTableHeaderCellProps) => {
       spacingSize={spacingSize}
     >
       <Text content={label}></Text>
+    </TableHeadCell>
+  );
+};
+
+// TODO - This shouldn't be a regular checkbox but a ternary checkbox
+// TODO - Need to be able to select and deselect all rows
+// TODO - Need to know how many rows in the table are selected
+export const SelectableTableHeaderCell = (
+  props: SelectableTableHeaderCellProps
+) => {
+  const { spacingSize = "MEDIUM", spacingAlignment = "LEFT" } = props;
+  return (
+    <TableHeadCell
+      spacingAlignment={spacingAlignment}
+      spacingSize={spacingSize}
+    >
+      <Input type="CHECKBOX" id="" name=""></Input>
     </TableHeadCell>
   );
 };

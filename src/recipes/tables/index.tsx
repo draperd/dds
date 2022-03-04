@@ -6,6 +6,7 @@ import {
   InMemoryTableProps,
   InMemoryPaginatedTableProps,
   AsyncPaginatedTableProps,
+  SelectableTableProps,
 } from "./types";
 
 import { Table } from "../../html/Table";
@@ -19,6 +20,8 @@ import {
   sortRows,
   createPaginationControls,
   createSimpleTableHeader,
+  createSelectableTableBody,
+  createSelectableTableHeader,
 } from "./utils";
 import { reducer } from "./reducers";
 
@@ -211,5 +214,39 @@ export const AsyncPaginatedTable = (
       </Table>
       {paginationControls}
     </Stack>
+  );
+};
+
+export const SelectableTable = (props: SelectableTableProps<Object>) => {
+  const {
+    tableHeaderConfig,
+    tableData,
+    spacingSize = "MEDIUM",
+    selectKey,
+  } = props;
+
+  // TODO - Need to manage state of selected rows
+  // TODO - Consider useReducer this time?
+  // TODO - Need to be able to indicate selected state on each row - Box property?
+  // TODO - Pass setState or reducer actions to header and body helpers
+
+  const heading = createSelectableTableHeader({
+    tableHeaderConfig,
+    spacingSize,
+  });
+  const headingKeys = Object.keys(tableHeaderConfig);
+  const body = createSelectableTableBody({
+    selectKey,
+    tableHeaderConfig,
+    tableData: tableData,
+    headingKeys,
+    spacingSize,
+  });
+
+  return (
+    <Table>
+      {heading}
+      {body}
+    </Table>
   );
 };

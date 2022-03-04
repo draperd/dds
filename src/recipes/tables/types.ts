@@ -59,6 +59,11 @@ export type CreateSimpleTableHeader<T> = (args: {
   spacingSize: SpacingSize;
 }) => ReactElement;
 
+export type CreateSelectableTableHeader<T> = (args: {
+  tableHeaderConfig: TableHeaderConfig<T>;
+  spacingSize: SpacingSize;
+}) => ReactElement;
+
 export type CreateTableHeader<T> = (args: {
   tableHeaderConfig: TableHeaderConfig<T>;
   sortState: SortState;
@@ -80,7 +85,24 @@ export type CreateTableRow<T> = (args: {
   spacingSize: SpacingSize;
 }) => ReactElement[];
 
+export type CreateSelectableTableRow<T> = (args: {
+  selectKey: HeadingKey;
+  tableRowData: T;
+  headingKeys: HeadingKey[];
+  tableHeaderConfig: TableHeaderConfig<T>;
+  rowNumber: number;
+  spacingSize: SpacingSize;
+}) => ReactElement[];
+
 export type CreateTableBody<T> = (args: {
+  tableData: T[];
+  headingKeys: HeadingKey[];
+  tableHeaderConfig: TableHeaderConfig<T>;
+  spacingSize: SpacingSize;
+}) => ReactElement;
+
+export type CreateSelectableTableBody<T> = (args: {
+  selectKey: HeadingKey;
   tableData: T[];
   headingKeys: HeadingKey[];
   tableHeaderConfig: TableHeaderConfig<T>;
@@ -169,6 +191,29 @@ export interface SimpleTableHeaderCellProps {
   tableHeaderCellConfig: TableHeaderCellConfig;
 }
 
+export interface SelectableTableHeaderCellProps {
+  spacingSize?: SpacingSize;
+  spacingAlignment?: SpacingAlignment;
+}
+
+export interface SimpleTableDataCellProps<T> {
+  tableRowData: T;
+  headingKey: HeadingKey;
+  rowNumber: number;
+  columnNumber: number;
+  spacingSize: SpacingSize;
+  spacingAlignment: SpacingAlignment;
+}
+
+export interface SelectRowTableDataCellProps<T> {
+  selectKey: HeadingKey;
+  tableRowData: T;
+  rowNumber: number;
+  columnNumber: number;
+  spacingSize: SpacingSize;
+  spacingAlignment: SpacingAlignment;
+}
+
 export interface SortableTableHeaderCellProps
   extends SimpleTableHeaderCellProps {
   sortState: SortState;
@@ -196,6 +241,10 @@ export interface AsyncPaginatedTableProps<T> {
   dataUrl: string;
   countAttribute: string;
   resultsAttribute: string;
+}
+
+export interface SelectableTableProps<T> extends InMemoryTableProps<T> {
+  selectKey: keyof T;
 }
 
 /* *****************************************************

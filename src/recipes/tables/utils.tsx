@@ -2,6 +2,9 @@ import React from "react";
 import {
   CreatePageButtons,
   CreatePaginationControls,
+  CreateSelectableTableBody,
+  CreateSelectableTableHeader,
+  CreateSelectableTableRow,
   CreateSimpleTableHeader,
   CreateTableBody,
   CreateTableHeader,
@@ -16,17 +19,16 @@ import {
   SortRows,
 } from "./types";
 
-import {
-  TableBody,
-  TableDataCell,
-  TableHead,
-  TableRow,
-} from "../../html/Table";
+import { TableBody, TableHead, TableRow } from "../../html/Table";
 
 import { Inline } from "../../primitives/Inline";
-import { Text } from "../../primitives/Text";
 import { Button } from "../Button";
-import { SimpleTableHeaderCell, SortableTableHeaderCell } from "./header";
+import {
+  SelectableTableHeaderCell,
+  SimpleTableHeaderCell,
+  SortableTableHeaderCell,
+} from "./header";
+import { SelectRowTableDataCell, SimpleTableDataCell } from "./body";
 
 /* *****************************************************
  *
@@ -93,6 +95,29 @@ export const createSimpleTableHeader: CreateSimpleTableHeader<Object> = ({
   );
 };
 
+export const createSelectableTableHeader: CreateSelectableTableHeader<
+  Object
+> = ({ tableHeaderConfig }) => {
+  const headerCells = [];
+  const selectableTableHeaderCell = (
+    <SelectableTableHeaderCell></SelectableTableHeaderCell>
+  );
+  headerCells.push(selectableTableHeaderCell);
+  for (const [key, value] of Object.entries(tableHeaderConfig)) {
+    headerCells.push(
+      <SimpleTableHeaderCell
+        headingKey={key}
+        tableHeaderCellConfig={value}
+      ></SimpleTableHeaderCell>
+    );
+  }
+  return (
+    <TableHead>
+      <TableRow>{headerCells}</TableRow>
+    </TableHead>
+  );
+};
+
 /**
  * Creates an array of table heading cells.
  */
@@ -141,15 +166,47 @@ export const createTableRow: CreateTableRow<Object> = ({
     const tableHeaderCellConfig = tableHeaderConfig[headingKey];
     const { spacingAlignment } = tableHeaderCellConfig;
     return (
-      <TableDataCell
-        key={`${rowNumber}_${index}`}
+      <SimpleTableDataCell
+        headingKey={headingKey}
+        columnNumber={index}
+        rowNumber={rowNumber}
         spacingAlignment={spacingAlignment}
         spacingSize={spacingSize}
-      >
-        <Text content={tableRowData[headingKey]}></Text>
-      </TableDataCell>
+        tableRowData={tableRowData}
+      ></SimpleTableDataCell>
     );
   });
+};
+
+export const createSelectableTableRow: CreateSelectableTableRow<Object> = ({
+  selectKey,
+  tableHeaderConfig,
+  tableRowData,
+  headingKeys,
+  rowNumber,
+  spacingSize,
+}) => {
+  const row = createTableRow({
+    tableRowData,
+    headingKeys,
+    tableHeaderConfig,
+    rowNumber,
+    spacingSize,
+  });
+
+  const selectRowCell = (
+    <SelectRowTableDataCell
+      columnNumber={-1}
+      rowNumber={rowNumber}
+      selectKey={selectKey}
+      spacingSize={spacingSize}
+      spacingAlignment={tableHeaderConfig[selectKey].spacingAlignment}
+      tableRowData={tableRowData}
+    ></SelectRowTableDataCell>
+  );
+  row.unshift(selectRowCell);
+
+  return row;
 };
 
 /**
@@ -165,6 +222,28 @@ export const createTableBody: CreateTableBody<Object> = ({
   const rows = tableData.map((tableRowData, rowNumber) => (
     <TableRow key={rowNumber}>
       {createTableRow({
+        tableHeaderConfig,
+        tableRowData,
+        headingKeys,
+        rowNumber,
+        spacingSize,
+      })}
+    </TableRow>
+  ));
+  return <TableBody>{rows}</TableBody>;
+};
+
+export const createSelectableTableBody: CreateSelectableTableBody<Object> = ({
+  tableHeaderConfig,
+  tableData,
+  headingKeys,
+  spacingSize,
+  selectKey,
+}) => {
+  const rows = tableData.map((tableRowData, rowNumber) => (
+    <TableRow key={rowNumber}>
+      {createSelectableTableRow({
+        selectKey,
         tableHeaderConfig,
         tableRowData,
         headingKeys,
