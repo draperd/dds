@@ -1,11 +1,18 @@
-// An example action
-// export const createOnDayChangedAction: CreateOnDayChangedAction = ({
-//   value
-// }) => {
-//   return {
-//     type: ON_DAY_CHANGED_ACTION,
-//     payload: {
-//       value: parseInt(value)
-//     }
-//   };
-// };
+import { SelectRowTableAction, SELECT_ROW_ACTION } from "./reducers";
+import { Propertyof } from "./types";
+
+export type CreateSelectRowAction<T> = (args: {
+  key: Propertyof<T>;
+  selected: boolean;
+}) => SelectRowTableAction<T>;
+
+export const createSelectRowAction: CreateSelectRowAction<Object> = ({
+  key,
+  selected,
+}) => {
+  return {
+    type: SELECT_ROW_ACTION,
+    key,
+    selected,
+  };
+};

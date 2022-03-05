@@ -179,12 +179,14 @@ export const createTableRow: CreateTableRow<Object> = ({
 };
 
 export const createSelectableTableRow: CreateSelectableTableRow<Object> = ({
-  selectKey,
+  rowKey,
   tableHeaderConfig,
   tableRowData,
   headingKeys,
   rowNumber,
   spacingSize,
+  selectRow,
+  selected,
 }) => {
   const row = createTableRow({
     tableRowData,
@@ -198,10 +200,13 @@ export const createSelectableTableRow: CreateSelectableTableRow<Object> = ({
     <SelectRowTableDataCell
       columnNumber={-1}
       rowNumber={rowNumber}
-      selectKey={selectKey}
+      rowKey={rowKey}
       spacingSize={spacingSize}
-      spacingAlignment={tableHeaderConfig[selectKey].spacingAlignment}
+      // spacingAlignment={tableHeaderConfig[rowKey].spacingAlignment}
+      spacingAlignment="LEFT" // TODO: Bug in the line above to fix :/
       tableRowData={tableRowData}
+      selectRow={selectRow}
+      selected={selected}
     ></SelectRowTableDataCell>
   );
   row.unshift(selectRowCell);
@@ -238,20 +243,27 @@ export const createSelectableTableBody: CreateSelectableTableBody<Object> = ({
   tableData,
   headingKeys,
   spacingSize,
-  selectKey,
+  rowKey,
+  selectRow,
+  selectedRows,
 }) => {
-  const rows = tableData.map((tableRowData, rowNumber) => (
-    <TableRow key={rowNumber}>
-      {createSelectableTableRow({
-        selectKey,
-        tableHeaderConfig,
-        tableRowData,
-        headingKeys,
-        rowNumber,
-        spacingSize,
-      })}
-    </TableRow>
-  ));
+  const rows = tableData.map((tableRowData, rowNumber) => {
+    const selected = selectedRows.includes(tableRowData[rowKey]);
+    return (
+      <TableRow key={rowNumber}>
+        {createSelectableTableRow({
+          rowKey,
+          tableHeaderConfig,
+          tableRowData,
+          headingKeys,
+          rowNumber,
+          spacingSize,
+          selectRow,
+          selected,
+        })}
+      </TableRow>
+    );
+  });
   return <TableBody>{rows}</TableBody>;
 };
 
@@ -303,7 +315,6 @@ export const getPage: GetPage<Object> = ({
 }) => {
   // Imagine a page size of 3, 9 rows of data and a page number of 2...
   // Page 2 should be rows 3, 4 & 5 (zero-indexed)
-  // debugger;
   const firstRow = (pageNumber - 1) * pageSize; // (2 - 1) * 3 = 3
   const lastRow = firstRow + pageSize; // 3 + 3 = 6
   return tableData.slice(firstRow, lastRow); // Page is 3 -> 6

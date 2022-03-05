@@ -35,21 +35,31 @@ export const SelectRowTableDataCell = (
   props: SelectRowTableDataCellProps<Object>
 ) => {
   const {
-    selectKey,
+    rowKey,
     spacingSize = "MEDIUM",
     spacingAlignment = "LEFT",
     tableRowData,
     rowNumber,
     columnNumber,
+    selectRow,
+    selected,
   } = props;
-  const rowId = tableRowData[selectKey];
+  const rowId = tableRowData[rowKey];
   return (
     <TableDataCell
       key={`${rowNumber}_${columnNumber}`}
       spacingAlignment={spacingAlignment}
       spacingSize={spacingSize}
     >
-      <Input type="CHECKBOX" id={rowId} name={rowId}></Input>
+      <Input
+        type="CHECKBOX"
+        id={rowId}
+        name={rowId}
+        onChange={() =>
+          selectRow({ key: tableRowData[rowKey], selected: true })
+        }
+        checked={selected}
+      ></Input>
     </TableDataCell>
   );
 };

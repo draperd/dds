@@ -1,7 +1,6 @@
 import React, { createContext, useEffect, useReducer, useState } from "react";
 
 import {
-  DynamicTableProps,
   TableState,
   InMemoryTableProps,
   InMemoryPaginatedTableProps,
@@ -24,35 +23,37 @@ import {
   createSelectableTableHeader,
 } from "./utils";
 import { reducer } from "./reducers";
+import { createSelectRowAction } from "./actions";
 
 export const DEFAULT_PAGE_SIZE = 10;
 
 // TODO Probably want to define a type for table context here
 export const TableContext = React.createContext({});
 
-// Hate the name DynamicTable, but it'll do for now... grrr
-export const DynamicTable = (props: DynamicTableProps) => {
-  const {} = props;
+// // Hate the name DynamicTable, but it'll do for now... grrr
+// export const DynamicTable = (props: DynamicTableProps) => {
+//   const {} = props;
 
-  const initialState: TableState = {
-    totalRows: 0,
-    pageSize: DEFAULT_PAGE_SIZE,
-    currentPage: 1,
-  };
-  const [state, dispatch] = useReducer(reducer, initialState);
-  const context = createContext({ state, dispatch });
+//   const initialState: TableState<Object> = {
+//     totalRows: 0,
+//     pageSize: DEFAULT_PAGE_SIZE,
+//     currentPage: 1,
+//     tableData: {},
+//   };
+//   const [state, dispatch] = useReducer(reducer, initialState);
+//   const context = createContext({ state, dispatch });
 
-  // Things to consider...
-  // 1. Is data provided?
-  // 2. Are functions provided?
-  // 3. Can both be provided?
+//   // Things to consider...
+//   // 1. Is data provided?
+//   // 2. Are functions provided?
+//   // 3. Can both be provided?
 
-  return (
-    <TableContext.Provider value={context}>
-      <Table></Table>
-    </TableContext.Provider>
-  );
-};
+//   return (
+//     <TableContext.Provider value={context}>
+//       <Table></Table>
+//     </TableContext.Provider>
+//   );
+// };
 
 // This is the simplest example of a table
 // - NO selection
@@ -228,8 +229,18 @@ export const SelectableTable = (props: SelectableTableProps<Object>) => {
     tableHeaderConfig,
     tableData,
     spacingSize = "MEDIUM",
-    selectKey,
+    rowKey,
   } = props;
+
+  const initialState: TableState<Object> = {
+    totalRows: 0,
+    pageSize: DEFAULT_PAGE_SIZE,
+    currentPage: 1,
+    tableData,
+    selectedRows: [],
+  };
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const context = createContext({ state, dispatch });
 
   // TODO - Need to manage state of selected rows
   // TODO - Consider useReducer this time?
@@ -242,17 +253,22 @@ export const SelectableTable = (props: SelectableTableProps<Object>) => {
   });
   const headingKeys = Object.keys(tableHeaderConfig);
   const body = createSelectableTableBody({
-    selectKey,
+    rowKey,
     tableHeaderConfig,
     tableData: tableData,
     headingKeys,
     spacingSize,
+    selectedRows: state.selectedRows,
+    selectRow: ({ key, selected }) =>
+      dispatch(createSelectRowAction({ key, selected })),
   });
 
   return (
-    <Table>
-      {heading}
-      {body}
-    </Table>
+    <TableContext.Provider value={context}>
+      <Table>
+        {heading}
+        {body}
+      </Table>
+    </TableContext.Provider>
   );
 };

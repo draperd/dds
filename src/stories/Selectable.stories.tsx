@@ -15,7 +15,7 @@ const Template: ComponentStory<typeof SelectableTable> = (args) => (
 );
 
 const table1: SelectableTableProps<Album> = {
-  selectKey: "title",
+  rowKey: "title",
   tableHeaderConfig: {
     artist: {
       index: false,

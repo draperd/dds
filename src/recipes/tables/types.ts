@@ -86,12 +86,14 @@ export type CreateTableRow<T> = (args: {
 }) => ReactElement[];
 
 export type CreateSelectableTableRow<T> = (args: {
-  selectKey: HeadingKey;
+  rowKey: HeadingKey;
   tableRowData: T;
   headingKeys: HeadingKey[];
   tableHeaderConfig: TableHeaderConfig<T>;
   rowNumber: number;
   spacingSize: SpacingSize;
+  selectRow: SelectRow<T>;
+  selected: boolean;
 }) => ReactElement[];
 
 export type CreateTableBody<T> = (args: {
@@ -102,11 +104,13 @@ export type CreateTableBody<T> = (args: {
 }) => ReactElement;
 
 export type CreateSelectableTableBody<T> = (args: {
-  selectKey: HeadingKey;
+  rowKey: HeadingKey;
   tableData: T[];
   headingKeys: HeadingKey[];
   tableHeaderConfig: TableHeaderConfig<T>;
   spacingSize: SpacingSize;
+  selectRow: SelectRow<T>;
+  selectedRows: Propertyof<T>[];
 }) => ReactElement;
 
 /* *****************************************************
@@ -181,6 +185,17 @@ export type CreatePaginationControls<T> = (args: {
 
 /* *****************************************************
  *
+ * SELECTING
+ *
+ * *****************************************************/
+
+export type SelectRow<T> = (args: {
+  key: Propertyof<T>;
+  selected: boolean;
+}) => void;
+
+/* *****************************************************
+ *
  * COMPONENTS
  *
  * *****************************************************/
@@ -206,12 +221,14 @@ export interface SimpleTableDataCellProps<T> {
 }
 
 export interface SelectRowTableDataCellProps<T> {
-  selectKey: HeadingKey;
+  rowKey: HeadingKey;
   tableRowData: T;
   rowNumber: number;
   columnNumber: number;
   spacingSize: SpacingSize;
   spacingAlignment: SpacingAlignment;
+  selectRow: SelectRow<T>;
+  selected: boolean;
 }
 
 export interface SortableTableHeaderCellProps
@@ -244,7 +261,8 @@ export interface AsyncPaginatedTableProps<T> {
 }
 
 export interface SelectableTableProps<T> extends InMemoryTableProps<T> {
-  selectKey: keyof T;
+  rowKey: keyof T;
+  // selectRow: SelectRow<T>;
 }
 
 /* *****************************************************
@@ -255,24 +273,14 @@ export interface SelectableTableProps<T> extends InMemoryTableProps<T> {
 
 export type DynamicTableProps = {};
 
-export type TableState = {
+export type Propertyof<T> = T[keyof T];
+
+export type TableState<T> = {
+  tableData: T[];
   totalRows: number;
   currentPage: number;
   pageSize: number;
   sortAttribute?: string;
   sortDirection?: SortDirection;
-  selectedRows?: string[];
+  selectedRows: Propertyof<T>[];
 };
-
-export const DEFAULT_ACTION = "default";
-
-export type DefaultActionReducer = (args: {
-  state: TableState;
-  action: TableAction;
-}) => TableState;
-
-export type DefaultTableAction = {
-  type: typeof DEFAULT_ACTION;
-};
-
-export type TableAction = DefaultTableAction;

@@ -11,6 +11,7 @@ interface InputProps {
   type?: InputType;
   onChange?: ChangeHandler;
   value?: number | string;
+  checked?: boolean; // NOTE: Bit weird, maybe better to type checkbox separately? :/
 }
 
 export type ChangeHandler = (value: string) => void;
@@ -33,6 +34,7 @@ export const Input = ({
   name,
   onChange,
   value,
+  checked = false,
 }: InputProps) => {
   return (
     <input
@@ -42,6 +44,7 @@ export const Input = ({
       className={className}
       onChange={(evt) => handleChange({ evt, onChange })}
       value={value}
+      checked={checked}
     ></input>
   );
 };
