@@ -2,7 +2,7 @@ import React, { createContext, useEffect, useReducer, useState } from "react";
 
 import {
   DynamicTableProps,
-  DynamicTableState,
+  TableState,
   InMemoryTableProps,
   InMemoryPaginatedTableProps,
   AsyncPaginatedTableProps,
@@ -25,6 +25,8 @@ import {
 } from "./utils";
 import { reducer } from "./reducers";
 
+export const DEFAULT_PAGE_SIZE = 10;
+
 // TODO Probably want to define a type for table context here
 export const TableContext = React.createContext({});
 
@@ -32,7 +34,11 @@ export const TableContext = React.createContext({});
 export const DynamicTable = (props: DynamicTableProps) => {
   const {} = props;
 
-  const initialState: DynamicTableState = {};
+  const initialState: TableState = {
+    totalRows: 0,
+    pageSize: DEFAULT_PAGE_SIZE,
+    currentPage: 1,
+  };
   const [state, dispatch] = useReducer(reducer, initialState);
   const context = createContext({ state, dispatch });
 

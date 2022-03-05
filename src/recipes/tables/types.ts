@@ -255,17 +255,24 @@ export interface SelectableTableProps<T> extends InMemoryTableProps<T> {
 
 export type DynamicTableProps = {};
 
-export type DynamicTableState = {};
+export type TableState = {
+  totalRows: number;
+  currentPage: number;
+  pageSize: number;
+  sortAttribute?: string;
+  sortDirection?: SortDirection;
+  selectedRows?: string[];
+};
 
 export const DEFAULT_ACTION = "default";
 
 export type DefaultActionReducer = (args: {
-  state: DynamicTableState;
-  action: DynamicTableAction;
-}) => DynamicTableState;
+  state: TableState;
+  action: TableAction;
+}) => TableState;
 
-export type DefaultDynamicTableAction = {
+export type DefaultTableAction = {
   type: typeof DEFAULT_ACTION;
 };
 
-export type DynamicTableAction = DefaultDynamicTableAction;
+export type TableAction = DefaultTableAction;
