@@ -6,6 +6,7 @@ import {
   InMemoryPaginatedTableProps,
   AsyncPaginatedTableProps,
   SelectableTableProps,
+  Propertyof,
 } from "./types";
 
 import { Table } from "../../html/Table";
@@ -24,6 +25,8 @@ import {
 } from "./utils";
 import { reducer } from "./reducers";
 import { createSelectRowAction, createSelectRowsAction } from "./actions";
+import { Inline } from "../../primitives/Inline";
+import { Button } from "../Button";
 
 export const DEFAULT_PAGE_SIZE = 10;
 
@@ -224,6 +227,34 @@ export const AsyncPaginatedTable = (
   );
 };
 
+export type TableActionsProps<T> = {
+  tableData: T[];
+  selectedRows: Propertyof<T>[];
+  rowKey: keyof T;
+};
+
+export const TableActions = (props: TableActionsProps<Object>) => {
+  const { selectedRows, tableData, rowKey } = props;
+  const disabled = selectedRows.length === 0;
+
+  const selectedTableData = tableData.filter((data) => {
+    return selectedRows.includes(data[rowKey]);
+  });
+  const message = selectedTableData
+    .map((data) => `"${data[rowKey]}" by ${data.artist}`)
+    .join(", ");
+
+  return (
+    <Inline>
+      <Button
+        disabled={disabled}
+        label="What's selected?"
+        onPress={() => alert(`Selected ${message}`)}
+      ></Button>
+    </Inline>
+  );
+};
+
 export const SelectableTable = (props: SelectableTableProps<Object>) => {
   const {
     tableHeaderConfig,
@@ -265,6 +296,11 @@ export const SelectableTable = (props: SelectableTableProps<Object>) => {
 
   return (
     <TableContext.Provider value={context}>
+      <TableActions
+        selectedRows={state.selectedRows}
+        tableData={tableData}
+        rowKey={rowKey}
+      ></TableActions>
       <Table>
         {heading}
         {body}
