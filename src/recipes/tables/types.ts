@@ -22,6 +22,7 @@
 
 import { ReactElement } from "react";
 import { SpacingAlignment, SpacingSize } from "../../foundations/Spacing";
+import { TernaryCheckedState } from "../TernaryCheckbox";
 
 /* *****************************************************
  *
@@ -60,8 +61,12 @@ export type CreateSimpleTableHeader<T> = (args: {
 }) => ReactElement;
 
 export type CreateSelectableTableHeader<T> = (args: {
+  rowKey: keyof T;
+  tableData: T[];
   tableHeaderConfig: TableHeaderConfig<T>;
   spacingSize: SpacingSize;
+  selectRows: SelectRows<T>;
+  selectedRows: Propertyof<T>[];
 }) => ReactElement;
 
 export type CreateTableHeader<T> = (args: {
@@ -189,9 +194,21 @@ export type CreatePaginationControls<T> = (args: {
  *
  * *****************************************************/
 
+export type SelectRowsOption = "NONE" | "ALL";
+
+export type GetSelectedRowsState<T> = (args: {
+  tableData: T[];
+  selectedRows: Propertyof<T>[];
+}) => TernaryCheckedState;
+
 export type SelectRow<T> = (args: {
   key: Propertyof<T>;
   selected: boolean;
+}) => void;
+
+export type SelectRows<T> = (args: {
+  rowKey: keyof T;
+  select: SelectRowsOption;
 }) => void;
 
 /* *****************************************************
@@ -206,9 +223,12 @@ export interface SimpleTableHeaderCellProps {
   tableHeaderCellConfig: TableHeaderCellConfig;
 }
 
-export interface SelectableTableHeaderCellProps {
+export interface SelectableTableHeaderCellProps<T> {
   spacingSize?: SpacingSize;
   spacingAlignment?: SpacingAlignment;
+  rowKey: keyof T;
+  selectRows: SelectRows<T>;
+  selected: TernaryCheckedState;
 }
 
 export interface SimpleTableDataCellProps<T> {

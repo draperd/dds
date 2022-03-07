@@ -8,7 +8,7 @@ import {
 import { TableHeadCell } from "../../../html/Table";
 
 import { Inline } from "../../../primitives/Inline";
-import { Input } from "../../../html/Input";
+import { TernaryCheckbox } from "../../TernaryCheckbox";
 import { Text } from "../../../primitives/Text";
 import { Button } from "../../Button";
 import { getNextSortState } from "../utils";
@@ -31,15 +31,29 @@ export const SimpleTableHeaderCell = (props: SimpleTableHeaderCellProps) => {
 // TODO - Need to be able to select and deselect all rows
 // TODO - Need to know how many rows in the table are selected
 export const SelectableTableHeaderCell = (
-  props: SelectableTableHeaderCellProps
+  props: SelectableTableHeaderCellProps<Object>
 ) => {
-  const { spacingSize = "MEDIUM", spacingAlignment = "LEFT" } = props;
+  const {
+    spacingSize = "MEDIUM",
+    spacingAlignment = "LEFT",
+    rowKey,
+    selected,
+    selectRows,
+  } = props;
   return (
     <TableHeadCell
       spacingAlignment={spacingAlignment}
       spacingSize={spacingSize}
     >
-      <Input type="CHECKBOX" id="" name=""></Input>
+      <TernaryCheckbox
+        checkedState={selected}
+        onPress={() =>
+          selectRows({
+            rowKey,
+            select: selected === "ALL" ? "NONE" : "ALL",
+          })
+        }
+      ></TernaryCheckbox>
     </TableHeadCell>
   );
 };

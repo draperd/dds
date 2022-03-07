@@ -14,6 +14,7 @@ import {
   GetInitialSortState,
   GetNextSortState,
   GetPage,
+  GetSelectedRowsState,
   PageDown,
   PageUp,
   SortRows,
@@ -95,12 +96,32 @@ export const createSimpleTableHeader: CreateSimpleTableHeader<Object> = ({
   );
 };
 
+export const getSelectedRowsState: GetSelectedRowsState<Object> = ({
+  tableData,
+  selectedRows,
+}) => {
+  const rowCount = tableData.length;
+  const selectedRowCount = selectedRows.length;
+  if (rowCount === selectedRowCount) {
+    return "ALL";
+  } else if (selectedRowCount === 0) {
+    return "NONE";
+  }
+  return "SOME";
+};
+
 export const createSelectableTableHeader: CreateSelectableTableHeader<
   Object
-> = ({ tableHeaderConfig }) => {
+> = ({ tableHeaderConfig, rowKey, selectRows, selectedRows, tableData }) => {
   const headerCells = [];
+
+  const selected = getSelectedRowsState({ tableData, selectedRows });
   const selectableTableHeaderCell = (
-    <SelectableTableHeaderCell></SelectableTableHeaderCell>
+    <SelectableTableHeaderCell
+      rowKey={rowKey}
+      selectRows={selectRows}
+      selected={selected}
+    ></SelectableTableHeaderCell>
   );
   headerCells.push(selectableTableHeaderCell);
   for (const [key, value] of Object.entries(tableHeaderConfig)) {
@@ -248,9 +269,10 @@ export const createSelectableTableBody: CreateSelectableTableBody<Object> = ({
   selectedRows,
 }) => {
   const rows = tableData.map((tableRowData, rowNumber) => {
-    const selected = selectedRows.includes(tableRowData[rowKey]);
+    const key = tableRowData[rowKey];
+    const selected = selectedRows.includes(key);
     return (
-      <TableRow key={rowNumber}>
+      <TableRow key={key}>
         {createSelectableTableRow({
           rowKey,
           tableHeaderConfig,

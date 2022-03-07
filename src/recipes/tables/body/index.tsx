@@ -44,7 +44,7 @@ export const SelectRowTableDataCell = (
     selectRow,
     selected,
   } = props;
-  const rowId = tableRowData[rowKey];
+  const key = tableRowData[rowKey];
   return (
     <TableDataCell
       key={`${rowNumber}_${columnNumber}`}
@@ -53,10 +53,10 @@ export const SelectRowTableDataCell = (
     >
       <Input
         type="CHECKBOX"
-        id={rowId}
-        name={rowId}
+        id={key}
+        name={key}
         onChange={() =>
-          selectRow({ key: tableRowData[rowKey], selected: true })
+          selectRow({ key: tableRowData[rowKey], selected: !selected })
         }
         checked={selected}
       ></Input>

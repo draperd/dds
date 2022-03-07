@@ -1,13 +1,9 @@
 import { TableState, Propertyof } from "./types";
 
-export const DEFAULT_ACTION = "default";
 export const SET_PAGE_NUMBER_ACTION = "SetPage";
 export const SET_PAGE_SIZE_ACTION = "SetPageSize";
 export const SELECT_ROW_ACTION = "SelectRow";
-
-export type DefaultTableAction = {
-  type: typeof DEFAULT_ACTION;
-};
+export const SELECT_ROWS_ACTION = "SelectRows";
 
 export type SetPageTableAction = {
   type: typeof SET_PAGE_NUMBER_ACTION;
@@ -25,16 +21,17 @@ export type SelectRowTableAction<T> = {
   selected: boolean;
 };
 
+export type SelectRowsTableAction<T> = {
+  type: typeof SELECT_ROWS_ACTION;
+  select: "NONE" | "ALL";
+  rowKey: keyof T;
+};
+
 export type TableAction<T> =
-  | DefaultTableAction
   | SetPageTableAction
   | SetPageSizeTableAction
-  | SelectRowTableAction<T>;
-
-export type DefaultActionReducer<T> = (args: {
-  state: TableState<T>;
-  action: TableAction<T>;
-}) => TableState<T>;
+  | SelectRowTableAction<T>
+  | SelectRowsTableAction<T>;
 
 export type SetPageNumberReducer<T> = (args: {
   state: TableState<T>;
@@ -51,19 +48,17 @@ export type SelectRowReducer<T> = (args: {
   action: SelectRowTableAction<T>;
 }) => TableState<T>;
 
+export type SelectRowsReducer<T> = (args: {
+  state: TableState<T>;
+  action: SelectRowsTableAction<T>;
+}) => TableState<T>;
+
 // Reduce behaviour
 // 1. Handle page update (loading states?) -> reset row selection?
 // 2. Handle page size change
 // 3. Handle sort change (reset pagination? reload data?)
 // 4. Handle row selection -> update header selection?
 // 5. Handle all rows selected / all rows deselected
-
-// Example reducer template for when needed
-const reduceDefault: DefaultActionReducer<Object> = ({ state, action }) => {
-  return {
-    ...state,
-  };
-};
 
 const reduceSetPageNumber: SetPageNumberReducer<Object> = ({
   state,
@@ -120,14 +115,34 @@ const reduceSelectRow: SelectRowReducer<Object> = ({ state, action }) => {
   }
 };
 
+const reduceSelectRows: SelectRowsReducer<Object> = ({ state, action }) => {
+  const { tableData } = state;
+  const { select, rowKey } = action;
+  switch (select) {
+    case "NONE": {
+      return {
+        ...state,
+        selectedRows: [],
+      };
+    }
+    case "ALL": {
+      const selectedRows: Propertyof<Object>[] = tableData.map(
+        (row) => row[rowKey]
+      );
+      return {
+        ...state,
+        selectedRows,
+      };
+    }
+  }
+  return state;
+};
+
 export function reducer(
   state: TableState<Object>,
   action: TableAction<Object>
 ) {
   switch (action.type) {
-    case DEFAULT_ACTION: {
-      return reduceDefault({ state, action });
-    }
     case SET_PAGE_NUMBER_ACTION: {
       return reduceSetPageNumber({ state, action });
     }
@@ -136,6 +151,9 @@ export function reducer(
     }
     case SELECT_ROW_ACTION: {
       return reduceSelectRow({ state, action });
+    }
+    case SELECT_ROWS_ACTION: {
+      return reduceSelectRows({ state, action });
     }
 
     default:

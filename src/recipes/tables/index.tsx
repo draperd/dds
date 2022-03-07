@@ -23,7 +23,7 @@ import {
   createSelectableTableHeader,
 } from "./utils";
 import { reducer } from "./reducers";
-import { createSelectRowAction } from "./actions";
+import { createSelectRowAction, createSelectRowsAction } from "./actions";
 
 export const DEFAULT_PAGE_SIZE = 10;
 
@@ -242,14 +242,14 @@ export const SelectableTable = (props: SelectableTableProps<Object>) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const context = createContext({ state, dispatch });
 
-  // TODO - Need to manage state of selected rows
-  // TODO - Consider useReducer this time?
-  // TODO - Need to be able to indicate selected state on each row - Box property?
-  // TODO - Pass setState or reducer actions to header and body helpers
-
   const heading = createSelectableTableHeader({
     tableHeaderConfig,
+    tableData: tableData,
     spacingSize,
+    rowKey,
+    selectedRows: state.selectedRows,
+    selectRows: ({ rowKey, select }) =>
+      dispatch(createSelectRowsAction({ rowKey, select })),
   });
   const headingKeys = Object.keys(tableHeaderConfig);
   const body = createSelectableTableBody({
