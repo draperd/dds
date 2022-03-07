@@ -7,9 +7,17 @@ import {
   AsyncPaginatedTableProps,
   SelectableTableProps,
   Propertyof,
+  ComposedTableProps,
 } from "./types";
 
-import { Table } from "../../html/Table";
+import {
+  Table,
+  TableBody,
+  TableDataCell,
+  TableHead,
+  TableHeadCell,
+  TableRow,
+} from "../../html/Table";
 import { Stack } from "../../primitives/Stack";
 import {
   createTableHeader,
@@ -240,6 +248,7 @@ export const TableActions = (props: TableActionsProps<Object>) => {
   const selectedTableData = tableData.filter((data) => {
     return selectedRows.includes(data[rowKey]);
   });
+
   const message = selectedTableData
     .map((data) => `"${data[rowKey]}" by ${data.artist}`)
     .join(", ");
@@ -306,5 +315,26 @@ export const SelectableTable = (props: SelectableTableProps<Object>) => {
         {body}
       </Table>
     </TableContext.Provider>
+  );
+};
+
+export const ComposedTable = (props: ComposedTableProps) => {
+  return (
+    <Table>
+      <TableHead>
+        <TableHeadCell>Letters</TableHeadCell>
+        <TableHeadCell>Numbers</TableHeadCell>
+      </TableHead>
+      <TableBody>
+        <TableRow>
+          <TableDataCell>1</TableDataCell>
+          <TableDataCell>A</TableDataCell>
+        </TableRow>
+        <TableRow>
+          <TableDataCell>2</TableDataCell>
+          <TableDataCell>B</TableDataCell>
+        </TableRow>
+      </TableBody>
+    </Table>
   );
 };

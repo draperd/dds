@@ -281,6 +281,11 @@ export interface AsyncPaginatedTableProps<T> {
   resultsAttribute: string;
 }
 
+export interface ComposedTableProps {
+  spacingSize?: SpacingSize;
+  spacingAlignment?: SpacingAlignment;
+}
+
 export interface SelectableTableProps<T> extends InMemoryTableProps<T> {
   rowKey: keyof T;
   // sortAttribute: keyof T;
