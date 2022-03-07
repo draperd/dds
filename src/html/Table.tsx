@@ -56,6 +56,7 @@ export const TableRow = ({
   spacingStyle = "INSET",
   spacingSize = "MEDIUM",
   className = "",
+  selected,
   children,
 }: TableProps) => (
   <AbstractBox
@@ -63,6 +64,7 @@ export const TableRow = ({
     className={`${className} html-table`}
     spacingStyle={spacingStyle}
     spacingSize={spacingSize}
+    selected={selected}
   >
     {children}
   </AbstractBox>

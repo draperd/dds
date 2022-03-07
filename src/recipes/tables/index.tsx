@@ -233,7 +233,7 @@ export const SelectableTable = (props: SelectableTableProps<Object>) => {
   } = props;
 
   const initialState: TableState<Object> = {
-    totalRows: 0,
+    totalRows: tableData.length,
     pageSize: DEFAULT_PAGE_SIZE,
     currentPage: 1,
     tableData,

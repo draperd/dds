@@ -1,5 +1,6 @@
 table.html-table {
   display: table;
+  border-collapse: collapse;
 }
 
 tr.html-table {

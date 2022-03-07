@@ -34,6 +34,7 @@ export const SelectableTableHeaderCell = (
   props: SelectableTableHeaderCellProps<Object>
 ) => {
   const {
+    headingKey,
     spacingSize = "MEDIUM",
     spacingAlignment = "LEFT",
     rowKey,
@@ -44,6 +45,7 @@ export const SelectableTableHeaderCell = (
     <TableHeadCell
       spacingAlignment={spacingAlignment}
       spacingSize={spacingSize}
+      key={headingKey}
     >
       <TernaryCheckbox
         checkedState={selected}

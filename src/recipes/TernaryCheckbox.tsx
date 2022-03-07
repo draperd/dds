@@ -26,11 +26,7 @@ export const TernaryCheckbox = ({
   } else if (checkedState === "ALL") label = "[/]";
 
   return (
-    <Pressable
-      spacingStyle="SQUISHED-INSET"
-      spacingSize="MEDIUM"
-      onPress={onPress}
-    >
+    <Pressable spacingStyle="FLUSH" spacingSize="MEDIUM" onPress={onPress}>
       <Text content={label}></Text>
     </Pressable>
   );

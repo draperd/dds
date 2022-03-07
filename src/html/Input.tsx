@@ -41,7 +41,7 @@ export const Input = ({
       id={id}
       name={name}
       type={type}
-      className={className}
+      className={`input ${className}`}
       onChange={(evt) => handleChange({ evt, onChange })}
       value={value}
       checked={checked}

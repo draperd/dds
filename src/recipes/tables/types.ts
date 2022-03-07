@@ -224,6 +224,7 @@ export interface SimpleTableHeaderCellProps {
 }
 
 export interface SelectableTableHeaderCellProps<T> {
+  headingKey: HeadingKey;
   spacingSize?: SpacingSize;
   spacingAlignment?: SpacingAlignment;
   rowKey: keyof T;
@@ -282,7 +283,9 @@ export interface AsyncPaginatedTableProps<T> {
 
 export interface SelectableTableProps<T> extends InMemoryTableProps<T> {
   rowKey: keyof T;
-  // selectRow: SelectRow<T>;
+  // sortAttribute: keyof T;
+  // sortDirection: SortDirection;
+  // pageSize: number;
 }
 
 /* *****************************************************

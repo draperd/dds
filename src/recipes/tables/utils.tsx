@@ -112,15 +112,24 @@ export const getSelectedRowsState: GetSelectedRowsState<Object> = ({
 
 export const createSelectableTableHeader: CreateSelectableTableHeader<
   Object
-> = ({ tableHeaderConfig, rowKey, selectRows, selectedRows, tableData }) => {
+> = ({
+  tableHeaderConfig,
+  rowKey,
+  selectRows,
+  selectedRows,
+  tableData,
+  spacingSize,
+}) => {
   const headerCells = [];
 
   const selected = getSelectedRowsState({ tableData, selectedRows });
   const selectableTableHeaderCell = (
     <SelectableTableHeaderCell
       rowKey={rowKey}
+      headingKey="select_column"
       selectRows={selectRows}
       selected={selected}
+      spacingSize={spacingSize}
     ></SelectableTableHeaderCell>
   );
   headerCells.push(selectableTableHeaderCell);
@@ -129,6 +138,7 @@ export const createSelectableTableHeader: CreateSelectableTableHeader<
       <SimpleTableHeaderCell
         headingKey={key}
         tableHeaderCellConfig={value}
+        spacingSize={spacingSize}
       ></SimpleTableHeaderCell>
     );
   }
@@ -272,7 +282,7 @@ export const createSelectableTableBody: CreateSelectableTableBody<Object> = ({
     const key = tableRowData[rowKey];
     const selected = selectedRows.includes(key);
     return (
-      <TableRow key={key}>
+      <TableRow key={key} selected={selected}>
         {createSelectableTableRow({
           rowKey,
           tableHeaderConfig,
