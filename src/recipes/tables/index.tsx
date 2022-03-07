@@ -6,7 +6,6 @@ import {
   InMemoryPaginatedTableProps,
   AsyncPaginatedTableProps,
   SelectableTableProps,
-  Propertyof,
   ComposedTableProps,
 } from "./types";
 
@@ -33,8 +32,6 @@ import {
 } from "./utils";
 import { reducer } from "./reducers";
 import { createSelectRowAction, createSelectRowsAction } from "./actions";
-import { Inline } from "../../primitives/Inline";
-import { Button } from "../Button";
 
 export const DEFAULT_PAGE_SIZE = 10;
 
@@ -235,41 +232,13 @@ export const AsyncPaginatedTable = (
   );
 };
 
-export type TableActionsProps<T> = {
-  tableData: T[];
-  selectedRows: Propertyof<T>[];
-  rowKey: keyof T;
-};
-
-export const TableActions = (props: TableActionsProps<Object>) => {
-  const { selectedRows, tableData, rowKey } = props;
-  const disabled = selectedRows.length === 0;
-
-  const selectedTableData = tableData.filter((data) => {
-    return selectedRows.includes(data[rowKey]);
-  });
-
-  const message = selectedTableData
-    .map((data) => `"${data[rowKey]}" by ${data.artist}`)
-    .join(", ");
-
-  return (
-    <Inline>
-      <Button
-        disabled={disabled}
-        label="What's selected?"
-        onPress={() => alert(`Selected ${message}`)}
-      ></Button>
-    </Inline>
-  );
-};
-
 export const SelectableTable = (props: SelectableTableProps<Object>) => {
   const {
     tableHeaderConfig,
     tableData,
     spacingSize = "MEDIUM",
     rowKey,
+    actions,
   } = props;
 
   const initialState: TableState<Object> = {
@@ -305,11 +274,7 @@ export const SelectableTable = (props: SelectableTableProps<Object>) => {
 
   return (
     <TableContext.Provider value={context}>
-      <TableActions
-        selectedRows={state.selectedRows}
-        tableData={tableData}
-        rowKey={rowKey}
-      ></TableActions>
+      {actions({ rowKey, selectedRows: state.selectedRows, tableData })}
       <Table>
         {heading}
         {body}
@@ -318,6 +283,7 @@ export const SelectableTable = (props: SelectableTableProps<Object>) => {
   );
 };
 
+// This example just shows how to build a table directly from primitives...
 export const ComposedTable = (props: ComposedTableProps) => {
   return (
     <Table>

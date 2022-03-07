@@ -286,8 +286,15 @@ export interface ComposedTableProps {
   spacingAlignment?: SpacingAlignment;
 }
 
+export type RenderTableActions<T> = (args: {
+  tableData: T[];
+  selectedRows: Propertyof<T>[];
+  rowKey: keyof T;
+}) => ReactElement;
+
 export interface SelectableTableProps<T> extends InMemoryTableProps<T> {
   rowKey: keyof T;
+  actions: RenderTableActions<T>;
   // sortAttribute: keyof T;
   // sortDirection: SortDirection;
   // pageSize: number;

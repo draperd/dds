@@ -2,8 +2,13 @@ import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
 import { SelectableTable } from "../recipes/tables";
-import { SelectableTableProps } from "../recipes/tables/types";
+import {
+  RenderTableActions,
+  SelectableTableProps,
+} from "../recipes/tables/types";
 import { Album } from "./Table.stories";
+import { Inline } from "../primitives/Inline";
+import { Button } from "../recipes/Button";
 
 export default {
   title: "Example/Tables",
@@ -13,6 +18,32 @@ export default {
 const Template: ComponentStory<typeof SelectableTable> = (args) => (
   <SelectableTable {...args} />
 );
+
+export const renderTableActions: RenderTableActions<Album> = ({
+  selectedRows,
+  tableData,
+  rowKey,
+}) => {
+  const disabled = selectedRows.length === 0;
+
+  const selectedTableData = tableData.filter((data) => {
+    return selectedRows.includes(data[rowKey]);
+  });
+
+  const message = selectedTableData
+    .map((data) => `"${data[rowKey]}" by ${data.artist}`)
+    .join(", ");
+
+  return (
+    <Inline>
+      <Button
+        disabled={disabled}
+        label="What's selected?"
+        onPress={() => alert(`Selected ${message}`)}
+      ></Button>
+    </Inline>
+  );
+};
 
 const table1: SelectableTableProps<Album> = {
   rowKey: "title",
@@ -53,6 +84,8 @@ const table1: SelectableTableProps<Album> = {
   // sortDirection: "ASCENDING",
   // pageSize: 5,
   spacingSize: "SMALL",
+  actions: ({ selectedRows, tableData, rowKey }) =>
+    renderTableActions({ selectedRows, tableData, rowKey }),
 };
 
 export const Selectable = Template.bind({});
