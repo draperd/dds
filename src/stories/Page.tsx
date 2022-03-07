@@ -3,7 +3,11 @@ import React from "react";
 import { Grid } from "../layout/Grid";
 import { GridItem } from "../layout/GridItem";
 import { Card } from "../recipes/Card";
+// import "@atlaskit/css-reset/dist/bundle.css";
 import "./page.css";
+import "@atlaskit/tokens/css/atlassian-light.css";
+import "@atlaskit/tokens/css/atlassian-dark.css";
+
 interface PageProps {}
 
 const description: string =

@@ -1,3 +1,4 @@
 .box-selected {
-  background-color: #eee;
+  background-color: var(--ds-background-selected);
+  border-color: var(--ds-border-selected);
 }

@@ -1,8 +1,18 @@
-import React from "react";
+import React, { CSSProperties } from "react";
 import { AbstractBox, PublicBoxProps } from "../primitives/AbstractBox";
+import { SPACING_XXX_SMALL, SPACING_XX_SMALL } from "../foundations/Spacing";
+import { token } from "@atlaskit/tokens";
 import "./table.css";
 
 export type TableProps = PublicBoxProps;
+
+const theadStyles: CSSProperties = {
+  borderBottom: `${token("color.border")} solid ${SPACING_XX_SMALL}`,
+};
+
+const trowStyles: CSSProperties = {
+  borderBottom: `${token("color.border")} solid  ${SPACING_XXX_SMALL}`,
+};
 
 export const Table = ({
   spacingStyle = "INSET",
@@ -31,6 +41,7 @@ export const TableHead = ({
     className={`${className} html-table`}
     spacingStyle={spacingStyle}
     spacingSize={spacingSize}
+    style={theadStyles}
   >
     {children}
   </AbstractBox>
@@ -65,6 +76,7 @@ export const TableRow = ({
     spacingStyle={spacingStyle}
     spacingSize={spacingSize}
     selected={selected}
+    style={trowStyles}
   >
     {children}
   </AbstractBox>

@@ -19,7 +19,7 @@ const Template: ComponentStory<typeof SelectableTable> = (args) => (
   <SelectableTable {...args} />
 );
 
-export const renderTableActions: RenderTableActions<Album> = ({
+const renderTableActions: RenderTableActions<Album> = ({
   selectedRows,
   tableData,
   rowKey,

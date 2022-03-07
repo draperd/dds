@@ -4,7 +4,6 @@
   background-color: #ccc;
   border-color: #bbb;
   border-radius: var(--spacing-small);
-  /* color: #000; */
 }
 
 .button.selected {
@@ -13,7 +12,7 @@
 }
 
 .button.disabled {
-  background-color: #eee;
+  background-color: var(--ds-background-disabled);
   cursor: not-allowed;
-  color: #ccc;
+  color: var(--ds-text-disabled);
 }

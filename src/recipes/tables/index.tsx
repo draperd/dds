@@ -32,6 +32,7 @@ import {
 } from "./utils";
 import { reducer } from "./reducers";
 import { createSelectRowAction, createSelectRowsAction } from "./actions";
+import { NumberSpinner } from "../NumberSpinner";
 
 export const DEFAULT_PAGE_SIZE = 10;
 
@@ -288,8 +289,16 @@ export const ComposedTable = (props: ComposedTableProps) => {
   return (
     <Table>
       <TableHead>
-        <TableHeadCell>Letters</TableHeadCell>
-        <TableHeadCell>Numbers</TableHeadCell>
+        <TableRow>
+          <TableHeadCell>Letters</TableHeadCell>
+          <TableHeadCell>Numbers</TableHeadCell>
+        </TableRow>
+        <TableRow>
+          <TableHeadCell>
+            <NumberSpinner label="Width" id="width" value={50}></NumberSpinner>
+          </TableHeadCell>
+          <TableHeadCell></TableHeadCell>
+        </TableRow>
       </TableHead>
       <TableBody>
         <TableRow>
