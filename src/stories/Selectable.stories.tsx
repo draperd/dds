@@ -45,7 +45,7 @@ const renderTableActions: RenderTableActions<Album> = ({
   );
 };
 
-const table1: SelectableTableProps<Album> = {
+const selectableTable: SelectableTableProps<Album> = {
   rowKey: "title",
   tableHeaderConfig: {
     artist: {
@@ -77,7 +77,7 @@ const table1: SelectableTableProps<Album> = {
     { artist: "U2", title: "Zooropa", released: 1993 },
     { artist: "U2", title: "Pop", released: 1997 },
     { artist: "U2", title: "All that you can't leave behind", released: 2000 },
-    // { artist: "U2", title: "Actung Baby", released: 1991 },
+    { artist: "U2", title: "Actung Baby", released: 1991 },
     // { artist: "U2", title: "The Joshua Tree", released: 1987 },
   ],
   // sortAttribute: "title",
@@ -90,5 +90,5 @@ const table1: SelectableTableProps<Album> = {
 
 export const Selectable = Template.bind({});
 Selectable.args = {
-  ...table1,
+  ...selectableTable,
 };
