@@ -20,7 +20,7 @@
 
 */
 
-import { ReactElement } from "react";
+import { CSSProperties, ReactElement } from "react";
 import { SpacingAlignment, SpacingSize } from "../../foundations/Spacing";
 import { TernaryCheckedState } from "../TernaryCheckbox";
 
@@ -262,6 +262,7 @@ export interface InMemoryTableProps<T> {
   tableHeaderConfig: TableHeaderConfig<T>;
   tableData: T[];
   spacingSize?: SpacingSize;
+  width?: CSSProperties["width"];
 }
 
 export interface InMemoryPaginatedTableProps<T> extends InMemoryTableProps<T> {
@@ -279,11 +280,13 @@ export interface AsyncPaginatedTableProps<T> {
   dataUrl: string;
   countAttribute: string;
   resultsAttribute: string;
+  width?: CSSProperties["width"];
 }
 
 export interface ComposedTableProps {
   spacingSize?: SpacingSize;
   spacingAlignment?: SpacingAlignment;
+  width?: CSSProperties["width"];
 }
 
 export type RenderTableActions<T> = (args: {

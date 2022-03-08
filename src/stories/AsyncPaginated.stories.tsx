@@ -37,6 +37,7 @@ export type SwapiPersonData = {
 };
 
 const table1: AsyncPaginatedTableProps<Person> = {
+  width: "60%",
   tableHeaderConfig: {
     name: {
       index: false,

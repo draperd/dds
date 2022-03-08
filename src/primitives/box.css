@@ -48,7 +48,7 @@
 .box-inline {
   flex-direction: row;
   width: 100%;
-  align-items: baseline;
+  align-items: center;
 }
 
 .box-inline-large {

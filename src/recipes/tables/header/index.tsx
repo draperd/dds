@@ -15,7 +15,7 @@ import { getNextSortState } from "../utils";
 
 export const SimpleTableHeaderCell = (props: SimpleTableHeaderCellProps) => {
   const { headingKey, spacingSize = "MEDIUM", tableHeaderCellConfig } = props;
-  const { label, spacingAlignment = "LEFT" } = tableHeaderCellConfig;
+  const { label, spacingAlignment } = tableHeaderCellConfig;
   return (
     <TableHeadCell
       key={headingKey}
@@ -36,7 +36,7 @@ export const SelectableTableHeaderCell = (
   const {
     headingKey,
     spacingSize = "MEDIUM",
-    spacingAlignment = "LEFT",
+    spacingAlignment,
     rowKey,
     selected,
     selectRows,
@@ -48,6 +48,7 @@ export const SelectableTableHeaderCell = (
       key={headingKey}
     >
       <TernaryCheckbox
+        spacingAlignment={spacingAlignment}
         checkedState={selected}
         onPress={() =>
           selectRows({
@@ -87,7 +88,7 @@ export const SortableTableHeaderCell = (
       spacingAlignment={spacingAlignment}
       spacingSize={spacingSize}
     >
-      <Inline>
+      <Inline spacingAlignment={spacingAlignment}>
         <Text content={label}></Text>
         <Button
           label={sortButtonLabel}

@@ -4,12 +4,14 @@ import { PressHandler } from "../primitives/AbstractBox";
 import { Pressable } from "../behaviors/Pressable";
 import { Text } from "../primitives/Text";
 import "./button.css";
+import { SpacingAlignment } from "src/foundations/Spacing";
 
 interface ButtonProps {
   label: string;
   onPress?: PressHandler;
   disabled?: boolean;
   selected?: boolean;
+  spacingAlignment?: SpacingAlignment;
 }
 
 export const Button = ({
@@ -17,8 +19,10 @@ export const Button = ({
   onPress,
   disabled = false,
   selected = false,
+  spacingAlignment,
 }: ButtonProps) => (
   <Pressable
+    spacingAlignment={spacingAlignment}
     spacingStyle="SQUISHED-INSET"
     spacingSize="MEDIUM"
     className={`button ${disabled ? "disabled" : ""} ${

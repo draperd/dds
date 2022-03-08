@@ -32,37 +32,10 @@ import {
 } from "./utils";
 import { reducer } from "./reducers";
 import { createSelectRowAction, createSelectRowsAction } from "./actions";
-import { NumberSpinner } from "../NumberSpinner";
-
 export const DEFAULT_PAGE_SIZE = 10;
 
 // TODO Probably want to define a type for table context here
 export const TableContext = React.createContext({});
-
-// // Hate the name DynamicTable, but it'll do for now... grrr
-// export const DynamicTable = (props: DynamicTableProps) => {
-//   const {} = props;
-
-//   const initialState: TableState<Object> = {
-//     totalRows: 0,
-//     pageSize: DEFAULT_PAGE_SIZE,
-//     currentPage: 1,
-//     tableData: {},
-//   };
-//   const [state, dispatch] = useReducer(reducer, initialState);
-//   const context = createContext({ state, dispatch });
-
-//   // Things to consider...
-//   // 1. Is data provided?
-//   // 2. Are functions provided?
-//   // 3. Can both be provided?
-
-//   return (
-//     <TableContext.Provider value={context}>
-//       <Table></Table>
-//     </TableContext.Provider>
-//   );
-// };
 
 // This is the simplest example of a table
 // - NO selection
@@ -101,6 +74,7 @@ export const InMemoryPaginatedTable = (
     sortAttribute,
     sortDirection,
     spacingSize = "MEDIUM",
+    width,
   } = props;
 
   const initialSortState = getInitialSortState({
@@ -143,7 +117,7 @@ export const InMemoryPaginatedTable = (
   return (
     <div>
       <Stack>
-        <Table>
+        <Table width={width}>
           {heading}
           {body}
         </Table>
@@ -163,6 +137,7 @@ export const AsyncPaginatedTable = (
     tableHeaderConfig,
     pageSize,
     spacingSize = "MEDIUM",
+    width,
   } = props;
 
   const [tableData, setTableData] = useState([]);
@@ -211,7 +186,7 @@ export const AsyncPaginatedTable = (
 
   return (
     <Stack>
-      <Table>
+      <Table width={width}>
         {heading}
         {body}
       </Table>
@@ -227,6 +202,7 @@ export const SelectableTable = (props: SelectableTableProps<Object>) => {
     spacingSize = "MEDIUM",
     rowKey,
     actions,
+    width,
   } = props;
 
   const initialState: TableState<Object> = {
@@ -263,7 +239,7 @@ export const SelectableTable = (props: SelectableTableProps<Object>) => {
   return (
     <TableContext.Provider value={context}>
       {actions({ rowKey, selectedRows: state.selectedRows, tableData })}
-      <Table>
+      <Table width={width}>
         {heading}
         {body}
       </Table>
@@ -274,17 +250,11 @@ export const SelectableTable = (props: SelectableTableProps<Object>) => {
 // This example just shows how to build a table directly from primitives...
 export const ComposedTable = (props: ComposedTableProps) => {
   return (
-    <Table>
+    <Table width="auto">
       <TableHead>
         <TableRow>
           <TableHeadCell>Letters</TableHeadCell>
           <TableHeadCell>Numbers</TableHeadCell>
-        </TableRow>
-        <TableRow>
-          <TableHeadCell>
-            <NumberSpinner label="Width" id="width" value={50}></NumberSpinner>
-          </TableHeadCell>
-          <TableHeadCell></TableHeadCell>
         </TableRow>
       </TableHead>
       <TableBody>

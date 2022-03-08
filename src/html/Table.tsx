@@ -4,7 +4,9 @@ import { SPACING_XXX_SMALL, SPACING_XX_SMALL } from "../foundations/Spacing";
 import { token } from "@atlaskit/tokens";
 import "./table.css";
 
-export type TableProps = PublicBoxProps;
+export type TableProps = PublicBoxProps & {
+  width?: CSSProperties["width"];
+};
 
 const theadStyles: CSSProperties = {
   borderBottom: `${token("color.border")} solid ${SPACING_XX_SMALL}`,
@@ -18,6 +20,7 @@ export const Table = ({
   spacingStyle = "INSET",
   spacingSize = "MEDIUM",
   className = "",
+  width,
   children,
 }: TableProps) => (
   <AbstractBox
@@ -25,6 +28,7 @@ export const Table = ({
     className={`${className} html-table`}
     spacingStyle={spacingStyle}
     spacingSize={spacingSize}
+    style={{ width: width === undefined ? "100%" : width }}
   >
     {children}
   </AbstractBox>

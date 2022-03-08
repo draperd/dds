@@ -15,6 +15,7 @@ const Template: ComponentStory<typeof InMemoryPaginatedTable> = (args) => (
 );
 
 const table1: InMemoryPaginatedTableProps<Album> = {
+  width: "60%",
   tableHeaderConfig: {
     artist: {
       index: false,

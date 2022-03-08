@@ -95,25 +95,25 @@ export const Calendar = ({
         <Table>
           <TableHead>
             <TableRow>
-              <TableHeadCell>
+              <TableHeadCell spacingAlignment="CENTER">
                 <Text content="SUN" />
               </TableHeadCell>
-              <TableHeadCell>
+              <TableHeadCell spacingAlignment="CENTER">
                 <Text content="MON" />
               </TableHeadCell>
-              <TableHeadCell>
+              <TableHeadCell spacingAlignment="CENTER">
                 <Text content="TUE" />
               </TableHeadCell>
-              <TableHeadCell>
+              <TableHeadCell spacingAlignment="CENTER">
                 <Text content="WED" />
               </TableHeadCell>
-              <TableHeadCell>
+              <TableHeadCell spacingAlignment="CENTER">
                 <Text content="THU" />
               </TableHeadCell>
-              <TableHeadCell>
+              <TableHeadCell spacingAlignment="CENTER">
                 <Text content="FRI" />
               </TableHeadCell>
-              <TableHeadCell>
+              <TableHeadCell spacingAlignment="CENTER">
                 <Text content="SAT" />
               </TableHeadCell>
             </TableRow>

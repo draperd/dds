@@ -47,6 +47,7 @@ const renderTableActions: RenderTableActions<Album> = ({
 
 const selectableTable: SelectableTableProps<Album> = {
   rowKey: "title",
+  width: "50%",
   tableHeaderConfig: {
     artist: {
       index: false,
@@ -80,9 +81,6 @@ const selectableTable: SelectableTableProps<Album> = {
     { artist: "U2", title: "Actung Baby", released: 1991 },
     // { artist: "U2", title: "The Joshua Tree", released: 1987 },
   ],
-  // sortAttribute: "title",
-  // sortDirection: "ASCENDING",
-  // pageSize: 5,
   spacingSize: "SMALL",
   actions: ({ selectedRows, tableData, rowKey }) =>
     renderTableActions({ selectedRows, tableData, rowKey }),
