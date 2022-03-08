@@ -103,18 +103,6 @@ export const InMemoryPaginatedTable = (
     spacingSize = "MEDIUM",
   } = props;
 
-  const [data, setData] = useState(null);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch(`https://swapi.dev/api/people/`);
-      const newData = await response.json();
-      setData(newData);
-    };
-
-    fetchData();
-  }, []);
-
   const initialSortState = getInitialSortState({
     sortAttribute,
     sortDirection,
@@ -154,7 +142,6 @@ export const InMemoryPaginatedTable = (
 
   return (
     <div>
-      {data && <span>Got data</span>}
       <Stack>
         <Table>
           {heading}

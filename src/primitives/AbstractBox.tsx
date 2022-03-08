@@ -23,6 +23,7 @@ export type AbstractBoxProps = PrivateBoxProps &
 
 export interface PressableProps {
   onPress?: PressHandler;
+  disabled?: boolean;
 }
 
 // These are props that we DON'T want to expose for public use
@@ -111,6 +112,7 @@ export const AbstractBox = ({
   spacingAlignment = "LEFT",
   style = {},
   selected = false,
+  disabled = false,
 }: AbstractBoxProps) => {
   // We need to select the appropriate styling for the spacing type... so we need to evaluate the property
   // Should this be CSS or directly set style?
@@ -139,10 +141,10 @@ export const AbstractBox = ({
           role="button"
           tabIndex={0}
           onClick={(evt: React.MouseEvent<HTMLElement, MouseEvent>) =>
-            handleClick({ evt, onPress })
+            !disabled && handleClick({ evt, onPress })
           }
           onKeyPress={(evt: React.KeyboardEvent<HTMLElement>) =>
-            handleKeyPress({ evt, onPress })
+            !disabled && handleKeyPress({ evt, onPress })
           }
         >
           {children}

@@ -25,6 +25,7 @@ export const Button = ({
       selected ? "selected" : ""
     }`}
     onPress={onPress}
+    disabled={disabled}
   >
     <Text content={label}></Text>
   </Pressable>
