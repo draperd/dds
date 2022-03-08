@@ -31,7 +31,6 @@ export interface PressableProps {
 export type PrivateBoxProps = {
   boxType?: BoxType;
   as?: React.ElementType;
-  style?: React.CSSProperties;
 };
 
 export interface PublicBoxProps {
@@ -43,6 +42,7 @@ export interface PublicBoxProps {
   children?: React.ReactNode;
   className?: string;
   selected?: boolean;
+  style?: React.CSSProperties;
 }
 
 export type PressableBoxProps = PublicBoxProps & PressableProps;

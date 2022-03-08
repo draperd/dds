@@ -11,6 +11,7 @@ export const Box = ({
   spacingSize = "MEDIUM",
   spacingAlignment = "LEFT",
   className = "",
+  style,
   children,
 }: BoxProps) => (
   <AbstractBox
@@ -18,6 +19,7 @@ export const Box = ({
     spacingStyle={spacingStyle}
     spacingSize={spacingSize}
     spacingAlignment={spacingAlignment}
+    style={style}
   >
     {children}
   </AbstractBox>

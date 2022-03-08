@@ -29,7 +29,7 @@
 }
 
 .box-stack {
-  width: 100%;
+  /* width: 100%; */ /* Commenting this breaks date picker */
   flex-direction: column;
 }
 
