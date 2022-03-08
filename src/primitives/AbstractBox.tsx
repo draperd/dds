@@ -23,6 +23,7 @@ export type AbstractBoxProps = PrivateBoxProps &
 
 export interface PressableProps {
   onPress?: PressHandler;
+  disabled?: boolean;
 }
 
 // These are props that we DON'T want to expose for public use
@@ -41,6 +42,7 @@ export interface PublicBoxProps {
   spacingAlignment?: SpacingAlignment;
   children?: React.ReactNode;
   className?: string;
+  selected?: boolean;
 }
 
 export type PressableBoxProps = PublicBoxProps & PressableProps;
@@ -52,16 +54,23 @@ type GetSpacingClassNamesArgs = {
   spacingStyle: SpacingStyle;
   spacingSize: SpacingSize;
   spacingAlignment: SpacingAlignment;
+  selected: boolean;
 };
 
 // This is a bit of a short cut and we'd want unit tests for this!
-export const getSpacingClassNames = ({
+export const getAbstractBoxClassNames = ({
   className,
   spacingStyle,
   spacingSize,
   spacingAlignment,
+  selected = false,
 }: GetSpacingClassNamesArgs) => {
-  return `${cssPrefix}defaults ${cssPrefix}${spacingStyle.toLowerCase()} ${cssPrefix}${spacingStyle.toLowerCase()}-${spacingSize.toLowerCase()} ${cssPrefix}${spacingAlignment.toLowerCase()} ${className}`;
+  const defaults = `${cssPrefix}defaults`;
+  const spacingStylesAndSizes = `${cssPrefix}${spacingStyle.toLowerCase()} ${cssPrefix}${spacingStyle.toLowerCase()}-${spacingSize.toLowerCase()}`;
+  const spacingAlignments = `${cssPrefix}${spacingAlignment.toLowerCase()}`;
+  const selection = selected ? `${cssPrefix}selected` : "";
+
+  return `${defaults} ${spacingStylesAndSizes} ${spacingAlignments} ${selection} ${className}`;
 };
 
 export type OnClickHandlerArgs = {
@@ -102,15 +111,18 @@ export const AbstractBox = ({
   spacingStyle = "INSET",
   spacingAlignment = "LEFT",
   style = {},
+  selected = false,
+  disabled = false,
 }: AbstractBoxProps) => {
   // We need to select the appropriate styling for the spacing type... so we need to evaluate the property
   // Should this be CSS or directly set style?
   // Ideally we want to use CSS here because it should reduce DOM size and be more efficient
-  const spacingClassNames = getSpacingClassNames({
+  const spacingClassNames = getAbstractBoxClassNames({
     className,
     spacingStyle,
     spacingSize,
     spacingAlignment,
+    selected,
   });
 
   switch (boxType) {
@@ -129,10 +141,10 @@ export const AbstractBox = ({
           role="button"
           tabIndex={0}
           onClick={(evt: React.MouseEvent<HTMLElement, MouseEvent>) =>
-            handleClick({ evt, onPress })
+            !disabled && handleClick({ evt, onPress })
           }
           onKeyPress={(evt: React.KeyboardEvent<HTMLElement>) =>
-            handleKeyPress({ evt, onPress })
+            !disabled && handleKeyPress({ evt, onPress })
           }
         >
           {children}

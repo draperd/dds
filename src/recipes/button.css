@@ -1,8 +1,19 @@
 @import url(../foundations/spacing.css);
 
 .button {
-  background-color: #ccc;
-  border-color: #bbb;
+  background-color: var(--ds-background-neutral);
+  border-color: var(--ds-border-neutral);
   border-radius: var(--spacing-small);
-  /* color: #000; */
+}
+
+.button.selected {
+  background-color: var(--ds-background-selected);
+  color: var(--ds-text-selected);
+  text-decoration: underline;
+}
+
+.button.disabled {
+  background-color: var(--ds-background-disabled);
+  cursor: not-allowed;
+  color: var(--ds-text-disabled);
 }

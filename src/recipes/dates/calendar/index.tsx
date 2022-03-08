@@ -20,7 +20,7 @@ import { getMonthData } from "../utils";
 export const Day = ({ day, onDayPressed }: DayProps) => {
   const { dayOfMonth, date } = day;
   return (
-    <TableDataCell>
+    <TableDataCell spacingStyle="SQUISHED-INSET">
       <Pressable
         onPress={() => onDayPressed({ date })}
         spacingStyle="FLUSH"
@@ -95,25 +95,25 @@ export const Calendar = ({
         <Table>
           <TableHead>
             <TableRow>
-              <TableHeadCell>
+              <TableHeadCell spacingAlignment="CENTER">
                 <Text content="SUN" />
               </TableHeadCell>
-              <TableHeadCell>
+              <TableHeadCell spacingAlignment="CENTER">
                 <Text content="MON" />
               </TableHeadCell>
-              <TableHeadCell>
+              <TableHeadCell spacingAlignment="CENTER">
                 <Text content="TUE" />
               </TableHeadCell>
-              <TableHeadCell>
+              <TableHeadCell spacingAlignment="CENTER">
                 <Text content="WED" />
               </TableHeadCell>
-              <TableHeadCell>
+              <TableHeadCell spacingAlignment="CENTER">
                 <Text content="THU" />
               </TableHeadCell>
-              <TableHeadCell>
+              <TableHeadCell spacingAlignment="CENTER">
                 <Text content="FRI" />
               </TableHeadCell>
-              <TableHeadCell>
+              <TableHeadCell spacingAlignment="CENTER">
                 <Text content="SAT" />
               </TableHeadCell>
             </TableRow>

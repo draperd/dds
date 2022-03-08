@@ -4,6 +4,7 @@
 
 :root,
 element {
+  --spacing-xxxsmall: 0.0625rem;
   --spacing-xxsmall: 0.125rem;
   --spacing-xsmall: 0.25rem;
   --spacing-small: 0.5rem;
@@ -12,3 +13,16 @@ element {
   --spacing-xlarge: 4rem;
   --spacing-xxlarge: 8rem;
 }
+
+/*
+  So for font-size 16px...
+
+  xxxsmall = 1px
+  xxsmall = 2px
+  xsmall = 4px
+  small =  8px
+  medium = 16px
+  large =  32px
+  xlarge = 64px
+  xxlarge = 128px
+*/

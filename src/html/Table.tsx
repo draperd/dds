@@ -1,13 +1,26 @@
-import React from "react";
+import React, { CSSProperties } from "react";
 import { AbstractBox, PublicBoxProps } from "../primitives/AbstractBox";
+import { SPACING_XXX_SMALL, SPACING_XX_SMALL } from "../foundations/Spacing";
+import { token } from "@atlaskit/tokens";
 import "./table.css";
 
-export type TableProps = PublicBoxProps;
+export type TableProps = PublicBoxProps & {
+  width?: CSSProperties["width"];
+};
+
+const theadStyles: CSSProperties = {
+  borderBottom: `${token("color.border")} solid ${SPACING_XX_SMALL}`,
+};
+
+const trowStyles: CSSProperties = {
+  borderBottom: `${token("color.border")} solid  ${SPACING_XXX_SMALL}`,
+};
 
 export const Table = ({
-  spacingStyle = "FLUSH",
+  spacingStyle = "INSET",
   spacingSize = "MEDIUM",
   className = "",
+  width,
   children,
 }: TableProps) => (
   <AbstractBox
@@ -15,13 +28,14 @@ export const Table = ({
     className={`${className} html-table`}
     spacingStyle={spacingStyle}
     spacingSize={spacingSize}
+    style={{ width: width === undefined ? "100%" : width }}
   >
     {children}
   </AbstractBox>
 );
 
 export const TableHead = ({
-  spacingStyle = "FLUSH",
+  spacingStyle = "INSET",
   spacingSize = "MEDIUM",
   className = "",
   children,
@@ -31,13 +45,14 @@ export const TableHead = ({
     className={`${className} html-table`}
     spacingStyle={spacingStyle}
     spacingSize={spacingSize}
+    style={theadStyles}
   >
     {children}
   </AbstractBox>
 );
 
 export const TableBody = ({
-  spacingStyle = "FLUSH",
+  spacingStyle = "INSET",
   spacingSize = "MEDIUM",
   className = "",
   children,
@@ -53,9 +68,10 @@ export const TableBody = ({
 );
 
 export const TableRow = ({
-  spacingStyle = "FLUSH",
+  spacingStyle = "INSET",
   spacingSize = "MEDIUM",
   className = "",
+  selected,
   children,
 }: TableProps) => (
   <AbstractBox
@@ -63,6 +79,8 @@ export const TableRow = ({
     className={`${className} html-table`}
     spacingStyle={spacingStyle}
     spacingSize={spacingSize}
+    selected={selected}
+    style={trowStyles}
   >
     {children}
   </AbstractBox>
@@ -71,6 +89,7 @@ export const TableRow = ({
 export const TableHeadCell = ({
   spacingStyle = "INSET",
   spacingSize = "MEDIUM",
+  spacingAlignment,
   className = "",
   children,
 }: TableProps) => (
@@ -79,14 +98,16 @@ export const TableHeadCell = ({
     className={`${className} html-table`}
     spacingStyle={spacingStyle}
     spacingSize={spacingSize}
+    spacingAlignment={spacingAlignment}
   >
     {children}
   </AbstractBox>
 );
 
 export const TableDataCell = ({
-  spacingStyle = "SQUISHED-INSET",
+  spacingStyle = "INSET",
   spacingSize = "MEDIUM",
+  spacingAlignment,
   className = "",
   children,
 }: TableProps) => (
@@ -95,6 +116,7 @@ export const TableDataCell = ({
     className={`${className} html-table`}
     spacingStyle={spacingStyle}
     spacingSize={spacingSize}
+    spacingAlignment={spacingAlignment}
   >
     {children}
   </AbstractBox>

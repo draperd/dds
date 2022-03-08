@@ -16,6 +16,10 @@
    implementation would require many more definitions.
  */
 
+.box-inset-large {
+  padding: var(--spacing-large);
+}
+
 .box-inset-medium {
   padding: var(--spacing-medium);
 }
@@ -29,14 +33,26 @@
   flex-direction: column;
 }
 
+.box-stack-large {
+  gap: var(--spacing-medium);
+}
+
 .box-stack-medium {
   gap: var(--spacing-medium);
+}
+
+.box-stack-small {
+  gap: var(--spacing-small);
 }
 
 .box-inline {
   flex-direction: row;
   width: 100%;
-  align-items: baseline;
+  align-items: center;
+}
+
+.box-inline-large {
+  gap: var(--spacing-large);
 }
 
 .box-inline-medium {
@@ -47,11 +63,25 @@
   gap: var(--spacing-small);
 }
 
+.box-squished-inset-large {
+  padding-left: var(--spacing-large);
+  padding-right: var(--spacing-large);
+  padding-top: calc(var(--spacing-large) / 2);
+  padding-bottom: calc(var(--spacing-large) / 2);
+}
+
 .box-squished-inset-medium {
   padding-left: var(--spacing-medium);
   padding-right: var(--spacing-medium);
   padding-top: calc(var(--spacing-medium) / 2);
   padding-bottom: calc(var(--spacing-medium) / 2);
+}
+
+.box-squished-inset-small {
+  padding-left: var(--spacing-small);
+  padding-right: var(--spacing-small);
+  padding-top: calc(var(--spacing-small) / 2);
+  padding-bottom: calc(var(--spacing-small) / 2);
 }
 
 .box-left {

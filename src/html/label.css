@@ -4,5 +4,5 @@
 
 .typography-defaults {
   box-sizing: border-box;
-  font-size: var(--spacing-medium);
+  /* font-size: var(--spacing-medium); */
 }

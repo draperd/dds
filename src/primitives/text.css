@@ -1,15 +1,13 @@
 @import url(../foundations/spacing.css);
 
-.typography-defaults {
-  box-sizing: border-box;
-  /* display: flex; */
-  /* border: 1px dotted black; */
-}
-
 .typography-text {
   font-size: var(--spacing-medium);
 }
 
 .typography-heading {
   font-size: var(--spacing-large);
+}
+
+.typography-defaults {
+  box-sizing: border-box;
 }
