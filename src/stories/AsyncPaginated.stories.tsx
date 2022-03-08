@@ -40,26 +40,21 @@ const table1: AsyncPaginatedTableProps<Person> = {
   width: "60%",
   tableHeaderConfig: {
     name: {
-      index: false,
       label: "Name",
       sortable: true,
       spacingAlignment: "LEFT",
     },
     gender: {
-      index: false,
       label: "Gender",
       sortable: true,
       spacingAlignment: "LEFT",
     },
     mass: {
-      index: false,
       label: "Mass",
       sortable: true,
       spacingAlignment: "RIGHT",
     },
   },
-  sortAttribute: "name",
-  sortDirection: "ASCENDING",
   pageSize: 10,
   spacingSize: "SMALL",
   dataUrl: "https://swapi.dev/api/people/",

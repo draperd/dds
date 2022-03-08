@@ -18,19 +18,16 @@ const table1: InMemoryPaginatedTableProps<Album> = {
   width: "60%",
   tableHeaderConfig: {
     artist: {
-      index: false,
       label: "Artist",
       sortable: true,
       spacingAlignment: "LEFT",
     },
     title: {
-      index: false,
       label: "Title",
       sortable: true,
       spacingAlignment: "LEFT",
     },
     released: {
-      index: false,
       label: "Year released",
       sortable: true,
       spacingAlignment: "RIGHT",
@@ -57,7 +54,7 @@ const table1: InMemoryPaginatedTableProps<Album> = {
   sortAttribute: "title",
   sortDirection: "ASCENDING",
   pageSize: 5,
-  spacingSize: "SMALL",
+  spacingSize: "MEDIUM",
 };
 
 export const InMemoryPaginated = Template.bind({});
