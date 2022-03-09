@@ -11,7 +11,7 @@ export const Box = ({
   spacingSize = "MEDIUM",
   spacingAlignment = "LEFT",
   className = "",
-  style,
+  backgroundColor,
   children,
   wrapContent = false,
   radiusSize,
@@ -22,7 +22,7 @@ export const Box = ({
     spacingSize={spacingSize}
     spacingAlignment={spacingAlignment}
     wrapContent={wrapContent}
-    style={style}
+    backgroundColor={backgroundColor}
     radiusSize={radiusSize}
   >
     {children}

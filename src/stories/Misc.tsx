@@ -1,4 +1,4 @@
-import React, { CSSProperties } from "react";
+import React from "react";
 
 import { token } from "@atlaskit/tokens";
 import { Box } from "../primitives/Box";
@@ -10,23 +10,14 @@ import { Link } from "../primitives/Link";
 const message =
   "You're not allowed to change these restrictions. It's either due to the restrictions on the page, or permission settings for this space.";
 
-const sectionMessageStyles: CSSProperties = {
-  backgroundColor: `${token("color.background.accent.blue.subtler")}`,
-};
-
-const badgeStyles: CSSProperties = {
-  backgroundColor: `${token("color.background.selected.bold")}`,
-};
-
-const lozengeStyles: CSSProperties = {
-  backgroundColor: `${token("color.background.success")}`,
-};
-
 export const MiscellaneousComponents = () => (
   <section>
     <Stack>
       <Text typographyStyle="HEADING" content="Section Message"></Text>
-      <Box spacingStyle="INSET" style={sectionMessageStyles}>
+      <Box
+        spacingStyle="INSET"
+        backgroundColor={`${token("color.background.accent.blue.subtler")}`}
+      >
         <Inline>
           <Stack>
             <div>Icon</div>
@@ -43,7 +34,11 @@ export const MiscellaneousComponents = () => (
         </Inline>
       </Box>
       <Text typographyStyle="HEADING" content="Badge"></Text>
-      <Box style={badgeStyles} spacingSize="SMALL" radiusSize="MEDIUM">
+      <Box
+        backgroundColor={`${token("color.background.selected.bold")}`}
+        spacingSize="SMALL"
+        radiusSize="MEDIUM"
+      >
         <Text
           typographyStyle="TEXT"
           typographySize="XSMALL"
@@ -53,7 +48,7 @@ export const MiscellaneousComponents = () => (
       </Box>
       <Text typographyStyle="HEADING" content="Lozenge"></Text>
       <Box
-        style={lozengeStyles}
+        backgroundColor={`${token("color.background.success")}`}
         spacingStyle="SQUISHED-INSET"
         spacingSize="SMALL"
         radiusSize="XSMALL"

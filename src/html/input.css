@@ -1,3 +1,18 @@
+@import url(../foundations/spacing.css);
+
 .input {
   margin: 0;
+  padding: var(--spacing-small);
+  background: var(--ds-background-input);
+  border-color: var(--ds-border-input);
+  border-style: solid;
+}
+
+.input:hover {
+  border-color: var(--ds-interaction-hovered);
+}
+
+.input:focus,
+input:focus-visible {
+  border-color: var(--ds-border-focused);
 }

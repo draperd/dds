@@ -1,5 +1,6 @@
 import React from "react";
 import { AbstractText } from "../primitives/AbstractText";
+import { token } from "@atlaskit/tokens";
 import "./label.css";
 
 interface TextProps {
@@ -16,6 +17,9 @@ export const Label = ({ className = "", content, htmlFor }: TextProps) => {
       htmlFor={htmlFor}
       className="typography-default"
       content={content}
+      color={`${token("color.text.subtlest")}`}
+      typographySize="SMALL"
+      typographyWeight="SEMIBOLD"
     ></AbstractText>
   );
 };

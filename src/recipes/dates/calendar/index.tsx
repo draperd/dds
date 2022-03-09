@@ -1,5 +1,6 @@
 import React from "react";
 
+import { token } from "@atlaskit/tokens";
 import {
   Table,
   TableHead,
@@ -18,15 +19,26 @@ import { Pressable } from "../../../behaviors/Pressable";
 import { getMonthData } from "../utils";
 
 export const Day = ({ day, onDayPressed }: DayProps) => {
-  const { dayOfMonth, date } = day;
+  const { dayOfMonth, date, selected, isInCurrentMonth } = day;
+  let color = isInCurrentMonth
+    ? `${token("color.text")}`
+    : `${token("color.text.subtlest")}`;
+  color = !selected ? color : `${token("color.text.selected")}`;
+  const backgroundColor = selected
+    ? `${token("color.background.selected")}`
+    : undefined;
+
   return (
     <TableDataCell spacingStyle="SQUISHED-INSET">
       <Pressable
+        spacingSize="SMALL"
         onPress={() => onDayPressed({ date })}
-        spacingStyle="FLUSH"
+        spacingStyle="SQUISHED-INSET"
         spacingAlignment="CENTER"
+        radiusSize="SMALL"
+        backgroundColor={backgroundColor}
       >
-        <Text content={dayOfMonth.toString()}></Text>
+        <Text content={dayOfMonth.toString()} color={color}></Text>
       </Pressable>
     </TableDataCell>
   );
@@ -45,6 +57,20 @@ export const Week = ({ days, onDayPressed }: WeekProps) => {
     </TableRow>
   );
 };
+
+type DayOfWeekHeaderCellProps = {
+  content: string;
+};
+
+export const DayOfWeekHeaderCell = (props: DayOfWeekHeaderCellProps) => (
+  <TableHeadCell spacingAlignment="CENTER">
+    <Text
+      typographyWeight="BOLD"
+      content={props.content}
+      color={`${token("color.text.subtlest")}`}
+    />
+  </TableHeadCell>
+);
 
 export const Calendar = ({
   date,
@@ -95,27 +121,13 @@ export const Calendar = ({
         <Table>
           <TableHead>
             <TableRow>
-              <TableHeadCell spacingAlignment="CENTER">
-                <Text content="SUN" />
-              </TableHeadCell>
-              <TableHeadCell spacingAlignment="CENTER">
-                <Text content="MON" />
-              </TableHeadCell>
-              <TableHeadCell spacingAlignment="CENTER">
-                <Text content="TUE" />
-              </TableHeadCell>
-              <TableHeadCell spacingAlignment="CENTER">
-                <Text content="WED" />
-              </TableHeadCell>
-              <TableHeadCell spacingAlignment="CENTER">
-                <Text content="THU" />
-              </TableHeadCell>
-              <TableHeadCell spacingAlignment="CENTER">
-                <Text content="FRI" />
-              </TableHeadCell>
-              <TableHeadCell spacingAlignment="CENTER">
-                <Text content="SAT" />
-              </TableHeadCell>
+              <DayOfWeekHeaderCell content="SUN"></DayOfWeekHeaderCell>
+              <DayOfWeekHeaderCell content="MON"></DayOfWeekHeaderCell>
+              <DayOfWeekHeaderCell content="TUE"></DayOfWeekHeaderCell>
+              <DayOfWeekHeaderCell content="WED"></DayOfWeekHeaderCell>
+              <DayOfWeekHeaderCell content="THU"></DayOfWeekHeaderCell>
+              <DayOfWeekHeaderCell content="FRI"></DayOfWeekHeaderCell>
+              <DayOfWeekHeaderCell content="SAT"></DayOfWeekHeaderCell>
             </TableRow>
           </TableHead>
           <TableBody>{weeks}</TableBody>

@@ -21,6 +21,8 @@ export const Pressable = ({
   spacingStyle = "INSET",
   spacingAlignment = "LEFT",
   disabled = false,
+  radiusSize,
+  backgroundColor,
 }: PressableProps) => (
   <AbstractBox
     boxType="PRESSABLE"
@@ -30,6 +32,8 @@ export const Pressable = ({
     spacingStyle={spacingStyle}
     spacingAlignment={spacingAlignment}
     disabled={disabled}
+    radiusSize={radiusSize}
+    backgroundColor={backgroundColor}
   >
     {children}
   </AbstractBox>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { CSSProperties } from "react";
 import {
   SpacingAlignment,
   SpacingSize,
@@ -42,9 +42,10 @@ export interface PublicBoxProps {
   children?: React.ReactNode;
   className?: string;
   selected?: boolean;
-  style?: React.CSSProperties; // TODO: Should we just restrict styles to a subset of CSS Properties? :/
+  // style?: React.CSSProperties; // TODO: Should we just restrict styles to a subset of CSS Properties? :/
   wrapContent?: boolean; // TODO: Do we really want this publicly available? :/
   radiusSize?: SpacingSize;
+  backgroundColor?: CSSProperties["backgroundColor"];
 }
 
 export type PressableBoxProps = PublicBoxProps & PressableProps;
@@ -121,11 +122,11 @@ export const AbstractBox = ({
   spacingSize = "MEDIUM",
   spacingStyle = "INSET",
   spacingAlignment = "LEFT",
-  style = {},
   selected = false,
   disabled = false,
   wrapContent = false,
   radiusSize,
+  backgroundColor,
 }: AbstractBoxProps) => {
   // We need to select the appropriate styling for the spacing type... so we need to evaluate the property
   // Should this be CSS or directly set style?
@@ -139,6 +140,10 @@ export const AbstractBox = ({
     wrapContent,
     radiusSize,
   });
+
+  const style = {
+    backgroundColor,
+  };
 
   switch (boxType) {
     case "FOCUSABLE":
