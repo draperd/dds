@@ -100,3 +100,7 @@
   justify-content: flex-end;
   align-self: flex-end;
 }
+
+.box-radius-medium {
+  border-radius: var(--spacing-medium);
+}

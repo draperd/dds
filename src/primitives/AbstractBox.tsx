@@ -44,6 +44,7 @@ export interface PublicBoxProps {
   selected?: boolean;
   style?: React.CSSProperties; // TODO: Should we just restrict styles to a subset of CSS Properties? :/
   wrapContent?: boolean; // TODO: Do we really want this publicly available? :/
+  radiusSize?: SpacingSize;
 }
 
 export type PressableBoxProps = PublicBoxProps & PressableProps;
@@ -57,6 +58,7 @@ type GetSpacingClassNamesArgs = {
   spacingAlignment: SpacingAlignment;
   selected: boolean;
   wrapContent: boolean;
+  radiusSize?: SpacingSize;
 };
 
 // This is a bit of a short cut and we'd want unit tests for this!
@@ -67,14 +69,19 @@ export const getAbstractBoxClassNames = ({
   spacingAlignment,
   selected = false,
   wrapContent = false,
+  radiusSize,
 }: GetSpacingClassNamesArgs) => {
   const defaults = `${cssPrefix}defaults`;
   const spacingStylesAndSizes = `${cssPrefix}${spacingStyle.toLowerCase()} ${cssPrefix}${spacingStyle.toLowerCase()}-${spacingSize.toLowerCase()}`;
   const spacingAlignments = `${cssPrefix}${spacingAlignment.toLowerCase()}`;
   const selection = selected ? `${cssPrefix}selected` : "";
   const wrap = wrapContent ? `${cssPrefix}wrap` : "";
+  const radius =
+    radiusSize === undefined
+      ? ""
+      : `${cssPrefix}radius-${radiusSize.toLowerCase()}`;
 
-  return `${defaults} ${spacingStylesAndSizes} ${spacingAlignments} ${selection} ${wrap} ${className}`;
+  return `${defaults} ${spacingStylesAndSizes} ${spacingAlignments} ${selection} ${wrap} ${radius} ${className}`;
 };
 
 export type OnClickHandlerArgs = {
@@ -118,6 +125,7 @@ export const AbstractBox = ({
   selected = false,
   disabled = false,
   wrapContent = false,
+  radiusSize,
 }: AbstractBoxProps) => {
   // We need to select the appropriate styling for the spacing type... so we need to evaluate the property
   // Should this be CSS or directly set style?
@@ -129,6 +137,7 @@ export const AbstractBox = ({
     spacingAlignment,
     selected,
     wrapContent,
+    radiusSize,
   });
 
   switch (boxType) {

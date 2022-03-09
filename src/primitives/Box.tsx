@@ -14,6 +14,7 @@ export const Box = ({
   style,
   children,
   wrapContent = false,
+  radiusSize,
 }: BoxProps) => (
   <AbstractBox
     className={className}
@@ -22,6 +23,7 @@ export const Box = ({
     spacingAlignment={spacingAlignment}
     wrapContent={wrapContent}
     style={style}
+    radiusSize={radiusSize}
   >
     {children}
   </AbstractBox>

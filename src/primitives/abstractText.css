@@ -1,16 +1,29 @@
-@import url(../foundations/spacing.css);
+@import url(../foundations/typography.css);
 
 .typography-text {
-  font-size: var(--spacing-medium);
+  font-size: var(--typography-medium);
+}
+
+.typography-xsmall {
+  font-size: var(--typography-xsmall);
+}
+
+.typography-small {
+  font-size: var(--typography-small);
+}
+
+.typography-medium {
+  font-size: var(--typography-medium);
 }
 
 .typography-bold {
-  font-size: 1.125rem;
+  font-size: var(--typography-large);
   font-weight: 600; /* TODO This should be variable */
 }
 
 .typography-heading {
-  font-size: var(--spacing-large);
+  font-size: var(--typography-large);
+  font-weight: 600;
 }
 
 .typography-defaults {

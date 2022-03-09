@@ -2,6 +2,7 @@ import React, { CSSProperties } from "react";
 import { TypographyStyle } from "../foundations/Typography";
 import { token } from "@atlaskit/tokens";
 import "./abstractText.css";
+import { SpacingSize } from "src/foundations/Spacing";
 
 type TextTypes = "span" | "a";
 
@@ -9,8 +10,10 @@ interface AbstractTextProps {
   className?: string;
   content: string;
   typographyStyle?: TypographyStyle;
+  typographySize?: SpacingSize;
   as: TextTypes;
   href?: string;
+  color?: CSSProperties["color"];
 }
 
 const cssPrefix = "typography-";
@@ -18,6 +21,7 @@ const cssPrefix = "typography-";
 type GetTypographyClassNamesArgs = {
   className: string;
   typographyStyle: TypographyStyle;
+  typographySize: SpacingSize;
 };
 
 const styles: CSSProperties = {
@@ -32,8 +36,13 @@ const linkStyles: CSSProperties = {
 export const getTypographyClassNames = ({
   className,
   typographyStyle,
+  typographySize,
 }: GetTypographyClassNamesArgs) => {
-  return `${cssPrefix}defaults ${cssPrefix}${typographyStyle.toLowerCase()} ${className}`;
+  const defaults = `${cssPrefix}defaults`;
+  const style = `${cssPrefix}${typographyStyle.toLowerCase()}`;
+  const size = `${cssPrefix}${typographySize.toLowerCase()}`;
+
+  return `${defaults} ${style} ${size} ${className}`;
 };
 
 export const AbstractText = ({
@@ -41,14 +50,23 @@ export const AbstractText = ({
   className = "",
   content,
   typographyStyle = "TEXT",
+  color,
+  typographySize = "MEDIUM",
 }: AbstractTextProps) => {
   const typographyClassNames = getTypographyClassNames({
     className,
     typographyStyle,
+    typographySize,
   });
-  const useStyles = HtmlElement === "span" ? styles : linkStyles;
+  let textStyle = HtmlElement === "span" ? styles : linkStyles;
+  if (color) {
+    textStyle = {
+      ...textStyle,
+      color: color,
+    };
+  }
   return (
-    <HtmlElement className={typographyClassNames} style={useStyles}>
+    <HtmlElement className={typographyClassNames} style={textStyle}>
       {content}
     </HtmlElement>
   );
