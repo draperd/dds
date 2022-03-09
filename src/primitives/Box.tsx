@@ -13,12 +13,14 @@ export const Box = ({
   className = "",
   style,
   children,
+  wrapContent = false,
 }: BoxProps) => (
   <AbstractBox
     className={className}
     spacingStyle={spacingStyle}
     spacingSize={spacingSize}
     spacingAlignment={spacingAlignment}
+    wrapContent={wrapContent}
     style={style}
   >
     {children}

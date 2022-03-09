@@ -4,7 +4,6 @@
   box-sizing: border-box;
   display: flex;
   align-items: flex-start;
-  flex-wrap: wrap;
 }
 
 .box-flush {
@@ -29,7 +28,6 @@
 }
 
 .box-stack {
-  /* width: 100%; */ /* Commenting this breaks date picker */
   flex-direction: column;
 }
 
@@ -63,6 +61,10 @@
   gap: var(--spacing-small);
 }
 
+.box-wrap {
+  flex-wrap: wrap;
+}
+
 .box-squished-inset-large {
   padding-left: var(--spacing-large);
   padding-right: var(--spacing-large);
@@ -86,12 +88,15 @@
 
 .box-left {
   justify-content: flex-start;
+  align-self: flex-start;
 }
 
 .box-center {
   justify-content: center;
+  align-self: center;
 }
 
 .box-right {
   justify-content: flex-end;
+  align-self: flex-end;
 }

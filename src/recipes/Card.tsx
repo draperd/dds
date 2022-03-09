@@ -30,9 +30,11 @@ export const Card = ({ type, title, description, tags = [] }: CardProps) => (
       <Box spacingStyle="INSET">
         <Stack>
           <Text content={type}></Text>
-          <Text typographyStyle="HEADING" content={title}></Text>
-          <Text content={description}></Text>
-          <Inline spacingSize="SMALL">
+          <Stack spacingSize="SMALL">
+            <Text typographyStyle="HEADING" content={title}></Text>
+            <Text content={description}></Text>
+          </Stack>
+          <Inline spacingSize="SMALL" wrapContent={true}>
             {tags.map((tag) => (
               <Pill key={tag} content={tag}></Pill>
             ))}
