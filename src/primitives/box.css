@@ -4,7 +4,6 @@
   box-sizing: border-box;
   display: flex;
   align-items: flex-start;
-  flex-wrap: wrap;
 }
 
 .box-flush {
@@ -28,8 +27,11 @@
   padding: var(--spacing-small);
 }
 
+.box-inset-xsmall {
+  padding: var(--spacing-xsmall);
+}
+
 .box-stack {
-  width: 100%;
   flex-direction: column;
 }
 
@@ -63,6 +65,10 @@
   gap: var(--spacing-small);
 }
 
+.box-wrap {
+  flex-wrap: wrap;
+}
+
 .box-squished-inset-large {
   padding-left: var(--spacing-large);
   padding-right: var(--spacing-large);
@@ -84,14 +90,36 @@
   padding-bottom: calc(var(--spacing-small) / 2);
 }
 
+.box-squished-inset-xsmall {
+  padding-left: var(--spacing-xsmall);
+  padding-right: var(--spacing-xsmall);
+  padding-top: calc(var(--spacing-xsmall) / 2);
+  padding-bottom: calc(var(--spacing-xsmall) / 2);
+}
+
 .box-left {
   justify-content: flex-start;
+  align-self: flex-start;
 }
 
 .box-center {
   justify-content: center;
+  align-self: center;
 }
 
 .box-right {
   justify-content: flex-end;
+  align-self: flex-end;
+}
+
+.box-radius-medium {
+  border-radius: var(--spacing-medium);
+}
+
+.box-radius-small {
+  border-radius: var(--spacing-small);
+}
+
+.box-radius-xsmall {
+  border-radius: var(--spacing-xsmall);
 }

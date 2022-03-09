@@ -22,19 +22,16 @@ export type Album = {
 const table1: InMemoryTableProps<Album> = {
   tableHeaderConfig: {
     artist: {
-      index: false,
       label: "Artist",
       sortable: true,
       spacingAlignment: "LEFT",
     },
     title: {
-      index: false,
       label: "Title",
       sortable: true,
       spacingAlignment: "LEFT",
     },
     released: {
-      index: false,
       label: "Year released",
       sortable: true,
       spacingAlignment: "LEFT",

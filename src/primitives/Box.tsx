@@ -11,13 +11,19 @@ export const Box = ({
   spacingSize = "MEDIUM",
   spacingAlignment = "LEFT",
   className = "",
+  backgroundColor,
   children,
+  wrapContent = false,
+  radiusSize,
 }: BoxProps) => (
   <AbstractBox
     className={className}
     spacingStyle={spacingStyle}
     spacingSize={spacingSize}
     spacingAlignment={spacingAlignment}
+    wrapContent={wrapContent}
+    backgroundColor={backgroundColor}
+    radiusSize={radiusSize}
   >
     {children}
   </AbstractBox>

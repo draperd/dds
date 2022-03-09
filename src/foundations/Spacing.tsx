@@ -6,7 +6,7 @@ export type SpacingStyle =
   | "SQUISHED-INSET"
   | "SPREAD";
 
-export type SpacingSize = "SMALL" | "MEDIUM" | "LARGE";
+export type SpacingSize = "XSMALL" | "SMALL" | "MEDIUM" | "LARGE" | "XLARGE";
 
 export type SpacingAlignment = "LEFT" | "CENTER" | "RIGHT";
 

@@ -1,0 +1,28 @@
+/* This is just an example of spacing - these would ideally be tokenised and could be swapped out with
+   different scales. For example this is a non-linear scale (it doubles every time) but could be a linear scale
+ */
+
+:root,
+element {
+  --typography-xxxsmall: 0.0625rem;
+  --typography-xxsmall: 0.125rem;
+  --typography-xsmall: 0.75rem;
+  --typography-small: 0.875rem;
+  --typography-medium: 1rem;
+  --typography-large: 1.125rem;
+  --typography-xlarge: 1.25rem;
+  --typography-xxlarge: 8rem;
+}
+
+/*
+  So for font-size 16px...
+
+  xxxsmall = 1px
+  xxsmall = 2px
+  xsmall = 12px
+  small =  14px
+  medium = 16px
+  large =  32px
+  xlarge = 64px
+  xxlarge = 128px
+*/

@@ -22,7 +22,7 @@ export const SimpleTableHeaderCell = (props: SimpleTableHeaderCellProps) => {
       spacingAlignment={spacingAlignment}
       spacingSize={spacingSize}
     >
-      <Text content={label}></Text>
+      <Text typographyWeight="BOLD" content={label}></Text>
     </TableHeadCell>
   );
 };
@@ -89,7 +89,7 @@ export const SortableTableHeaderCell = (
       spacingSize={spacingSize}
     >
       <Inline spacingAlignment={spacingAlignment}>
-        <Text content={label}></Text>
+        <Text typographyWeight="BOLD" content={label}></Text>
         <Button
           label={sortButtonLabel}
           onPress={() => setSortState(nextSortState)}

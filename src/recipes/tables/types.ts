@@ -37,7 +37,6 @@ export type GetHeadingKeys<T> = (args: {
 }) => HeadingKey[];
 
 export interface TableHeaderCellConfig {
-  index: boolean; // Not sure if this is needed
   sortable: boolean;
   label: string;
   spacingAlignment?: SpacingAlignment;
@@ -274,8 +273,6 @@ export interface InMemoryPaginatedTableProps<T> extends InMemoryTableProps<T> {
 export interface AsyncPaginatedTableProps<T> {
   tableHeaderConfig: TableHeaderConfig<T>;
   spacingSize?: SpacingSize;
-  sortAttribute: keyof T;
-  sortDirection: SortDirection;
   pageSize: number;
   dataUrl: string;
   countAttribute: string;

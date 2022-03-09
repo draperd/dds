@@ -1,5 +1,6 @@
 @import url(../foundations/spacing.css);
 
+/* TODO: These selectors probably should be with AbstractBox and not on Button :/ */
 .button {
   background-color: var(--ds-background-neutral);
   border-color: var(--ds-border-neutral);

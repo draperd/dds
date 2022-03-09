@@ -1,45 +1,41 @@
 import React, { CSSProperties } from "react";
-import { TypographyStyle } from "../foundations/Typography";
-import { token } from "@atlaskit/tokens";
-import "./text.css";
+import { SpacingSize } from "../foundations/Spacing";
+import {
+  TypographyStyle,
+  TypographyTransformation,
+  TypographyWeight,
+} from "../foundations/Typography";
+import { AbstractText } from "./AbstractText";
 
 interface TextProps {
   className?: string;
   content: string;
   typographyStyle?: TypographyStyle;
+  typographySize?: SpacingSize;
+  typographyWeight?: TypographyWeight;
+  typographyTransformation?: TypographyTransformation;
+  color?: CSSProperties["color"];
 }
-
-const cssPrefix = "typography-";
-
-type GetTypographyClassNamesArgs = {
-  className: string;
-  typographyStyle: TypographyStyle;
-};
-
-const styles: CSSProperties = {
-  color: `${token("color.text")}`,
-};
-
-// This is a bit of a short cut and we'd want unit tests for this!
-export const getTypographyClassNames = ({
-  className,
-  typographyStyle,
-}: GetTypographyClassNamesArgs) => {
-  return `${cssPrefix}defaults ${cssPrefix}${typographyStyle.toLowerCase()} ${className}`;
-};
 
 export const Text = ({
   className = "",
   content,
   typographyStyle = "TEXT",
+  typographySize,
+  typographyWeight = "NORMAL",
+  typographyTransformation = "NONE",
+  color,
 }: TextProps) => {
-  const typographyClassNames = getTypographyClassNames({
-    className,
-    typographyStyle,
-  });
   return (
-    <span className={typographyClassNames} style={styles}>
-      {content}
-    </span>
+    <AbstractText
+      as="span"
+      className={className}
+      typographyStyle={typographyStyle}
+      typographySize={typographySize}
+      typographyWeight={typographyStyle === "BOLD" ? "BOLD" : typographyWeight}
+      typographyTransformation={typographyTransformation}
+      content={content}
+      color={color}
+    ></AbstractText>
   );
 };

@@ -50,19 +50,16 @@ const selectableTable: SelectableTableProps<Album> = {
   width: "50%",
   tableHeaderConfig: {
     artist: {
-      index: false,
       label: "Artist",
       sortable: true,
       spacingAlignment: "LEFT",
     },
     title: {
-      index: false,
       label: "Title",
       sortable: true,
       spacingAlignment: "LEFT",
     },
     released: {
-      index: false,
       label: "Year released",
       sortable: true,
       spacingAlignment: "RIGHT",
@@ -79,7 +76,6 @@ const selectableTable: SelectableTableProps<Album> = {
     { artist: "U2", title: "Pop", released: 1997 },
     { artist: "U2", title: "All that you can't leave behind", released: 2000 },
     { artist: "U2", title: "Actung Baby", released: 1991 },
-    // { artist: "U2", title: "The Joshua Tree", released: 1987 },
   ],
   spacingSize: "SMALL",
   actions: ({ selectedRows, tableData, rowKey }) =>

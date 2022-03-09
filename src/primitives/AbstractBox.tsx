@@ -1,4 +1,4 @@
-import React from "react";
+import React, { CSSProperties } from "react";
 import {
   SpacingAlignment,
   SpacingSize,
@@ -31,7 +31,6 @@ export interface PressableProps {
 export type PrivateBoxProps = {
   boxType?: BoxType;
   as?: React.ElementType;
-  style?: React.CSSProperties;
 };
 
 export interface PublicBoxProps {
@@ -43,6 +42,10 @@ export interface PublicBoxProps {
   children?: React.ReactNode;
   className?: string;
   selected?: boolean;
+  // style?: React.CSSProperties; // TODO: Should we just restrict styles to a subset of CSS Properties? :/
+  wrapContent?: boolean; // TODO: Do we really want this publicly available? :/
+  radiusSize?: SpacingSize;
+  backgroundColor?: CSSProperties["backgroundColor"];
 }
 
 export type PressableBoxProps = PublicBoxProps & PressableProps;
@@ -55,6 +58,8 @@ type GetSpacingClassNamesArgs = {
   spacingSize: SpacingSize;
   spacingAlignment: SpacingAlignment;
   selected: boolean;
+  wrapContent: boolean;
+  radiusSize?: SpacingSize;
 };
 
 // This is a bit of a short cut and we'd want unit tests for this!
@@ -64,13 +69,20 @@ export const getAbstractBoxClassNames = ({
   spacingSize,
   spacingAlignment,
   selected = false,
+  wrapContent = false,
+  radiusSize,
 }: GetSpacingClassNamesArgs) => {
   const defaults = `${cssPrefix}defaults`;
   const spacingStylesAndSizes = `${cssPrefix}${spacingStyle.toLowerCase()} ${cssPrefix}${spacingStyle.toLowerCase()}-${spacingSize.toLowerCase()}`;
   const spacingAlignments = `${cssPrefix}${spacingAlignment.toLowerCase()}`;
   const selection = selected ? `${cssPrefix}selected` : "";
+  const wrap = wrapContent ? `${cssPrefix}wrap` : "";
+  const radius =
+    radiusSize === undefined
+      ? ""
+      : `${cssPrefix}radius-${radiusSize.toLowerCase()}`;
 
-  return `${defaults} ${spacingStylesAndSizes} ${spacingAlignments} ${selection} ${className}`;
+  return `${defaults} ${spacingStylesAndSizes} ${spacingAlignments} ${selection} ${wrap} ${radius} ${className}`;
 };
 
 export type OnClickHandlerArgs = {
@@ -110,9 +122,11 @@ export const AbstractBox = ({
   spacingSize = "MEDIUM",
   spacingStyle = "INSET",
   spacingAlignment = "LEFT",
-  style = {},
   selected = false,
   disabled = false,
+  wrapContent = false,
+  radiusSize,
+  backgroundColor,
 }: AbstractBoxProps) => {
   // We need to select the appropriate styling for the spacing type... so we need to evaluate the property
   // Should this be CSS or directly set style?
@@ -123,7 +137,13 @@ export const AbstractBox = ({
     spacingSize,
     spacingAlignment,
     selected,
+    wrapContent,
+    radiusSize,
   });
+
+  const style = {
+    backgroundColor,
+  };
 
   switch (boxType) {
     case "FOCUSABLE":
