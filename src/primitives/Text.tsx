@@ -1,6 +1,10 @@
 import React, { CSSProperties } from "react";
 import { SpacingSize } from "../foundations/Spacing";
-import { TypographyStyle } from "../foundations/Typography";
+import {
+  TypographyStyle,
+  TypographyTransformation,
+  TypographyWeight,
+} from "../foundations/Typography";
 import { AbstractText } from "./AbstractText";
 
 interface TextProps {
@@ -8,6 +12,8 @@ interface TextProps {
   content: string;
   typographyStyle?: TypographyStyle;
   typographySize?: SpacingSize;
+  typographyWeight?: TypographyWeight;
+  typographyTransformation?: TypographyTransformation;
   color?: CSSProperties["color"];
 }
 
@@ -16,14 +22,20 @@ export const Text = ({
   content,
   typographyStyle = "TEXT",
   typographySize,
+  typographyWeight = "NORMAL",
+  typographyTransformation = "NONE",
   color,
-}: TextProps) => (
-  <AbstractText
-    as="span"
-    className={className}
-    typographyStyle={typographyStyle}
-    content={content}
-    color={color}
-    typographySize={typographySize}
-  ></AbstractText>
-);
+}: TextProps) => {
+  return (
+    <AbstractText
+      as="span"
+      className={className}
+      typographyStyle={typographyStyle}
+      typographySize={typographySize}
+      typographyWeight={typographyStyle === "BOLD" ? "BOLD" : typographyWeight}
+      typographyTransformation={typographyTransformation}
+      content={content}
+      color={color}
+    ></AbstractText>
+  );
+};

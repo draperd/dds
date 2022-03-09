@@ -1,4 +1,10 @@
 export type TypographyStyle = "TEXT" | "BOLD" | "HEADING";
+export type TypographyWeight = "NORMAL" | "SEMIBOLD" | "BOLD";
+export type TypographyTransformation =
+  | "NONE"
+  | "UPPERCASE"
+  | "LOWERCASE"
+  | "CAPITALIZE";
 
 // TODO: Not sure if these are still needed? :/
 export const TYPOGRAPHY_XXX_SMALL = `0.0625rem`;

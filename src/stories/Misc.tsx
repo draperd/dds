@@ -18,6 +18,10 @@ const badgeStyles: CSSProperties = {
   backgroundColor: `${token("color.background.selected.bold")}`,
 };
 
+const lozengeStyles: CSSProperties = {
+  backgroundColor: `${token("color.background.success")}`,
+};
+
 export const MiscellaneousComponents = () => (
   <section>
     <Stack>
@@ -45,6 +49,22 @@ export const MiscellaneousComponents = () => (
           typographySize="XSMALL"
           content="99"
           color={`${token("color.text.inverse")}`}
+        ></Text>
+      </Box>
+      <Text typographyStyle="HEADING" content="Lozenge"></Text>
+      <Box
+        style={lozengeStyles}
+        spacingStyle="SQUISHED-INSET"
+        spacingSize="SMALL"
+        radiusSize="XSMALL"
+      >
+        <Text
+          typographyStyle="TEXT"
+          typographySize="XSMALL"
+          typographyWeight="SEMIBOLD"
+          typographyTransformation="UPPERCASE"
+          content="Success"
+          color={`${token("color.text.success")}`}
         ></Text>
       </Box>
     </Stack>

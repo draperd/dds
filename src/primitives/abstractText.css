@@ -1,24 +1,36 @@
 @import url(../foundations/typography.css);
 
+.typography-defaults {
+  box-sizing: border-box;
+  text-transform: none;
+}
+
 .typography-text {
   font-size: var(--typography-medium);
 }
 
-.typography-xsmall {
+.typography-size-xsmall {
   font-size: var(--typography-xsmall);
 }
 
-.typography-small {
+.typography-size-small {
   font-size: var(--typography-small);
 }
 
-.typography-medium {
+.typography-size-medium {
   font-size: var(--typography-medium);
 }
 
-.typography-bold {
-  font-size: var(--typography-large);
-  font-weight: 600; /* TODO This should be variable */
+.typography-weight-normal {
+  font-weight: 400;
+}
+
+.typography-weight-semibold {
+  font-weight: 600;
+}
+
+.typography-weight-bold {
+  font-weight: 700;
 }
 
 .typography-heading {
@@ -26,8 +38,16 @@
   font-weight: 600;
 }
 
-.typography-defaults {
-  box-sizing: border-box;
+.typography-transformation-uppercase {
+  text-transform: uppercase;
+}
+
+.typography-transformation-lowercase {
+  text-transform: uppercase;
+}
+
+.typography-transformation-capitalize {
+  text-transform: capitalize;
 }
 
 a.typography-text:hover {
