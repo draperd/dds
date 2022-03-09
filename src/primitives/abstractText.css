@@ -1,0 +1,23 @@
+@import url(../foundations/spacing.css);
+
+.typography-text {
+  font-size: var(--spacing-medium);
+}
+
+.typography-bold {
+  font-size: 1.125rem;
+  font-weight: 600; /* TODO This should be variable */
+}
+
+.typography-heading {
+  font-size: var(--spacing-large);
+}
+
+.typography-defaults {
+  box-sizing: border-box;
+}
+
+a.typography-text:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}

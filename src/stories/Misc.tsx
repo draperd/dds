@@ -5,6 +5,7 @@ import { Box } from "../primitives/Box";
 import { Inline } from "../primitives/Inline";
 import { Stack } from "../primitives/Stack";
 import { Text } from "../primitives/Text";
+import { Link } from "../primitives/Link";
 
 const message =
   "You're not allowed to change these restrictions. It's either due to the restrictions on the page, or permission settings for this space.";
@@ -24,9 +25,9 @@ export const MiscellaneousComponents = () => (
           <Text content="Editing is restricted" typographyStyle="BOLD"></Text>
           <Text content={message} typographyStyle="TEXT"></Text>
           <Inline>
-            <Text content="Request edit access" typographyStyle="TEXT"></Text>
+            <Link content="Request edit access" href="#"></Link>
             <Text content="." typographyStyle="TEXT"></Text>
-            <Text content="Learn more" typographyStyle="TEXT"></Text>
+            <Link content="Learn more" href="#"></Link>
           </Inline>
         </Stack>
       </Inline>
