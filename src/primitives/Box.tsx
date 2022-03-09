@@ -15,6 +15,7 @@ export const Box = ({
   children,
   wrapContent = false,
   radiusSize,
+  stretchHorizontally,
 }: BoxProps) => (
   <AbstractBox
     className={className}
@@ -24,6 +25,7 @@ export const Box = ({
     wrapContent={wrapContent}
     backgroundColor={backgroundColor}
     radiusSize={radiusSize}
+    stretchHorizontally={stretchHorizontally}
   >
     {children}
   </AbstractBox>

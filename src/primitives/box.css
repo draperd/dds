@@ -123,3 +123,7 @@
 .box-radius-xsmall {
   border-radius: var(--spacing-xsmall);
 }
+
+.box-stretch {
+  align-self: stretch;
+}

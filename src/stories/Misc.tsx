@@ -17,6 +17,7 @@ export const MiscellaneousComponents = () => (
       <Box
         spacingStyle="INSET"
         backgroundColor={`${token("color.background.accent.blue.subtler")}`}
+        stretchHorizontally={true}
       >
         <Inline>
           <Stack>

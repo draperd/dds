@@ -46,6 +46,7 @@ export interface PublicBoxProps {
   wrapContent?: boolean; // TODO: Do we really want this publicly available? :/
   radiusSize?: SpacingSize;
   backgroundColor?: CSSProperties["backgroundColor"];
+  stretchHorizontally?: boolean;
 }
 
 export type PressableBoxProps = PublicBoxProps & PressableProps;
@@ -60,6 +61,7 @@ type GetSpacingClassNamesArgs = {
   selected: boolean;
   wrapContent: boolean;
   radiusSize?: SpacingSize;
+  stretchHorizontally?: boolean;
 };
 
 // This is a bit of a short cut and we'd want unit tests for this!
@@ -71,18 +73,20 @@ export const getAbstractBoxClassNames = ({
   selected = false,
   wrapContent = false,
   radiusSize,
+  stretchHorizontally,
 }: GetSpacingClassNamesArgs) => {
   const defaults = `${cssPrefix}defaults`;
   const spacingStylesAndSizes = `${cssPrefix}${spacingStyle.toLowerCase()} ${cssPrefix}${spacingStyle.toLowerCase()}-${spacingSize.toLowerCase()}`;
   const spacingAlignments = `${cssPrefix}${spacingAlignment.toLowerCase()}`;
   const selection = selected ? `${cssPrefix}selected` : "";
   const wrap = wrapContent ? `${cssPrefix}wrap` : "";
+  const stretch = stretchHorizontally ? `${cssPrefix}stretch` : "";
   const radius =
     radiusSize === undefined
       ? ""
       : `${cssPrefix}radius-${radiusSize.toLowerCase()}`;
 
-  return `${defaults} ${spacingStylesAndSizes} ${spacingAlignments} ${selection} ${wrap} ${radius} ${className}`;
+  return `${defaults} ${spacingStylesAndSizes} ${spacingAlignments} ${selection} ${wrap} ${stretch} ${radius} ${className}`;
 };
 
 export type OnClickHandlerArgs = {
@@ -127,6 +131,7 @@ export const AbstractBox = ({
   wrapContent = false,
   radiusSize,
   backgroundColor,
+  stretchHorizontally,
 }: AbstractBoxProps) => {
   // We need to select the appropriate styling for the spacing type... so we need to evaluate the property
   // Should this be CSS or directly set style?
@@ -139,6 +144,7 @@ export const AbstractBox = ({
     selected,
     wrapContent,
     radiusSize,
+    stretchHorizontally,
   });
 
   const style = {
