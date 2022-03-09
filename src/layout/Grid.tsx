@@ -74,6 +74,8 @@ export const Grid = ({
   // Set the initial state for the media type
   const [media, setMedia] = useState(getMedia());
 
+  // Should consider avoiding match media, see https://github.com/draperd/dds/pull/6#discussion_r800257016
+  // and https://hello.atlassian.net/wiki/spaces/~akorzunov/blog/2021/10/22/1380136629/Match+Media+and+other+Shenanigans
   useEffect(() => {
     // If this is running on every render then it suggests that we're just repeatedly creating listeners, which would be bad :/
     // Need to check and then fix this if that's the case...

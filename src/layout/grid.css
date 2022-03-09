@@ -4,7 +4,6 @@
   display: grid;
   column-gap: var(--spacing-medium);
   row-gap: var(--spacing-medium);
-  grid-template-rows: repeat(3, minmax(min-content, max-content));
 }
 
 .mobile {

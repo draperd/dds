@@ -2,6 +2,7 @@
 
 .subgrid {
   display: grid;
+  width: 100%;
   column-gap: var(--spacing-medium);
   row-gap: var(--spacing-medium);
 }

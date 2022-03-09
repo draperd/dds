@@ -13,6 +13,8 @@ export type PressableProps = PublicBoxProps & PressableBoxProps;
 // the Pressable component an instance of a Box component. This may or may not be the right approach
 // to take, but it seemed more composable to do this than to create a component that attempted to
 // manipulate its child components or added an additional DOM layer
+
+// See this comment for suggested performance improvements: https://github.com/draperd/dds/pull/6#discussion_r800256679
 export const Pressable = ({
   children,
   onPress,

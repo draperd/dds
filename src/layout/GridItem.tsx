@@ -6,20 +6,14 @@ import "./griditem.css";
 // developers to be able to work out the layout they want for themselves.
 interface GridItemProps {
   columnSpan?: number;
-  rowSpan?: number;
   children?: React.ReactNode;
 }
 
-export const GridItem = ({
-  columnSpan = 1,
-  rowSpan = 1,
-  children,
-}: GridItemProps) => (
+export const GridItem = ({ columnSpan = 1, children }: GridItemProps) => (
   <div
     className="griditem"
     style={{
       gridColumnStart: `span ${columnSpan}`,
-      gridRowStart: `span ${rowSpan}`,
     }}
   >
     {children}
