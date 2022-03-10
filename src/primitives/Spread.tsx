@@ -17,8 +17,6 @@ export const Spread = ({
   spacingSize = "MEDIUM",
 }: SpreadProps) => (
   <Box className="spread" spacingStyle="SPREAD" spacingSize={spacingSize}>
-    {children.map((child, index) => (
-      <div key={index}>{child}</div>
-    ))}
+    {children}
   </Box>
 );

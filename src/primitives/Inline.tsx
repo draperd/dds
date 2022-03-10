@@ -9,6 +9,7 @@ interface InlineProps {
   spacingSize?: SpacingSize;
   spacingAlignment?: SpacingAlignment;
   wrapContent?: boolean;
+  stretchHorizontally?: boolean;
 }
 
 export const Inline = ({
@@ -16,12 +17,14 @@ export const Inline = ({
   spacingSize = "MEDIUM",
   spacingAlignment = "LEFT",
   wrapContent = false,
+  stretchHorizontally = false,
 }: InlineProps) => (
   <Box
     spacingStyle="INLINE"
     spacingSize={spacingSize}
     spacingAlignment={spacingAlignment}
     wrapContent={wrapContent}
+    stretchHorizontally={stretchHorizontally}
   >
     {children}
   </Box>

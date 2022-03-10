@@ -9,6 +9,7 @@ interface StackProps {
   children: React.ReactNode;
   spacingSize?: SpacingSize;
   spacingAlignment?: SpacingAlignment;
+  stretchHorizontally?: boolean;
 }
 
 export const Stack = ({
@@ -16,12 +17,14 @@ export const Stack = ({
   className = "",
   spacingSize,
   spacingAlignment,
+  stretchHorizontally,
 }: StackProps) => (
   <Box
     spacingStyle="STACK"
     spacingSize={spacingSize}
     spacingAlignment={spacingAlignment}
     className={className}
+    stretchHorizontally={stretchHorizontally}
   >
     {children}
   </Box>

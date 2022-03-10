@@ -6,6 +6,8 @@ import { Inline } from "../primitives/Inline";
 import { Stack } from "../primitives/Stack";
 import { Text } from "../primitives/Text";
 import { Link } from "../primitives/Link";
+import { Spread } from "../primitives/Spread";
+import { Button } from "../recipes/Button";
 
 const message =
   "You're not allowed to change these restrictions. It's either due to the restrictions on the page, or permission settings for this space.";
@@ -63,6 +65,27 @@ export const MiscellaneousComponents = () => (
           color={`${token("color.text.success")}`}
         ></Text>
       </Box>
+      <Text
+        typographyStyle="HEADING"
+        content="Jira active board heading"
+      ></Text>
+      <Stack stretchHorizontally={true}>
+        <Inline>
+          <Text content="Projects / Design System Project / DS Pyxis Engineering Board"></Text>
+        </Inline>
+        <Spread>
+          <Inline spacingAlignment="LEFT" stretchHorizontally={true}>
+            <Text
+              content="UIP Inno Q3 (Pyxis ENG)"
+              typographyStyle="HEADING"
+            ></Text>
+          </Inline>
+          <Inline spacingAlignment="RIGHT">
+            <Text content="1 day remaining"></Text>
+            <Button label="Complete sprint"></Button>
+          </Inline>
+        </Spread>
+      </Stack>
     </Stack>
   </section>
 );
