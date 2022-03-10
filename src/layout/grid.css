@@ -4,6 +4,8 @@
   display: grid;
   column-gap: var(--spacing-medium);
   row-gap: var(--spacing-medium);
+  grid-template-rows: min-content;
+  height: 100vh;
 }
 
 .mobile {

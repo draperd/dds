@@ -40,19 +40,25 @@ const Heading = () => (
 );
 
 const Sidebar = () => (
-  <Box>
+  <Box backgroundColor={`${token("color.background.accent.blue.subtlest")}`}>
     <Text content="Sidebar"></Text>
   </Box>
 );
 
 const Metadata = () => (
-  <Box>
+  <Box
+    backgroundColor={`${token("color.background.accent.blue.subtlest")}`}
+    stretchHorizontally={true}
+  >
     <Text content="Metadata"></Text>
   </Box>
 );
 
 const Comments = () => (
-  <Box>
+  <Box
+    backgroundColor={`${token("color.background.accent.blue.subtlest")}`}
+    stretchHorizontally={true}
+  >
     <Text content="Comments"></Text>
   </Box>
 );
@@ -88,12 +94,8 @@ Basic.args = {
           <SubGrid columns={6}>
             {renderShapes({ prefix: "a", count: 9 })}
           </SubGrid>
-          <SubGrid columns={6}>
-            <Metadata></Metadata>
-          </SubGrid>
-          <SubGrid columns={6}>
-            <Comments></Comments>
-          </SubGrid>
+          <Metadata></Metadata>
+          <Comments></Comments>
         </Stack>
       </GridItem>
     </>
@@ -139,3 +141,10 @@ Basic.args = {
     </>
   ),
 };
+
+const Layout = () => (
+  <div>
+    <Grid></Grid>
+    <Grid></Grid>
+  </div>
+);
