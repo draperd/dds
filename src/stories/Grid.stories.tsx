@@ -20,7 +20,7 @@ const Template: ComponentStory<typeof Grid> = (args) => <Grid {...args} />;
 const Shape = ({}) => (
   <GridItem columnSpan={2}>
     <Box backgroundColor={`${token("color.background.accent.blue.bolder")}`}>
-      <Text content="Blob"></Text>
+      <Text content="Card"></Text>
     </Box>
   </GridItem>
 );
@@ -53,7 +53,7 @@ const Metadata = () => (
 
 const Comments = () => (
   <Box>
-    <Text content="Metadata"></Text>
+    <Text content="Comments"></Text>
   </Box>
 );
 
